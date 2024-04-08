@@ -5,7 +5,10 @@ abstract class Vehicle(
     val year: Int,
     val color: Color,
     val mileage: Int,
-) {
+    val vehicleType: VehicleType
+): VehicleManager {
+
+    val id = idVehicle
 
 }
 
@@ -16,13 +19,16 @@ class Auto(
     year: Int,
     color: Color,
     mileage: Int,
+    vehicleType: VehicleType,
     val typeAuto: TypeAuto,
-) : Vehicle(idVehicle, brand, model, year, color, mileage) {
-
-    private val id = idVehicle
+) : Vehicle(idVehicle, brand, model, year, color, mileage, vehicleType = VehicleType.AUTO) {
 
     fun getVehicleInfo() {
         println("ID: $id\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип кузова: $typeAuto")
+    }
+
+    fun addVehicle (auto: Auto) {
+
     }
 
 }
@@ -34,9 +40,10 @@ class Moto(
     year: Int,
     color: Color,
     mileage: Int,
+    vehicleType: VehicleType,
     val typeMoto: TypeMoto,
-) : Vehicle(idVehicle, brand, model, year, color, mileage) {
-    private val id = idVehicle
+) : Vehicle(idVehicle, brand, model, year, color, mileage, vehicleType = VehicleType.MOTO) {
+
     fun getVehicleInfo() {
         println("ID: $id\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип мотоцикла: $typeMoto")
     }
@@ -50,13 +57,19 @@ class Commercial(
     year: Int,
     color: Color,
     mileage: Int,
+    vehicleType: VehicleType,
     val loadCapacity: Double,
-) : Vehicle(idVehicle, brand, model, year, color, mileage) {
-    private val id = idVehicle
+) : Vehicle(idVehicle, brand, model, year, color, mileage, vehicleType = VehicleType.COMMERCIAL) {
+
     fun getVehicleInfo() {
         println("ID: $id\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nГрузоподъемность: $loadCapacity")
     }
 
+}
+enum class VehicleType () {
+    AUTO,
+    MOTO,
+    COMMERCIAL
 }
 
 enum class Color() {

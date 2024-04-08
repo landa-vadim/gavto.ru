@@ -6,10 +6,12 @@ class Ads(
     val publicationDate: Date,
     val idVehicle: Int,
     val idOwner: Int,
-) {
+): AdsManager {
+
+    val id = idAd
 
 fun getAdInfo() {
-    println("ID: $idAd\nЦена: $price\nДата публикации: $publicationDate")
+    println("ID: $id\nЦена: $price\nДата публикации: $publicationDate")
 }
 
 }
