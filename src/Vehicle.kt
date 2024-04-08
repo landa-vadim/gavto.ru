@@ -1,47 +1,61 @@
 abstract class Vehicle(
-    open val idVehicle: Int,
-    open val brand: String,
-    open val model: String,
-    open val year: Int,
-    open val color: Color,
-    open val mileage: Int,
+    private val idVehicle: Int,
+    val brand: String,
+    val model: String,
+    val year: Int,
+    val color: Color,
+    val mileage: Int,
 ) {
 
 }
 
 class Auto(
-    override val idVehicle: Int,
-    override val brand: String,
-    override val model: String,
-    override val year: Int,
-    override val color: Color,
-    override val mileage: Int,
+    idVehicle: Int,
+    brand: String,
+    model: String,
+    year: Int,
+    color: Color,
+    mileage: Int,
     val typeAuto: TypeAuto,
 ) : Vehicle(idVehicle, brand, model, year, color, mileage) {
+
+    private val id = idVehicle
+
+    fun getVehicleInfo() {
+        println("ID: $id\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип кузова: $typeAuto")
+    }
 
 }
 
 class Moto(
-    override val idVehicle: Int,
-    override val brand: String,
-    override val model: String,
-    override val year: Int,
-    override val color: Color,
-    override val mileage: Int,
+    idVehicle: Int,
+    brand: String,
+    model: String,
+    year: Int,
+    color: Color,
+    mileage: Int,
     val typeMoto: TypeMoto,
 ) : Vehicle(idVehicle, brand, model, year, color, mileage) {
+    private val id = idVehicle
+    fun getVehicleInfo() {
+        println("ID: $id\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип мотоцикла: $typeMoto")
+    }
 
 }
 
 class Commercial(
-    override val idVehicle: Int,
-    override val brand: String,
-    override val model: String,
-    override val year: Int,
-    override val color: Color,
-    override val mileage: Int,
+    idVehicle: Int,
+    brand: String,
+    model: String,
+    year: Int,
+    color: Color,
+    mileage: Int,
     val loadCapacity: Double,
 ) : Vehicle(idVehicle, brand, model, year, color, mileage) {
+    private val id = idVehicle
+    fun getVehicleInfo() {
+        println("ID: $id\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nГрузоподъемность: $loadCapacity")
+    }
 
 }
 
@@ -55,7 +69,9 @@ enum class Color() {
     SILVER,
     BROWN,
     GOLD,
-    PINK
+    PINK,
+    ORANGE,
+    PURPLE
 }
 
 enum class TypeAuto() {
@@ -69,3 +85,4 @@ enum class TypeMoto() {
     SPORT,
     GRANTURISMO
 }
+

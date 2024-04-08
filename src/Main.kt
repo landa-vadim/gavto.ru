@@ -1,3 +1,36 @@
+import java.util.Date
+
 fun main() {
-    TODO("HERE WILL BE PROGRAMM LOGIC")
+
+val auto1 = Auto(
+    idVehicle = 1,
+    brand = "BMW",
+    model = "3",
+    year = 2019,
+    color = Color.BLUE,
+    mileage = 40000,
+    typeAuto = TypeAuto.SEDAN
+    )
+    auto1.getVehicleInfo()
+
+    println()
+
+    val owner1 = Owner(
+        idOwner = 1,
+        name = "Иван",
+        telephoneNumber = 89905578121,
+        email = "google.ivan@gmail.com"
+        )
+owner1.getOwnerInfo()
+
+println()
+
+    val ad1 = Ads(
+        idAd = 1,
+        price = 3000000,
+        publicationDate = Date,
+        idOwner = owner1.idOwner,
+        idVehicle = auto1.id
+    )
+    ad1.getAdInfo()
 }
