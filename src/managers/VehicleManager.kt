@@ -8,7 +8,7 @@ interface VehicleManager {
 
     fun getAllVehicle(): List<Vehicle>
 
-    fun searchVehicle()      //searchCriteria: VehicleSearchCriteria
+    fun searchVehicle(userRequest: Vehicle, vehicleList: List<Vehicle>): List<Vehicle>      //searchCriteria: VehicleSearchCriteria
 
 
 

@@ -8,6 +8,7 @@ interface AdsManager {
 
     fun removeAd()
 
+    fun searchAds()
 
 
 }

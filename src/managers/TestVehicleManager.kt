@@ -10,12 +10,31 @@ class TestVehicleManager : VehicleManager {
         vehicleList.add(vehicle)
     }
 
-    override fun getAllVehicle():List<Vehicle> {
+    override fun getAllVehicle(): List<Vehicle> {
         return vehicleList
     }
 
-    override fun searchVehicle() {
-        TODO("Not yet implemented")
+
+    override fun searchVehicle(userRequest: Vehicle, vehicleList: List<Vehicle>): List<Vehicle> {
+
+        val listVehicleOut = mutableListOf<Vehicle>()
+
+        for (vehicle in vehicleList) {
+            if (vehicle == userRequest) {
+                listVehicleOut.add(vehicle)
+            }
+        }
+        return listVehicleOut
     }
 
+
+//        for (i in vehicleList) {
+
+//        }
+//        val userRequestResult = vehicleList.contains(userRequest)
+
+//        return listOfSearch
+//    }
+
+//}
 }
