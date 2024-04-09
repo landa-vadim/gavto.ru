@@ -1,3 +1,6 @@
+package data
+
+import managers.AdsManager
 import java.util.*
 
 class Ads(
@@ -6,12 +9,12 @@ class Ads(
     val publicationDate: Date,
     val idVehicle: Int,
     val idOwner: Int,
-): AdsManager {
+) {
 
-    val id = idAd
+
 
 fun getAdInfo() {
-    println("ID: $id\nЦена: $price\nДата публикации: $publicationDate")
+    println("ID: $idAd\nЦена: $price\nДата публикации: $publicationDate")
 }
 
 }
