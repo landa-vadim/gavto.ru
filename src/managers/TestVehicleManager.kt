@@ -1,6 +1,7 @@
 package managers
 
 import data.Vehicle
+import java.util.*
 
 class TestVehicleManager : VehicleManager {
 
@@ -27,14 +28,14 @@ class TestVehicleManager : VehicleManager {
         return listVehicleOut
     }
 
+    override fun getVehicleByID(idVehicle: UUID): Vehicle {
 
-//        for (i in vehicleList) {
+        for (vehicle in vehicleList) {
+            if (vehicle.idVehicle == idVehicle) {
+                return vehicle
+            } else return vehicleList[0]
+        }
+        return vehicleList[0]
+    }
 
-//        }
-//        val userRequestResult = vehicleList.contains(userRequest)
-
-//        return listOfSearch
-//    }
-
-//}
 }

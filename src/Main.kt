@@ -1,20 +1,33 @@
 import data.*
 import managers.TestVehicleManager
 import managers.VehicleManager
-import org.w3c.dom.css.Counter
-import java.util.Date
+import java.util.*
 
 fun main() {
 
-    mainMenu()
 
-    createVehicleForSearch()
 
     val vehicleManager: VehicleManager = TestVehicleManager()
 
+    mainMenu(vehicleManager)
+
+//    createVehicleForSearch()
+
+    val allVehicles = vehicleManager.getAllVehicle()
+    allVehicles.forEach { vehicle ->
+        vehicle.getVehicleInfo()
+        if (vehicle is Auto) {
+            println(vehicle.typeAuto)
+        }
+        if (vehicle is Moto) {
+            println(vehicle.typeMoto)
+        }
+        if (vehicle is Commercial) {
+            println(vehicle.loadCapacity)
+        }
+    }
 
     val auto1 = Auto(
-        idVehicle = 1,
         brand = "BMW",
         model = "3",
         year = 2019,
@@ -25,7 +38,6 @@ fun main() {
     vehicleManager.addVehicle(auto1)
 
     val moto1 = Moto(
-        idVehicle = 2,
         brand = "Yamaha",
         model = "5",
         year = 2015,
@@ -36,16 +48,8 @@ fun main() {
 
     vehicleManager.addVehicle(moto1)
 
-    val allVehicles = vehicleManager.getAllVehicle()
-    allVehicles.forEach { vehicle ->
-        vehicle.getVehicleInfo()
-        if (vehicle is Auto) {
-            println(vehicle.typeAuto)
-        }
-    }
 
     val owner1 = Owner(
-        idOwner = 1,
         name = "Иван",
         telephoneNumber = 89905578121,
         email = "google.ivan@gmail.com"
@@ -53,13 +57,11 @@ fun main() {
 
 
     val ad1 = Ads(
-        idAd = 1,
         price = 3000000,
         publicationDate = Date(),
         idOwner = owner1.idOwner,
         idVehicle = auto1.idVehicle
     )
-
 
 }
 
@@ -68,24 +70,24 @@ fun search(usersChoice: Int) {
 }
 
 
-fun mainMenu(): Boolean {
-    val vehicleManager: VehicleManager = TestVehicleManager()
-    println("1. Добавить новое ТС\n2. Добавить данные владельца\n3. Добавить объявление\n4. Снять объявление\n5. Поиск по объявлениям")
+fun mainMenu(vehicleManager: VehicleManager): Boolean {
+
+    println("1. Добавить новое ТС\n2. Добавить нового владельца\n3. Добавить объявление\n4. Снять объявление\n5. Поиск по объявлениям")
     val numberOfChoice = enteredSymbolCheck(readln())
     if (numberOfChoice == 1) {
-        vehicleConstructor()
+        vehicleConstructor(vehicleManager)
     }
     if (numberOfChoice == 2) {
-
+//        TODO ("create ownerConstructor()")
     }
     if (numberOfChoice == 3) {
-
+//        TODO ("create adsConstructor()")
     }
     if (numberOfChoice == 4) {
-
+//        TODO ("create removeAds()")
     }
     if (numberOfChoice == 5) {
-
+//        TODO ("create adsSearch")
     }
 }
 
@@ -127,8 +129,8 @@ fun enteredSymbolCheck(enteredSymbol: String): Int {
     }
 }
 
-fun vehicleConstructor(): Boolean {
-    val vehicleManager: VehicleManager = TestVehicleManager()
+fun vehicleConstructor(vehicleManager: VehicleManager): Boolean {
+
     println("1. Добавить автомобиль\n2. Добавить мотоцикл\n3. Добавить коммерческий авто\n4. Назад")
     val choiceType = enteredSymbolCheck(readln())
     if (listOf(1, 2, 3).contains(choiceType)) {
@@ -154,7 +156,6 @@ fun vehicleConstructor(): Boolean {
                     else -> TypeAuto.UNKNOWN
                 }
             val vehicle = Auto(
-                1,
                 enteredBrand,
                 enteredModel,
                 enteredYear,
@@ -177,7 +178,6 @@ fun vehicleConstructor(): Boolean {
                     else -> TypeMoto.UNKNOWN
                 }
             val vehicle = Moto(
-                1,
                 enteredBrand,
                 enteredModel,
                 enteredYear,
@@ -192,7 +192,6 @@ fun vehicleConstructor(): Boolean {
             println("Введите грузоподъемность:")
             val enteredLoadCapacity = readln().toDouble()
             val vehicle = Commercial(
-                1,
                 enteredBrand,
                 enteredModel,
                 enteredYear,

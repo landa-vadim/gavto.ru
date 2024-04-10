@@ -1,8 +1,10 @@
 package managers
 
+import data.Owner
+
 interface OwnerManager {
 
-    fun addOwner()
+    fun addOwner(owner: Owner)
 
 
 }

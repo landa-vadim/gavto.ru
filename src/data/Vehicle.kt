@@ -1,7 +1,9 @@
 package data
 
+import java.util.*
+
 abstract class Vehicle(
-    val idVehicle: Int,
+    val idVehicle: UUID = UUID.randomUUID(),
     val brand: String,
     val model: String,
     val year: Int,
@@ -11,30 +13,28 @@ abstract class Vehicle(
     abstract fun getVehicleInfo()
 }
 class Auto(
-    idVehicle: Int,
     brand: String,
     model: String,
     year: Int,
     color: String,
     mileage: Int,
     val typeAuto: TypeAuto,
-) : Vehicle(idVehicle, brand, model, year, color, mileage) {
+) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
 
     override fun getVehicleInfo() {
-        println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип кузова: $typeAuto")
+        println("Марка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип кузова: $typeAuto")
     }
 
 }
 
 class Moto(
-    idVehicle: Int,
     brand: String,
     model: String,
     year: Int,
     color: String,
     mileage: Int,
     val typeMoto: TypeMoto,
-) : Vehicle(idVehicle, brand, model, year, color, mileage) {
+) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
 
     override fun getVehicleInfo() {
         println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип мотоцикла: $typeMoto")
@@ -43,14 +43,13 @@ class Moto(
 }
 
 class Commercial(
-    idVehicle: Int,
     brand: String,
     model: String,
     year: Int,
     color: String,
     mileage: Int,
     val loadCapacity: Double,
-) : Vehicle(idVehicle, brand, model, year, color, mileage) {
+) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
 
     override fun getVehicleInfo() {
         println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nГрузоподъемность: $loadCapacity")

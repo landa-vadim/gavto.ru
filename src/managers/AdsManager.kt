@@ -1,12 +1,14 @@
 package managers
 
+import data.Ads
+
 interface AdsManager {
 
-    fun addAd()
+    fun addAd(ad: Ads)
 
     fun getAllAds()
 
-    fun removeAd()
+    fun removeAd(ad: Ads)
 
     fun searchAds()
 

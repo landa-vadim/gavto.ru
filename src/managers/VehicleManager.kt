@@ -1,6 +1,7 @@
 package managers
 
 import data.Vehicle
+import java.util.UUID
 
 interface VehicleManager {
 
@@ -10,6 +11,6 @@ interface VehicleManager {
 
     fun searchVehicle(userRequest: Vehicle, vehicleList: List<Vehicle>): List<Vehicle>      //searchCriteria: VehicleSearchCriteria
 
-
+    fun getVehicleByID(idVehicle: UUID): Vehicle
 
 }

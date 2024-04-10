@@ -4,17 +4,17 @@ import managers.AdsManager
 import java.util.*
 
 class Ads(
-    val idAd: Int,
+    val idAd: UUID = UUID.randomUUID(),
     val price: Int,
     val publicationDate: Date,
-    val idVehicle: Int,
-    val idOwner: Int,
+    val idVehicle: UUID,
+    val idOwner: UUID
 ) {
 
 
 
 fun getAdInfo() {
-    println("ID: $idAd\nЦена: $price\nДата публикации: $publicationDate")
+    println("Цена: $price\nДата публикации: $publicationDate")
 }
 
 }
