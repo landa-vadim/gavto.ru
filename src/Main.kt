@@ -1,12 +1,12 @@
 import data.*
-import managers.TestVehicleManager
-import managers.VehicleManager
+import managers.*
 import java.util.*
 
 fun main() {
 
 
-
+    val ownerManager: OwnerManager = TestOwnerManager()
+    val adsManager: AdsManager = TestAdsManager()
     val vehicleManager: VehicleManager = TestVehicleManager()
 
     mainMenu(vehicleManager)
@@ -70,7 +70,7 @@ fun search(usersChoice: Int) {
 }
 
 
-fun mainMenu(vehicleManager: VehicleManager): Boolean {
+fun mainMenu(vehicleManager: VehicleManager, ownerManager: OwnerManager, adsManager: AdsManager): Boolean {
 
     println("1. Добавить новое ТС\n2. Добавить нового владельца\n3. Добавить объявление\n4. Снять объявление\n5. Поиск по объявлениям")
     val numberOfChoice = enteredSymbolCheck(readln())
@@ -78,16 +78,16 @@ fun mainMenu(vehicleManager: VehicleManager): Boolean {
         vehicleConstructor(vehicleManager)
     }
     if (numberOfChoice == 2) {
-//        TODO ("create ownerConstructor()")
+//        ownerConstructor(ownerManager)
     }
     if (numberOfChoice == 3) {
-//        TODO ("create adsConstructor()")
+//        adsConstructor(adsManager)
     }
     if (numberOfChoice == 4) {
-//        TODO ("create removeAds()")
+//        adsManager.removeAd(adsConstructor)
     }
     if (numberOfChoice == 5) {
-//        TODO ("create adsSearch")
+//        adsManager.searchAds(adsConstructor())
     }
 }
 
