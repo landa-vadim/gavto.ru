@@ -8,7 +8,7 @@ class Ads(
     val price: Int,
     val publicationDate: Date,
     val idVehicle: UUID,
-    val idOwner: UUID
+    val idOwner: UUID,
 ) {
 
 

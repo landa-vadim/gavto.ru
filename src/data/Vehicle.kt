@@ -7,7 +7,7 @@ abstract class Vehicle(
     val brand: String,
     val model: String,
     val year: Int,
-    val color: String,
+    val color: Color,
     val mileage: Int,
 ) {
     abstract fun getVehicleInfo()
@@ -16,7 +16,7 @@ class Auto(
     brand: String,
     model: String,
     year: Int,
-    color: String,
+    color: Color,
     mileage: Int,
     val typeAuto: TypeAuto,
 ) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
@@ -31,7 +31,7 @@ class Moto(
     brand: String,
     model: String,
     year: Int,
-    color: String,
+    color: Color,
     mileage: Int,
     val typeMoto: TypeMoto,
 ) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
@@ -46,7 +46,7 @@ class Commercial(
     brand: String,
     model: String,
     year: Int,
-    color: String,
+    color: Color,
     mileage: Int,
     val loadCapacity: Double,
 ) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
@@ -71,4 +71,14 @@ enum class TypeMoto() {
     GRANTURISMO,
     UNKNOWN
 }
+
+enum class Color() {
+    RED,
+    GREEN,
+    BLUE,
+    BLACK,
+    WHITE,
+    UNKNOWN
+}
+
 
