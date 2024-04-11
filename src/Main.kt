@@ -9,7 +9,7 @@ fun main() {
     val adsManager: AdsManager = TestAdsManager()
     val vehicleManager: VehicleManager = TestVehicleManager()
 
-    mainMenu(vehicleManager)
+    mainMenu(vehicleManager, ownerManager, adsManager)
 
 //    createVehicleForSearch()
 
@@ -78,10 +78,13 @@ fun mainMenu(vehicleManager: VehicleManager, ownerManager: OwnerManager, adsMana
         vehicleConstructor(vehicleManager)
     }
     if (numberOfChoice == 2) {
-//        ownerConstructor(ownerManager)
+        ownerConstructor(ownerManager)
     }
     if (numberOfChoice == 3) {
-//        adsConstructor(adsManager)
+        println("Введите данные авто, для которого хотите создать объявление:")
+        val vehicle = // функция поиска авто, которая в инпут получает свойства вехайкла, а в аутпут кладет найденный вехайкл из листа
+            TestVehicleManager.searchVehicle(vehicle)
+        adsConstructor(adsManager)
     }
     if (numberOfChoice == 4) {
 //        adsManager.removeAd(adsConstructor)
@@ -203,4 +206,40 @@ fun vehicleConstructor(vehicleManager: VehicleManager): Boolean {
             return true
         } else return false
     } else return false
+}
+
+fun ownerConstructor(ownerManager: OwnerManager): Owner {
+
+    println("Введите имя:")
+    val name = readln()
+    println("Введите номер телефона:")
+    val telephoneNumber = readln().toLong()
+    println("Введите email:")
+    val email = readln()
+    val owner = Owner(
+        UUID.randomUUID(),
+        name,
+        telephoneNumber,
+        email
+    )
+    return owner
+}
+
+
+fun adsConstructor(vehicle: Vehicle, owner: Owner, adsManager: AdsManager): Boolean {
+
+    val idVehicle = vehicle.idVehicle
+    val idOwner = owner.idOwner
+    val publicationDate = Date()
+    println("Введите цену:")
+    val price = readln().toInt()
+    val ad = Ads(
+        UUID.randomUUID(),
+        price,
+        publicationDate,
+        idVehicle,
+        idOwner
+    )
+    adsManager.addAd(ad)
+    return true
 }
