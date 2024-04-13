@@ -1,8 +1,12 @@
 package validators
 
+
+import java.util.*
 import java.util.regex.Pattern
 
 class InputValidator {
+
+    val calendar: Calendar = Calendar.getInstance()
 
 
     fun isStringValidInRange(string: String, range: IntRange): Int {
@@ -13,6 +17,16 @@ class InputValidator {
         }
     }
 
+    fun isYearValid(string: String): Int {
+        val output = string.toIntOrNull()
+        val calendar: Calendar = Calendar.getInstance()
+//      calendar.time = Date()
+        val year = calendar.get(Calendar.YEAR)
+        return if (output != null && output in 1900..year) output else {
+            println("Введите год в формате \"ГГГГ\"")
+            0
+        }
+    }
 
     fun isValidEmail(email: String): Boolean {
 

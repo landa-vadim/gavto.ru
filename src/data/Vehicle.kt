@@ -12,6 +12,7 @@ abstract class Vehicle(
 ) {
     abstract fun getVehicleInfo()
 }
+
 class Auto(
     brand: String,
     model: String,
@@ -57,6 +58,53 @@ class Commercial(
 
 }
 
+enum class Brand() {
+    AUDI,
+    BMW,
+    MAZDA,
+    KIA,
+    SKODA
+}
+
+enum class AudiModels() {
+    A3,
+    A4,
+    A6,
+    Q3,
+    Q5
+}
+
+enum class BMWModels() {
+    M3,
+    M5,
+    M7,
+    X5,
+    X6
+}
+
+enum class MazdaModels() {
+    M3,
+    M6,
+    CX30,
+    CX5,
+    CX9
+}
+
+enum class KIAModels() {
+    RIO,
+    CERATO,
+    OPTIMA,
+    SPORTAGE,
+    SORENTO
+}
+
+enum class SkodaModels() {
+    RAPID,
+    OCTAVIA,
+    SUPERB,
+    KAROQ,
+    KODIAQ
+}
 
 enum class TypeAuto() {
     SEDAN,

@@ -9,7 +9,7 @@ fun main() {
     val ownerManager: OwnerManager = TestOwnerManager()
     val adsManager: AdsManager = TestAdsManager()
     val vehicleManager: VehicleManager = TestVehicleManager()
-    val validator: InputValidator = InputValidator()
+    val validator = InputValidator()
 
     mainMenu(vehicleManager, ownerManager, adsManager, validator)
 
@@ -116,13 +116,16 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
     while (choiceVehicleType == 0) {
         choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
     }
-    if (listOf(1, 2, 3).contains(choiceVehicleType)) {
-        println("Введите марку:")
+    if (choiceVehicleType in 1..3) {
+        println("Выберете марку:")
         val enteredBrand = readln()
         println("Введите модель:")
         val enteredModel = readln()
         println("Введите год выпуска:")
-        val enteredYear = readln().toInt()
+        var enteredYear = validator.isYearValid(readln())
+        while (enteredYear == 0) {
+            enteredYear = validator.isYearValid(readln())
+        }
         println("Выберете цвет:\n1. Красный\n 2. Зеленый\n3. Синий\n4. Черный\n5. Белый")
         var choiceColor = validator.isStringValidInRange(readln(), 1..5)
         while (choiceColor == 0) {
