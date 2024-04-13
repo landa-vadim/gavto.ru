@@ -81,12 +81,12 @@ fun mainMenu(
 
     println("1. Добавить новое ТС\n2. Добавить нового владельца\n3. Добавить объявление\n4. Снять объявление\n5. Поиск по объявлениям")
     var enteredSymbol = (readln())
-    while (!validator.isValidOneToFive(enteredSymbol)) {
+    while (validator.isStringValidInRange(enteredSymbol, 1..5) == 0) {
         enteredSymbol = (readln())
     }
     val numberOfChoice = (enteredSymbol.toCharArray())[0].digitToInt()
     if (numberOfChoice == 1) {
-        return vehicleConstructor(vehicleManager)
+        return vehicleConstructor(vehicleManager, validator)
     }
     if (numberOfChoice == 2) {
         return ownerConstructor(ownerManager, validator)
@@ -112,12 +112,11 @@ fun mainMenu(
 fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator): Boolean {
 
     println("1. Добавить автомобиль\n2. Добавить мотоцикл\n3. Добавить коммерческий авто\n4. Назад")
-    var enteredSymbol = (readln())
-    while (!validator.isValidOneToFive(enteredSymbol)) {
-        enteredSymbol = (readln())
+    var choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
+    while (choiceVehicleType == 0) {
+        choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
     }
-    val numberOfChoice = (enteredSymbol.toCharArray())[0].digitToInt()
-    if (listOf(1, 2, 3).contains(numberOfChoice)) {
+    if (listOf(1, 2, 3).contains(choiceVehicleType)) {
         println("Введите марку:")
         val enteredBrand = readln()
         println("Введите модель:")
@@ -125,13 +124,12 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
         println("Введите год выпуска:")
         val enteredYear = readln().toInt()
         println("Выберете цвет:\n1. Красный\n 2. Зеленый\n3. Синий\n4. Черный\n5. Белый")
-        enteredSymbol = (readln())
-        while (!validator.isValidOneToFive(enteredSymbol)) {
-            enteredSymbol = (readln())
+        var choiceColor = validator.isStringValidInRange(readln(), 1..5)
+        while (choiceColor == 0) {
+            choiceColor = validator.isStringValidInRange(readln(), 1..5)
         }
-        val numberOfColor = (enteredSymbol.toCharArray())[0].digitToInt()
         val enteredColor =
-            when (numberOfColor) {
+            when (choiceColor) {
                 1 -> Color.RED
                 2 -> Color.GREEN
                 3 -> Color.BLUE
@@ -141,7 +139,7 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
             }
         println("Введите верхнюю границу пробега:")
         val enteredMaxMileage = readln().toInt()
-        if (numberOfChoice == 1) {
+        if (choiceVehicleType == 1) {
             println("Выберете тип кузова:\n1. Седан\n 2. Хэтчбэк\n3. Универсал")
             val enteredTypeAuto: TypeAuto
             val enteredSymbol = readln().toInt()
@@ -163,7 +161,7 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
             vehicleManager.addVehicle(vehicle)
             return true
         }
-        if (numberOfChoice == 2) {
+        if (choiceVehicleType == 2) {
             println("Выберете тип мотоцикла:\n1. Кроссовый\n2. Спортивный\n3. Грантуризмо")
             val enteredTypeMoto: TypeMoto
             val enteredSymbol = readln().toInt()
@@ -185,7 +183,7 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
             vehicleManager.addVehicle(vehicle)
             return true
         }
-        if (numberOfChoice == 3) {
+        if (choiceVehicleType == 3) {
             println("Введите грузоподъемность:")
             val enteredLoadCapacity = readln().toDouble()
             val vehicle = Commercial(
