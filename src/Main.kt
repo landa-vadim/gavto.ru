@@ -116,9 +116,20 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
     while (choiceVehicleType == 0) {
         choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
     }
-    if (choiceVehicleType in 1..3) {
-        println("Выберете марку:")
-        val enteredBrand = readln()
+    if (choiceVehicleType == 1) {
+        println("Выберете марку:\n1. Audi\n2. BMW\n3. Mazda\n4. KIA\n5. Skoda\n6. Назад")
+        var enteredBrand = validator.isStringValidInRange(readln(), 1..6)
+        while (enteredBrand == 0) {
+            enteredBrand = validator.isStringValidInRange(readln(), 1..6)
+        }
+        enteredBrand =
+            when (enteredBrand) {
+            1 -> BrandAuto.AUDI
+            2 -> BrandAuto.BMW
+            3 -> BrandAuto.MAZDA
+            4 -> BrandAuto.KIA
+            5 -> BrandAuto.SKODA
+        }
         println("Введите модель:")
         val enteredModel = readln()
         println("Введите год выпуска:")
@@ -126,10 +137,10 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
         while (enteredYear == 0) {
             enteredYear = validator.isYearValid(readln())
         }
-        println("Выберете цвет:\n1. Красный\n 2. Зеленый\n3. Синий\n4. Черный\n5. Белый")
-        var choiceColor = validator.isStringValidInRange(readln(), 1..5)
+        println("Выберете цвет:\n1. Красный\n 2. Зеленый\n3. Синий\n4. Черный\n5. Белый\n6. Назад")
+        var choiceColor = validator.isStringValidInRange(readln(), 1..6)
         while (choiceColor == 0) {
-            choiceColor = validator.isStringValidInRange(readln(), 1..5)
+            choiceColor = validator.isStringValidInRange(readln(), 1..6)
         }
         val enteredColor =
             when (choiceColor) {
@@ -138,7 +149,6 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
                 3 -> Color.BLUE
                 4 -> Color.BLACK
                 5 -> Color.WHITE
-                else -> Color.UNKNOWN
             }
         println("Введите верхнюю границу пробега:")
         val enteredMaxMileage = readln().toInt()

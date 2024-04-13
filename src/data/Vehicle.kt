@@ -51,14 +51,13 @@ class Commercial(
     mileage: Int,
     val loadCapacity: Double,
 ) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
-
     override fun getVehicleInfo() {
         println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nГрузоподъемность: $loadCapacity")
     }
 
 }
 
-enum class Brand() {
+enum class BrandAuto() {
     AUDI,
     BMW,
     MAZDA,
@@ -66,7 +65,7 @@ enum class Brand() {
     SKODA
 }
 
-enum class AudiModels() {
+enum class AudiAutoModels() {
     A3,
     A4,
     A6,
@@ -74,7 +73,7 @@ enum class AudiModels() {
     Q5
 }
 
-enum class BMWModels() {
+enum class BMWAutoModels() {
     M3,
     M5,
     M7,
@@ -82,7 +81,7 @@ enum class BMWModels() {
     X6
 }
 
-enum class MazdaModels() {
+enum class MazdaAutoModels() {
     M3,
     M6,
     CX30,
@@ -90,7 +89,7 @@ enum class MazdaModels() {
     CX9
 }
 
-enum class KIAModels() {
+enum class KIAAutoModels() {
     RIO,
     CERATO,
     OPTIMA,
@@ -98,12 +97,88 @@ enum class KIAModels() {
     SORENTO
 }
 
-enum class SkodaModels() {
+enum class SkodaAutoModels() {
     RAPID,
     OCTAVIA,
     SUPERB,
     KAROQ,
     KODIAQ
+}
+
+enum class BrandMoto() {
+    BMW,
+    YAMAHA,
+    KAWASAKI,
+    URAL,
+    HONDA
+}
+
+enum class BMWMotoModels() {
+    M,
+    K,
+    G,
+    R,
+    C
+}
+
+enum class YamahaMotoModels() {
+    MT,
+    XSR,
+    XT,
+    XV,
+    YZF
+}
+
+enum class KawasakiMotoModels() {
+    EN,
+    ER,
+    KX,
+    Ninja,
+    Z
+}
+
+enum class UralMotoModels() {
+    M,
+    SOLO,
+    TOURIST,
+    VOYAZH,
+    WOLF
+}
+
+enum class HondaMotoModels() {
+    CB,
+    CBF,
+    CBR,
+    CRF,
+    GL
+}
+
+enum class BrandCommercial() {
+    CITROEN,
+    LADA,
+    PEUGEOT,
+    RENAULT,
+    VOLKSWAGEN
+}
+
+enum class CitroenCommercialModels() {
+    BERLINGO
+}
+
+enum class LadaCommercialModels() {
+    LARGUS
+}
+
+enum class PeugeotCommercialModels() {
+    PARTNER
+}
+
+enum class RenaultCommercialModels() {
+    DOKKER
+}
+
+enum class VolksWagenCommercialModels() {
+    CADDY
 }
 
 enum class TypeAuto() {
