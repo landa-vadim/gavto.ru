@@ -4,8 +4,8 @@ import java.util.*
 
 abstract class Vehicle(
     val idVehicle: UUID = UUID.randomUUID(),
-    val brand: String,
-    val model: String,
+    val brand: Brand,
+    val model: VehicleModel,
     val year: Int,
     val color: Color,
     val mileage: Int,
@@ -14,8 +14,8 @@ abstract class Vehicle(
 }
 
 class Auto(
-    brand: String,
-    model: String,
+    brand: Brand,
+    model: AutoModel,
     year: Int,
     color: Color,
     mileage: Int,
@@ -29,8 +29,8 @@ class Auto(
 }
 
 class Moto(
-    brand: String,
-    model: String,
+    brand: Brand,
+    model: MotoModel,
     year: Int,
     color: Color,
     mileage: Int,
@@ -44,8 +44,8 @@ class Moto(
 }
 
 class Commercial(
-    brand: String,
-    model: String,
+    brand: Brand,
+    model: CommercialModel,
     year: Int,
     color: Color,
     mileage: Int,
@@ -57,103 +57,39 @@ class Commercial(
 
 }
 
-enum class BrandAuto() {
+sealed class VehicleModel
+
+open class AutoModel() : VehicleModel()
+data class AudiAutoModel(val model: AudiAutoModels) : AutoModel()
+data class BmwAutoModel(val model: BmwAutoModels) : AutoModel()
+data class MazdaAutoModel(val model: MazdaAutoModels) : AutoModel()
+data class KiaAutoModel(val model: KiaAutoModels) : AutoModel()
+data class SkodaAutoModel(val model: SkodaAutoModels) : AutoModel()
+
+open class MotoModel() : VehicleModel()
+data class BmwMotoModel(val model: BmwMotoModels) : MotoModel()
+data class YamahaMotoModel(val model: YamahaMotoModels) : MotoModel()
+data class KawasakiMotoModel(val model: KawasakiMotoModels) : MotoModel()
+data class UralMotoModel(val model: UralMotoModels) : MotoModel()
+data class HondaMotoModel(val model: HondaMotoModels) : MotoModel()
+
+open class CommercialModel() : VehicleModel()
+data class CitroenCommercialModel(val model: CitroenCommercialModels) : CommercialModel()
+data class LadaCommercialModel(val model: LadaCommercialModels) : CommercialModel()
+data class PeugeotCommercialModel(val model: PeugeotCommercialModels) : CommercialModel()
+data class RenaultCommercialModel(val model: RenaultCommercialModels) : CommercialModel()
+data class VolksWagenCommercialModel(val model: VolksWagenCommercialModels) : CommercialModel()
+
+enum class Brand {
     AUDI,
     BMW,
     MAZDA,
     KIA,
-    SKODA
-}
-
-enum class AudiAutoModels() {
-    A3,
-    A4,
-    A6,
-    Q3,
-    Q5
-}
-
-enum class BMWAutoModels() {
-    M3,
-    M5,
-    M7,
-    X5,
-    X6
-}
-
-enum class MazdaAutoModels() {
-    M3,
-    M6,
-    CX30,
-    CX5,
-    CX9
-}
-
-enum class KIAAutoModels() {
-    RIO,
-    CERATO,
-    OPTIMA,
-    SPORTAGE,
-    SORENTO
-}
-
-enum class SkodaAutoModels() {
-    RAPID,
-    OCTAVIA,
-    SUPERB,
-    KAROQ,
-    KODIAQ
-}
-
-enum class BrandMoto() {
-    BMW,
+    SKODA,
     YAMAHA,
     KAWASAKI,
     URAL,
-    HONDA
-}
-
-enum class BMWMotoModels() {
-    M,
-    K,
-    G,
-    R,
-    C
-}
-
-enum class YamahaMotoModels() {
-    MT,
-    XSR,
-    XT,
-    XV,
-    YZF
-}
-
-enum class KawasakiMotoModels() {
-    EN,
-    ER,
-    KX,
-    Ninja,
-    Z
-}
-
-enum class UralMotoModels() {
-    M,
-    SOLO,
-    TOURIST,
-    VOYAZH,
-    WOLF
-}
-
-enum class HondaMotoModels() {
-    CB,
-    CBF,
-    CBR,
-    CRF,
-    GL
-}
-
-enum class BrandCommercial() {
+    HONDA,
     CITROEN,
     LADA,
     PEUGEOT,
@@ -161,41 +97,196 @@ enum class BrandCommercial() {
     VOLKSWAGEN
 }
 
-enum class CitroenCommercialModels() {
-    BERLINGO
+enum class AudiAutoModels {
+    A3,
+    A4,
+    A6,
+    Q3,
+    Q5;
+    companion object {
+        fun getById(ordinal: Int): AudiAutoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
 }
 
-enum class LadaCommercialModels() {
-    LARGUS
+enum class BmwAutoModels {
+    M3,
+    M5,
+    M7,
+    X5,
+    X6;
+    companion object {
+        fun getById(ordinal: Int): BmwAutoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
 }
 
-enum class PeugeotCommercialModels() {
-    PARTNER
+enum class MazdaAutoModels {
+    M3,
+    M6,
+    CX30,
+    CX5,
+    CX9;
+    companion object {
+        fun getById(ordinal: Int): MazdaAutoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
 }
 
-enum class RenaultCommercialModels() {
-    DOKKER
+enum class KiaAutoModels {
+    RIO,
+    CERATO,
+    OPTIMA,
+    SPORTAGE,
+    SORENTO;
+    companion object {
+        fun getById(ordinal: Int): KiaAutoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
 }
 
-enum class VolksWagenCommercialModels() {
-    CADDY
+enum class SkodaAutoModels {
+    RAPID,
+    OCTAVIA,
+    SUPERB,
+    KAROQ,
+    KODIAQ;
+    companion object {
+        fun getById(ordinal: Int): SkodaAutoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
 }
 
-enum class TypeAuto() {
+enum class BmwMotoModels {
+    M,
+    K,
+    G,
+    R,
+    C;
+    companion object {
+        fun getById(ordinal: Int): BmwMotoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class YamahaMotoModels {
+    MT,
+    XSR,
+    XT,
+    XV,
+    YZF;
+    companion object {
+        fun getById(ordinal: Int): YamahaMotoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class KawasakiMotoModels {
+    EN,
+    ER,
+    KX,
+    NINJA,
+    Z;
+    companion object {
+        fun getById(ordinal: Int): KawasakiMotoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class UralMotoModels {
+    M,
+    SOLO,
+    TOURIST,
+    VOYAZH,
+    WOLF;
+    companion object {
+        fun getById(ordinal: Int): UralMotoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class HondaMotoModels {
+    CB,
+    CBF,
+    CBR,
+    CRF,
+    GL;
+    companion object {
+        fun getById(ordinal: Int): HondaMotoModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class CitroenCommercialModels {
+    BERLINGO;
+    companion object {
+        fun getById(ordinal: Int): CitroenCommercialModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class LadaCommercialModels {
+    LARGUS;
+    companion object {
+        fun getById(ordinal: Int): LadaCommercialModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class PeugeotCommercialModels {
+    PARTNER;
+    companion object {
+        fun getById(ordinal: Int): PeugeotCommercialModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class RenaultCommercialModels {
+    DOKKER;
+    companion object {
+        fun getById(ordinal: Int): RenaultCommercialModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class VolksWagenCommercialModels {
+    CADDY;
+    companion object {
+        fun getById(ordinal: Int): VolksWagenCommercialModels? {
+            return entries.firstOrNull() { it.ordinal == ordinal }
+        }
+    }
+}
+
+enum class TypeAuto {
     SEDAN,
     HATCHBACK,
     UNIVERSAL,
     UNKNOWN
 }
 
-enum class TypeMoto() {
+enum class TypeMoto {
     CROSS,
     SPORT,
     GRANTURISMO,
     UNKNOWN
 }
 
-enum class Color() {
+enum class Color {
     RED,
     GREEN,
     BLUE,
