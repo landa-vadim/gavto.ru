@@ -26,32 +26,20 @@ fun mainMenu(
     validator: InputValidator
 ): Boolean {
 
-    println("1. Добавить новое ТС\n2. Добавить нового владельца\n3. Добавить объявление\n4. Снять объявление\n5. Поиск по объявлениям")
     var enteredSymbol = 0
-    do enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
-    while (enteredSymbol == 0)
+    do {
+        println("1. Добавить новое ТС\n2. Добавить нового владельца\n3. Добавить объявление\n4. Снять объявление\n5. Поиск по объявлениям")
+        enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
+    } while (enteredSymbol == 0)
 
-    if (enteredSymbol == 1) {
-        return vehicleConstructor(vehicleManager, validator)
+    when (enteredSymbol) {
+        1 -> return vehicleConstructor(vehicleManager, validator)
+        2 -> return ownerConstructor(ownerManager, validator)
+        3 -> return adsConstructor()
+        4 -> return adsManager.removeAd(adsConstructor())
+        5 -> return adsManager.searchAds(adsConstructor())
+        else -> return false
     }
-    if (enteredSymbol == 2) {
-        return ownerConstructor(ownerManager, validator)
-    }
-    if (enteredSymbol == 3) {
-        println("Введите данные авто, для которого хотите создать объявление:")
-//      val vehicle = функция поиска авто, которая в инпут получает свойства вехайкла, а в аутпут кладет найденный вехайкл из листа
-//      TestVehicleManager.searchVehicle(vehicle)
-//      adsConstructor(adsManager)
-        return false
-    }
-    if (enteredSymbol == 4) {
-//        adsManager.removeAd(adsConstructor)
-        return false
-    }
-    if (enteredSymbol == 5) {
-//        adsManager.searchAds(adsConstructor())
-        return false
-    } else return false
 }
 
 
@@ -390,7 +378,7 @@ fun motoConstructor(validator: InputValidator): Moto? {
 
 fun commercialConstructor(validator: InputValidator): Commercial? {
 
-        var enteredBrand = 0
+    var enteredBrand = 0
     do {
         println(
             "Выберете марку:\n" +
@@ -402,8 +390,7 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
                     "6. Назад"
         )
         enteredBrand = validator.isStringValidInRange(readln(), 1..6)
-    }
-    while (enteredBrand == 0)
+    } while (enteredBrand == 0)
     val brandChoice =
         when (enteredBrand) {
             1 -> Brand.CITROEN
@@ -414,7 +401,7 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
             else -> return null
         }
 
-        var enteredModel = 0
+    var enteredModel = 0
     do {
         when (brandChoice) {
             Brand.CITROEN -> println(
@@ -445,8 +432,7 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
             else -> return null
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..1)
-    }
-    while (enteredModel == 0)
+    } while (enteredModel == 0)
     val modelChoice =
         when (brandChoice) {
             Brand.CITROEN -> CitroenCommercialModel(CitroenCommercialModels.getById(enteredModel - 1))
@@ -462,10 +448,9 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
     do {
         println("Введите год выпуска:")
         enteredYear = validator.isYearValid(readln())
-    }
-    while (enteredYear == 0)
+    } while (enteredYear == 0)
 
-        var enteredColor = 0
+    var enteredColor = 0
     do {
         println(
             "Выберете цвет:\n" +
@@ -476,8 +461,7 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
                     "5. Белый"
         )
         enteredColor = validator.isStringValidInRange(readln(), 1..5)
-    }
-    while (enteredColor == 0)
+    } while (enteredColor == 0)
     val colorChoice =
         when (enteredColor) {
             1 -> Color.RED
@@ -493,8 +477,7 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
     do {
         println("Введите пробег:")
         enteredMileage = validator.isStringValidInRange(readln(), 0..5000000)
-    }
-    while (enteredMileage == 0)
+    } while (enteredMileage == 0)
 
 
     var enteredLoadCapacity: Double? = 0.0
