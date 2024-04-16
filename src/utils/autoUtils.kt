@@ -4,6 +4,25 @@ import data.*
 import validators.InputValidator
 
 fun autoConstructor(validator: InputValidator): Auto? {
+
+    val brand = chooseCarBrand(validator) ?: return null
+    val model = chooseCarModel(brand, validator) ?: return null
+    val year = chooseYear(validator)
+    val color = chooseColor(validator) ?: return null
+    val mileage = chooseMileage(validator)
+    val carType = chooseCarType(validator) ?: return null
+
+    return Auto(
+        brand = brand,
+        model = model,
+        year = year,
+        color = color,
+        mileage = mileage,
+        typeAuto = carType
+    )
+}
+
+fun chooseCarBrand(validator: InputValidator): Brand? {
     var enteredBrand = 0
     do {
         println(
@@ -17,16 +36,17 @@ fun autoConstructor(validator: InputValidator): Auto? {
         )
         enteredBrand = validator.isStringValidInRange(readln(), 1..6)
     } while (enteredBrand == 0)
-    val brandChoice =
-        when (enteredBrand) {
-            1 -> Brand.AUDI
-            2 -> Brand.BMW
-            3 -> Brand.MAZDA
-            4 -> Brand.KIA
-            5 -> Brand.SKODA
-            else -> return null
-        }
+    return when (enteredBrand) {
+        1 -> Brand.AUDI
+        2 -> Brand.BMW
+        3 -> Brand.MAZDA
+        4 -> Brand.KIA
+        5 -> Brand.SKODA
+        else -> return null
+    }
+}
 
+fun chooseCarModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
     var enteredModel = 0
     do {
         when (brandChoice) {
@@ -79,23 +99,26 @@ fun autoConstructor(validator: InputValidator): Auto? {
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..5)
     } while (enteredModel == 0)
-    val modelChoice =
-        when (brandChoice) {
-            Brand.AUDI -> AudiAutoModel(AudiAutoModels.getById(enteredModel - 1))
-            Brand.BMW -> BmwAutoModel(BmwAutoModels.getById(enteredModel - 1))
-            Brand.MAZDA -> MazdaAutoModel(MazdaAutoModels.getById(enteredModel - 1))
-            Brand.KIA -> KiaAutoModel(KiaAutoModels.getById(enteredModel - 1))
-            Brand.SKODA -> SkodaAutoModel(SkodaAutoModels.getById(enteredModel - 1))
-            else -> return null
-        }
+    return when (brandChoice) {
+        Brand.AUDI -> AudiAutoModel(AudiAutoModels.getById(enteredModel - 1))
+        Brand.BMW -> BmwAutoModel(BmwAutoModels.getById(enteredModel - 1))
+        Brand.MAZDA -> MazdaAutoModel(MazdaAutoModels.getById(enteredModel - 1))
+        Brand.KIA -> KiaAutoModel(KiaAutoModels.getById(enteredModel - 1))
+        Brand.SKODA -> SkodaAutoModel(SkodaAutoModels.getById(enteredModel - 1))
+        else -> null
+    }
+}
 
+fun chooseYear(validator: InputValidator): Int {
     var enteredYear = 0
     do {
         println("Введите год выпуска:")
         enteredYear = validator.isYearValid(readln())
     } while (enteredYear == 0)
+    return enteredYear
+}
 
-
+fun chooseColor(validator: InputValidator): Color? {
     var enteredColor = 0
     do {
         println(
@@ -108,22 +131,26 @@ fun autoConstructor(validator: InputValidator): Auto? {
         )
         enteredColor = validator.isStringValidInRange(readln(), 1..5)
     } while (enteredColor == 0)
-    val colorChoice =
-        when (enteredColor) {
-            1 -> Color.RED
-            2 -> Color.GREEN
-            3 -> Color.BLUE
-            4 -> Color.BLACK
-            5 -> Color.WHITE
-            else -> return null
-        }
+    return when (enteredColor) {
+        1 -> Color.RED
+        2 -> Color.GREEN
+        3 -> Color.BLUE
+        4 -> Color.BLACK
+        5 -> Color.WHITE
+        else -> return null
+    }
+}
 
+fun chooseMileage(validator: InputValidator): Int {
     var enteredMileage = 0
     do {
         println("Введите пробег:")
         enteredMileage = validator.isStringValidInRange(readln(), 0..5000000)
     } while (enteredMileage == 0)
+    return enteredMileage
+}
 
+fun chooseCarType(validator: InputValidator): TypeAuto? {
     var enteredTypeAuto = 0
     do {
         println(
@@ -134,22 +161,10 @@ fun autoConstructor(validator: InputValidator): Auto? {
         )
         enteredTypeAuto = validator.isStringValidInRange(readln(), 1..3)
     } while (enteredTypeAuto == 0)
-    val typeAutoChoice =
-        when (enteredTypeAuto) {
+    return when (enteredTypeAuto) {
             1 -> TypeAuto.SEDAN
             2 -> TypeAuto.HATCHBACK
             3 -> TypeAuto.UNIVERSAL
             else -> return null
         }
-
-    val auto = Auto(
-        brand = brandChoice,
-        model = modelChoice,
-        year = enteredYear,
-        color = colorChoice,
-        mileage = enteredMileage,
-        typeAuto = typeAutoChoice
-    )
-
-    return auto
 }
