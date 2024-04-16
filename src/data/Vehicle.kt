@@ -60,25 +60,25 @@ class Commercial(
 sealed class VehicleModel
 
 open class AutoModel() : VehicleModel()
-data class AudiAutoModel(val model: AudiAutoModels) : AutoModel()
-data class BmwAutoModel(val model: BmwAutoModels) : AutoModel()
-data class MazdaAutoModel(val model: MazdaAutoModels) : AutoModel()
-data class KiaAutoModel(val model: KiaAutoModels) : AutoModel()
-data class SkodaAutoModel(val model: SkodaAutoModels) : AutoModel()
+data class AudiAutoModel(val model: AudiAutoModels?) : AutoModel()
+data class BmwAutoModel(val model: BmwAutoModels?) : AutoModel()
+data class MazdaAutoModel(val model: MazdaAutoModels?) : AutoModel()
+data class KiaAutoModel(val model: KiaAutoModels?) : AutoModel()
+data class SkodaAutoModel(val model: SkodaAutoModels?) : AutoModel()
 
 open class MotoModel() : VehicleModel()
-data class BmwMotoModel(val model: BmwMotoModels) : MotoModel()
-data class YamahaMotoModel(val model: YamahaMotoModels) : MotoModel()
-data class KawasakiMotoModel(val model: KawasakiMotoModels) : MotoModel()
-data class UralMotoModel(val model: UralMotoModels) : MotoModel()
-data class HondaMotoModel(val model: HondaMotoModels) : MotoModel()
+data class BmwMotoModel(val model: BmwMotoModels?) : MotoModel()
+data class YamahaMotoModel(val model: YamahaMotoModels?) : MotoModel()
+data class KawasakiMotoModel(val model: KawasakiMotoModels?) : MotoModel()
+data class UralMotoModel(val model: UralMotoModels?) : MotoModel()
+data class HondaMotoModel(val model: HondaMotoModels?) : MotoModel()
 
 open class CommercialModel() : VehicleModel()
-data class CitroenCommercialModel(val model: CitroenCommercialModels) : CommercialModel()
-data class LadaCommercialModel(val model: LadaCommercialModels) : CommercialModel()
-data class PeugeotCommercialModel(val model: PeugeotCommercialModels) : CommercialModel()
-data class RenaultCommercialModel(val model: RenaultCommercialModels) : CommercialModel()
-data class VolksWagenCommercialModel(val model: VolksWagenCommercialModels) : CommercialModel()
+data class CitroenCommercialModel(val model: CitroenCommercialModels?) : CommercialModel()
+data class LadaCommercialModel(val model: LadaCommercialModels?) : CommercialModel()
+data class PeugeotCommercialModel(val model: PeugeotCommercialModels?) : CommercialModel()
+data class RenaultCommercialModel(val model: RenaultCommercialModels?) : CommercialModel()
+data class VolksWagenCommercialModel(val model: VolksWagenCommercialModels?) : CommercialModel()
 
 enum class Brand {
     AUDI,

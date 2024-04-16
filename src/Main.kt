@@ -5,7 +5,6 @@ import java.util.*
 
 fun main() {
 
-
     val ownerManager: OwnerManager = TestOwnerManager()
     val adsManager: AdsManager = TestAdsManager()
     val vehicleManager: VehicleManager = TestVehicleManager()
@@ -13,73 +12,12 @@ fun main() {
 
     mainMenu(vehicleManager, ownerManager, adsManager, validator)
 
-//    createVehicleForSearch()
-
     val allVehicles = vehicleManager.getAllVehicle()
     allVehicles.forEach { vehicle ->
         vehicle.getVehicleInfo()
-        if (vehicle is Auto) {
-            println(vehicle.typeAuto)
-        }
-        if (vehicle is Moto) {
-            println(vehicle.typeMoto)
-        }
-        if (vehicle is Commercial) {
-            println(vehicle.loadCapacity)
-        }
     }
 
-    val auto1 = Auto(
-        brand = Brand.BMW,
-        model = BmwAutoModel(BmwAutoModels.M5),
-        year = 2019,
-        color = Color.BLUE,
-        mileage = 40000,
-        typeAuto = TypeAuto.SEDAN
-    )
-    vehicleManager.addVehicle(auto1)
-
-    val moto1 = Moto(
-        brand = Brand.YAMAHA,
-        model = YamahaMotoModel(YamahaMotoModels.XV),
-        year = 2015,
-        color = Color.BLACK,
-        mileage = 20000,
-        typeMoto = TypeMoto.SPORT
-    )
-
-    val commercial1 = Commercial(
-        brand = Brand.VOLKSWAGEN,
-        model = VolksWagenCommercialModel(VolksWagenCommercialModels.CADDY),
-        year = 2014,
-        color = Color.BLACK,
-        mileage = 20000,
-        loadCapacity = 1.5
-    )
-
-    vehicleManager.addVehicle(moto1)
-
-
-    val owner1 = Owner(
-        name = "Иван",
-        telephoneNumber = 89905578121,
-        email = "google.ivan@gmail.com"
-    )
-
-
-    val ad1 = Ads(
-        price = 3000000,
-        publicationDate = Date(),
-        idOwner = owner1.idOwner,
-        idVehicle = auto1.idVehicle
-    )
-
 }
-
-fun search(usersChoice: Int) {
-
-}
-
 
 fun mainMenu(
     vehicleManager: VehicleManager,
@@ -89,10 +27,10 @@ fun mainMenu(
 ): Boolean {
 
     println("1. Добавить новое ТС\n2. Добавить нового владельца\n3. Добавить объявление\n4. Снять объявление\n5. Поиск по объявлениям")
-    var enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
-    while (enteredSymbol == 0) {
-        enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
-    }
+    var enteredSymbol = 0
+    do enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
+    while (enteredSymbol == 0)
+
     if (enteredSymbol == 1) {
         return vehicleConstructor(vehicleManager, validator)
     }
@@ -121,21 +59,50 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
 
     println("1. Добавить автомобиль\n2. Добавить мотоцикл\n3. Добавить коммерческий авто\n4. Назад")
     var choiceVehicleType = 0
-    do validator.isStringValidInRange(readln(), 1..4)
+    do choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
     while (choiceVehicleType == 0)
     if (choiceVehicleType == 1) {
-        addAuto(vehicleManager, validator)
+        val autoWasAdded = autoConstructor(validator)
+        if (autoWasAdded == null) return false
+        else {
+            vehicleManager.addVehicle(autoWasAdded)
+            return true
+        }
     }
     if (choiceVehicleType == 2) {
-        addMoto(vehicleManager, validator)
+        val motoWasAdded = motoConstructor(validator)
+        if (motoWasAdded == null) return false
+        else {
+            vehicleManager.addVehicle(motoWasAdded)
+            return true
+        }
     }
     if (choiceVehicleType == 3) {
-        addCommercial(vehicleManager, validator)
-    }
+        val commercialWasAdded = commercialConstructor(validator)
+        if (commercialWasAdded == null) return false
+        else {
+            vehicleManager.addVehicle(commercialWasAdded)
+            return true
+        }
+    } else return false
+}
+
+
+fun autoConstructor(validator: InputValidator): Auto? {
 
     var enteredBrand = 0
-    do validator.isStringValidInRange(readln(), 1..6)
-    while (enteredBrand == 0)
+    do {
+        println(
+            "Выберете марку:\n" +
+                    "1. Audi\n" +
+                    "2. BMW\n" +
+                    "3. Mazda\n" +
+                    "4. KIA\n" +
+                    "5. Skoda\n" +
+                    "6. Назад"
+        )
+        enteredBrand = validator.isStringValidInRange(readln(), 1..6)
+    } while (enteredBrand == 0)
     val brandChoice =
         when (enteredBrand) {
             1 -> Brand.AUDI
@@ -143,159 +110,411 @@ fun vehicleConstructor(vehicleManager: VehicleManager, validator: InputValidator
             3 -> Brand.MAZDA
             4 -> Brand.KIA
             5 -> Brand.SKODA
-            else -> return false
+            else -> return null
         }
 
-    when (enteredBrand) {
-        1 -> println("Выберете модель:\n1. A3\n2. A4\n3. A6\n4. Q3\n5. Q5\n6. Назад")
-        2 -> println("Выберете модель:\n1. M3\n2. M5\n3. M7\n4. X5\n5. X6\n6. Назад")
-        3 -> println("Выберете модель:\n1. M3\n2. M6\n3. CX-30\n4. CX-5\n5. CX-9\n6. Назад")
-        4 -> println("Выберете модель:\n1. Rio\n2. Cerato\n3. Optima\n4. Sportage\n5. Sorento\n6. Назад")
-        5 -> println("Выберете модель:\n1. Rapid\n2. Octavia\n3. Superb\n4. Karoq\n5. Kodiaq\n6. Назад")
-    }
     var enteredModel = 0
-
-    do validator.isStringValidInRange(readln(), 1..6)
-    while (enteredModel == 0)
-    if (enteredModel == 6)
-
-        return false
-    val pickBrand =
+    do {
         when (brandChoice) {
-            Brand.AUDI -> AudiAutoModels.getById(enteredModel - 1)
-            Brand.BMW -> BmwAutoModels.getById(enteredModel - 1)
-            Brand.MAZDA -> MazdaAutoModels.getById(enteredModel - 1)
-            Brand.KIA -> KiaAutoModels.getById(enteredModel - 1)
-            Brand.SKODA -> SkodaAutoModels.getById(enteredModel - 1)
-            else -> return false
+            Brand.AUDI -> println(
+                "Выберете модель:\n+" +
+                        "1. A3\n" +
+                        "2. A4\n" +
+                        "3. A6\n" +
+                        "4. Q3\n" +
+                        "5. Q5"
+            )
+
+            Brand.BMW -> println(
+                "Выберете модель:\n" +
+                        "1. M3\n" +
+                        "2. M5\n" +
+                        "3. M7\n" +
+                        "4. X5\n" +
+                        "5. X6"
+            )
+
+            Brand.MAZDA -> println(
+                "Выберете модель:\n" +
+                        "1. M3\n" +
+                        "2. M6\n" +
+                        "3. CX-30\n" +
+                        "4. CX-5\n" +
+                        "5. CX-9"
+            )
+
+            Brand.KIA -> println(
+                "Выберете модель:\n" +
+                        "1. Rio\n" +
+                        "2. Cerato\n" +
+                        "3. Optima\n" +
+                        "4. Sportage\n" +
+                        "5. Sorento"
+            )
+
+            Brand.SKODA -> println(
+                "Выберете модель:\n" +
+                        "1. Rapid\n" +
+                        "2. Octavia\n" +
+                        "3. Superb\n" +
+                        "4. Karoq\n" +
+                        "5. Kodiaq"
+            )
+
+            else -> return null
+        }
+        enteredModel = validator.isStringValidInRange(readln(), 1..5)
+    } while (enteredModel == 0)
+    val modelChoice =
+        when (brandChoice) {
+            Brand.AUDI -> AudiAutoModel(AudiAutoModels.getById(enteredModel - 1))
+            Brand.BMW -> BmwAutoModel(BmwAutoModels.getById(enteredModel - 1))
+            Brand.MAZDA -> MazdaAutoModel(MazdaAutoModels.getById(enteredModel - 1))
+            Brand.KIA -> KiaAutoModel(KiaAutoModels.getById(enteredModel - 1))
+            Brand.SKODA -> SkodaAutoModel(SkodaAutoModels.getById(enteredModel - 1))
+            else -> return null
         }
 
-
-    println("Введите год выпуска:")
-    var enteredYear = validator.isYearValid(readln())
-    while (enteredYear == 0) {
+    var enteredYear = 0
+    do {
+        println("Введите год выпуска:")
         enteredYear = validator.isYearValid(readln())
-    }
-    println("Выберете цвет:\n1. Красный\n 2. Зеленый\n3. Синий\n4. Черный\n5. Белый\n6. Назад")
-    var enteredColor = validator.isStringValidInRange(readln(), 1..6)
-    while (enteredColor == 0) {
-        enteredColor = validator.isStringValidInRange(readln(), 1..6)
-    }
+    } while (enteredYear == 0)
 
-    val choiceColor =
+
+    var enteredColor = 0
+    do {
+        println(
+            "Выберете цвет:\n" +
+                    "1. Красный\n" +
+                    "2. Зеленый\n" +
+                    "3. Синий\n" +
+                    "4. Черный\n" +
+                    "5. Белый"
+        )
+        enteredColor = validator.isStringValidInRange(readln(), 1..5)
+    } while (enteredColor == 0)
+    val colorChoice =
         when (enteredColor) {
             1 -> Color.RED
             2 -> Color.GREEN
             3 -> Color.BLUE
             4 -> Color.BLACK
             5 -> Color.WHITE
-            else -> Color.UNKNOWN
+            else -> return null
         }
-    println("Введите верхнюю границу пробега:")
-    val enteredMaxMileage = readln().toInt()
-    if (choiceVehicleType == 1) {
-        println("Выберете тип кузова:\n1. Седан\n 2. Хэтчбэк\n3. Универсал")
-        val enteredTypeAuto: TypeAuto
-        val enteredSymbol = readln().toInt()
-        enteredTypeAuto =
-            when (enteredSymbol) {
-                1 -> TypeAuto.SEDAN
-                2 -> TypeAuto.HATCHBACK
-                3 -> TypeAuto.UNIVERSAL
-                else -> TypeAuto.UNKNOWN
-            }
-        val vehicle = Auto(
-            brandChoice,
-            modelChoice,
-            enteredYear,
-            choiceColor,
-            enteredMaxMileage,
-            enteredTypeAuto
-        )
-        vehicleManager.addVehicle(vehicle)
-        return true
-    }
-    if (choiceVehicleType == 2) {
-        println("Выберете тип мотоцикла:\n1. Кроссовый\n2. Спортивный\n3. Грантуризмо")
-        val enteredTypeMoto: TypeMoto
-        val enteredSymbol = readln().toInt()
-        enteredTypeMoto =
-            when (enteredSymbol) {
-                1 -> TypeMoto.CROSS
-                2 -> TypeMoto.SPORT
-                3 -> TypeMoto.GRANTURISMO
-            }
-        val vehicle = Moto(
-            brandChoice,
-            enteredModel,
-            enteredYear,
-            enteredColor,
-            enteredMaxMileage,
-            enteredTypeMoto
-        )
-        vehicleManager.addVehicle(vehicle)
-        return true
-    }
-    if (choiceVehicleType == 3) {
-        println("Введите грузоподъемность:")
-        val enteredLoadCapacity = readln().toDouble()
-        val vehicle = Commercial(
-            brandChoice,
-            enteredModel,
-            enteredYear,
-            enteredColor,
-            enteredMaxMileage,
-            enteredLoadCapacity
-        )
-        vehicleManager.addVehicle(vehicle)
-        return true
-    } else return false
-} else return false
-}
 
-fun addAuto(vehicleManager: VehicleManager, validator: InputValidator): Auto {
-    auto = Auto(
-        brand = chooseBrand(validator),
-        model = chooseModel(validator, brand),
+    var enteredMileage = 0
+    do {
+        println("Введите пробег:")
+        enteredMileage = validator.isStringValidInRange(readln(), 0..5000000)
+    } while (enteredMileage == 0)
 
+    var enteredTypeAuto = 0
+    do {
+        println(
+            "Выберете тип кузова:\n" +
+                    "1. Седан\n" +
+                    "2. Хэтчбэк\n" +
+                    "3. Универсал"
+        )
+        enteredTypeAuto = validator.isStringValidInRange(readln(), 1..3)
+    } while (enteredTypeAuto == 0)
+    val typeAutoChoice =
+        when (enteredTypeAuto) {
+            1 -> TypeAuto.SEDAN
+            2 -> TypeAuto.HATCHBACK
+            3 -> TypeAuto.UNIVERSAL
+            else -> return null
+        }
 
+    val auto = Auto(
+        brand = brandChoice,
+        model = modelChoice,
+        year = enteredYear,
+        color = colorChoice,
+        mileage = enteredMileage,
+        typeAuto = typeAutoChoice
     )
 
-}
-
-fun addMoto(vehicleManager: VehicleManager, validator: InputValidator): Moto {
+    return auto
 
 }
 
-fun addCommercial(vehicleManager: VehicleManager, validator: InputValidator): Commercial {
+fun motoConstructor(validator: InputValidator): Moto? {
 
-}
-
-fun chooseBrand(validator: InputValidator): Brand {
     println(
         "Выберете марку:\n" +
-                "1. Audi\n" +
-                "2. BMW\n" +
-                "3. Mazda\n" +
-                "4. KIA\n" +
-                "5. Skoda\n" +
+                "1. BMW\n" +
+                "2. Yamaha\n" +
+                "3. Kawasaki\n" +
+                "4. Ural\n" +
+                "5. Honda\n" +
                 "6. Назад"
     )
     var enteredBrand = 0
-    do {
-        enteredBrand = validator.isStringValidInRange(readln(), 1..6)
-    } while (enteredBrand == 0)
-
+    do enteredBrand = validator.isStringValidInRange(readln(), 1..6)
+    while (enteredBrand == 0)
     val brandChoice =
         when (enteredBrand) {
-            1 -> Brand.AUDI
-            2 -> Brand.BMW
-            3 -> Brand.MAZDA
-            4 -> Brand.KIA
-            5 -> Brand.SKODA
-            6 -> TODO("Жёпа")
+            1 -> Brand.BMW
+            2 -> Brand.YAMAHA
+            3 -> Brand.KAWASAKI
+            4 -> Brand.URAL
+            5 -> Brand.HONDA
+            else -> return null
         }
-    return brandChoice
+
+    when (brandChoice) {
+        Brand.BMW -> println(
+            "Выберете модель:\n+" +
+                    "1. M\n" +
+                    "2. K\n" +
+                    "3. G\n" +
+                    "4. R\n" +
+                    "5. C"
+        )
+
+        Brand.YAMAHA -> println(
+            "Выберете модель:\n" +
+                    "1. MT\n" +
+                    "2. XSR\n" +
+                    "3. XT\n" +
+                    "4. XV\n" +
+                    "5. YZF"
+        )
+
+        Brand.KAWASAKI -> println(
+            "Выберете модель:\n" +
+                    "1. EN\n" +
+                    "2. ER\n" +
+                    "3. KX\n" +
+                    "4. NINJA,\n" +
+                    "5. Z"
+        )
+
+        Brand.URAL -> println(
+            "Выберете модель:\n" +
+                    "1. M\n" +
+                    "2. Solo\n" +
+                    "3. Tourist\n" +
+                    "4. Voyazh\n" +
+                    "5. Wolf"
+        )
+
+        Brand.HONDA -> println(
+            "Выберете модель:\n" +
+                    "1. CB\n" +
+                    "2. CBF\n" +
+                    "3. CBR\n" +
+                    "4. CRF\n" +
+                    "5. GL"
+        )
+
+        else -> return null
+    }
+    var enteredModel = 0
+    do enteredModel = validator.isStringValidInRange(readln(), 1..5)
+    while (enteredModel == 0)
+    val modelChoice =
+        when (brandChoice) {
+            Brand.BMW -> BmwMotoModel(BmwMotoModels.getById(enteredModel - 1))
+            Brand.YAMAHA -> YamahaMotoModel(YamahaMotoModels.getById(enteredModel - 1))
+            Brand.KAWASAKI -> KawasakiMotoModel(KawasakiMotoModels.getById(enteredModel - 1))
+            Brand.URAL -> UralMotoModel(UralMotoModels.getById(enteredModel - 1))
+            Brand.HONDA -> HondaMotoModel(HondaMotoModels.getById(enteredModel - 1))
+            else -> return null
+        }
+
+    println("Введите год выпуска:")
+    var enteredYear = 0
+    do enteredYear = validator.isYearValid(readln())
+    while (enteredYear == 0)
+
+    println(
+        "Выберете цвет:\n" +
+                "1. Красный\n" +
+                "2. Зеленый\n" +
+                "3. Синий\n" +
+                "4. Черный\n" +
+                "5. Белый"
+    )
+    var enteredColor = 0
+    do enteredColor = validator.isStringValidInRange(readln(), 1..5)
+    while (enteredColor == 0)
+    val colorChoice =
+        when (enteredColor) {
+            1 -> Color.RED
+            2 -> Color.GREEN
+            3 -> Color.BLUE
+            4 -> Color.BLACK
+            5 -> Color.WHITE
+            else -> return null
+        }
+
+    println("Введите пробег:")
+    var enteredMileage = 0
+    do enteredMileage = validator.isStringValidInRange(readln(), 0..5000000)
+    while (enteredMileage == 0)
+
+    println(
+        "Выберете тип мотоцикла:\n" +
+                "1. Кроссовый\n" +
+                "2. Спортивный\n" +
+                "3. Грантуризмо"
+    )
+    var enteredTypeMoto = 0
+    do enteredTypeMoto = validator.isStringValidInRange(readln(), 1..3)
+    while (enteredTypeMoto == 0)
+    val typeMotoChoice =
+        when (enteredTypeMoto) {
+            1 -> TypeMoto.CROSS
+            2 -> TypeMoto.SPORT
+            3 -> TypeMoto.GRANTURISMO
+            else -> return null
+        }
+
+    val moto = Moto(
+        brand = brandChoice,
+        model = modelChoice,
+        year = enteredYear,
+        color = colorChoice,
+        mileage = enteredMileage,
+        typeMoto = typeMotoChoice
+    )
+
+    return moto
+
+}
+
+
+fun commercialConstructor(validator: InputValidator): Commercial? {
+
+        var enteredBrand = 0
+    do {
+        println(
+            "Выберете марку:\n" +
+                    "1. Citroen\n" +
+                    "2. Lada\n" +
+                    "3. Peugeot\n" +
+                    "4. Renault\n" +
+                    "5. VolksWagen\n" +
+                    "6. Назад"
+        )
+        enteredBrand = validator.isStringValidInRange(readln(), 1..6)
+    }
+    while (enteredBrand == 0)
+    val brandChoice =
+        when (enteredBrand) {
+            1 -> Brand.CITROEN
+            2 -> Brand.LADA
+            3 -> Brand.PEUGEOT
+            4 -> Brand.RENAULT
+            5 -> Brand.VOLKSWAGEN
+            else -> return null
+        }
+
+        var enteredModel = 0
+    do {
+        when (brandChoice) {
+            Brand.CITROEN -> println(
+                "Выберете модель:\n+" +
+                        "1. Berlingo"
+            )
+
+            Brand.LADA -> println(
+                "Выберете модель:\n" +
+                        "1. Largus"
+            )
+
+            Brand.PEUGEOT -> println(
+                "Выберете модель:\n" +
+                        "1. Partner"
+            )
+
+            Brand.RENAULT -> println(
+                "Выберете модель:\n" +
+                        "1. Dokker"
+            )
+
+            Brand.VOLKSWAGEN -> println(
+                "Выберете модель:\n" +
+                        "1. Caddy"
+            )
+
+            else -> return null
+        }
+        enteredModel = validator.isStringValidInRange(readln(), 1..1)
+    }
+    while (enteredModel == 0)
+    val modelChoice =
+        when (brandChoice) {
+            Brand.CITROEN -> CitroenCommercialModel(CitroenCommercialModels.getById(enteredModel - 1))
+            Brand.LADA -> LadaCommercialModel(LadaCommercialModels.getById(enteredModel - 1))
+            Brand.PEUGEOT -> PeugeotCommercialModel(PeugeotCommercialModels.getById(enteredModel - 1))
+            Brand.RENAULT -> RenaultCommercialModel(RenaultCommercialModels.getById(enteredModel - 1))
+            Brand.VOLKSWAGEN -> VolksWagenCommercialModel(VolksWagenCommercialModels.getById(enteredModel - 1))
+            else -> return null
+        }
+
+
+    var enteredYear = 0
+    do {
+        println("Введите год выпуска:")
+        enteredYear = validator.isYearValid(readln())
+    }
+    while (enteredYear == 0)
+
+        var enteredColor = 0
+    do {
+        println(
+            "Выберете цвет:\n" +
+                    "1. Красный\n" +
+                    "2. Зеленый\n" +
+                    "3. Синий\n" +
+                    "4. Черный\n" +
+                    "5. Белый"
+        )
+        enteredColor = validator.isStringValidInRange(readln(), 1..5)
+    }
+    while (enteredColor == 0)
+    val colorChoice =
+        when (enteredColor) {
+            1 -> Color.RED
+            2 -> Color.GREEN
+            3 -> Color.BLUE
+            4 -> Color.BLACK
+            5 -> Color.WHITE
+            else -> return null
+        }
+
+
+    var enteredMileage = 0
+    do {
+        println("Введите пробег:")
+        enteredMileage = validator.isStringValidInRange(readln(), 0..5000000)
+    }
+    while (enteredMileage == 0)
+
+
+    var enteredLoadCapacity: Double? = 0.0
+    do {
+        println("Введите грузоподъемность:")
+        enteredLoadCapacity = validator.isStringValidInDouble(readln())
+    } while (enteredLoadCapacity == null)
+
+
+    val commercial = Commercial(
+        brand = brandChoice,
+        model = modelChoice,
+        year = enteredYear,
+        color = colorChoice,
+        mileage = enteredMileage,
+        loadCapacity = enteredLoadCapacity
+    )
+
+    return commercial
+
 }
 
 fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator): Boolean {
@@ -337,4 +556,8 @@ fun adsConstructor(vehicle: Vehicle, owner: Owner, adsManager: AdsManager): Bool
     )
     adsManager.addAd(ad)
     return true
+}
+
+fun search(usersChoice: Int) {
+
 }

@@ -17,6 +17,11 @@ class InputValidator {
         }
     }
 
+    fun isStringValidInDouble(string: String): Double? {
+        val output = string.toDoubleOrNull()
+        return output
+    }
+
     fun isYearValid(string: String): Int {
         val output = string.toIntOrNull()
         val calendar: Calendar = Calendar.getInstance()
