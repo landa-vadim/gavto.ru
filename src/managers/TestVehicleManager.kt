@@ -1,6 +1,7 @@
 package managers
 
-import data.Vehicle
+import data.*
+import validators.InputValidator
 import java.util.*
 
 class TestVehicleManager : VehicleManager {
@@ -15,27 +16,44 @@ class TestVehicleManager : VehicleManager {
         return vehicleList
     }
 
-
-    override fun searchVehicle(userRequest: Vehicle, vehicleList: List<Vehicle>): List<Vehicle> {
-
-        val listVehicleOut = mutableListOf<Vehicle>()
-
-        for (vehicle in vehicleList) {
-            if (vehicle == userRequest) {
-                listVehicleOut.add(vehicle)
-            }
-        }
-        return listVehicleOut
-    }
-
-    override fun getVehicleByID(idVehicle: UUID): Vehicle {
+    override fun getVehicleByID(idVehicle: UUID): Vehicle? {
 
         for (vehicle in vehicleList) {
             if (vehicle.idVehicle == idVehicle) {
                 return vehicle
-            } else return vehicleList[0]
+            }
         }
-        return vehicleList[0]
+        return null
+    }
+
+    override fun searchVehicle(
+        userRequestBrand: Brand?,
+        userRequestModel: VehicleModel?,
+        userRequestYear: Int,
+        userRequestColor: Color?,
+        userRequestMileage: Int,
+        userRequestVehicleSpecificInfo: String?,
+        vehicleList: List<Vehicle>
+    ): List<Vehicle> {
+
+        val listVehicleOut = mutableListOf<Vehicle>()
+
+        for (vehicle in vehicleList) {
+            if (userRequestBrand == null || vehicle.brand == userRequestBrand) {
+                if (userRequestModel == null || vehicle.model == userRequestModel) {
+                    if (userRequestYear == 0 || vehicle.year >= userRequestYear) {
+                        if (userRequestColor == null || vehicle.color == userRequestColor) {
+                            if (userRequestMileage == 0 || vehicle.mileage <= userRequestMileage) {
+                                if (userRequestVehicleSpecificInfo == null || vehicle.getVehicleSpecificInfo() == userRequestVehicleSpecificInfo) {
+                                    listVehicleOut.add(vehicle)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return listVehicleOut
     }
 
 }

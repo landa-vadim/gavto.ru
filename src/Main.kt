@@ -14,7 +14,7 @@ fun main() {
     val validator = InputValidator()
 
     do mainMenu(vehicleManager, ownerManager, adsManager, validator)
-        while (true)
+    while (true)
 
 //    val allVehicles = vehicleManager.getAllVehicle()
 //    allVehicles.forEach { vehicle ->
@@ -31,11 +31,13 @@ fun mainMenu(
 
     var enteredSymbol = 0
     do {
-        println("1. Добавить новое ТС\n" +
-                "2. Добавить нового владельца\n" +
-                "3. Добавить объявление\n" +
-                "4. Снять объявление\n" +
-                "5. Поиск по объявлениям")
+        println(
+            "1. Добавить новое ТС\n" +
+                    "2. Добавить нового владельца\n" +
+                    "3. Добавить объявление\n" +
+                    "4. Снять объявление\n" +
+                    "5. Поиск по объявлениям"
+        )
 
         enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
     } while (enteredSymbol == 0)
@@ -44,48 +46,49 @@ fun mainMenu(
         1 -> vehicleMenu(vehicleManager, validator)
         2 -> ownerConstructor(ownerManager, validator)
         3 -> adsConstructor(validator, adsManager)
-//        4 -> adsManager.removeAd(adsConstructor())
-//        5 -> adsManager.searchAds(adsConstructor())
+        4 -> adsManager.removeAd(adsConstructor())
+        5 -> researchAds(adsManager)
         else -> return
     }
 }
 
 
-fun vehicleMenu(vehicleManager: VehicleManager, validator: InputValidator): Boolean {
-    println("1. Добавить автомобиль\n2. Добавить мотоцикл\n3. Добавить коммерческий авто\n4. Назад")
+fun vehicleMenu(vehicleManager: VehicleManager, validator: InputValidator) {
+    println(
+        "1. Добавить автомобиль\n" +
+                "2. Добавить мотоцикл\n" +
+                "3. Добавить коммерческий авто\n" +
+                "4. Назад"
+    )
     var choiceVehicleType = 0
     do {
         choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
-    }
-    while (choiceVehicleType == 0)
+    } while (choiceVehicleType == 0)
 
     if (choiceVehicleType == 1) {
         val autoWasAdded = autoConstructor(validator)
-        if (autoWasAdded == null) return false
+        if (autoWasAdded == null) return
         else {
             vehicleManager.addVehicle(autoWasAdded)
-            return true
         }
     }
     if (choiceVehicleType == 2) {
         val motoWasAdded = motoConstructor(validator)
-        if (motoWasAdded == null) return false
+        if (motoWasAdded == null) return
         else {
             vehicleManager.addVehicle(motoWasAdded)
-            return true
         }
     }
     if (choiceVehicleType == 3) {
         val commercialWasAdded = commercialConstructor(validator)
-        if (commercialWasAdded == null) return false
+        if (commercialWasAdded == null) return
         else {
             vehicleManager.addVehicle(commercialWasAdded)
-            return true
         }
-    } else return false
+    }
 }
 
-fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator): Boolean {
+fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
     println("Введите имя:")
     val name = readln()
     println("Введите номер телефона:")
@@ -103,13 +106,12 @@ fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator): Boo
         email
     )
     ownerManager.addOwner(owner)
-    return true
 }
 
 
-fun adsConstructor(validator: InputValidator, adsManager: AdsManager): Boolean {
-    val idVehicle = TODO("Функция выбора нужного авто и возврат его ID")
-    val idOwner = TODO("Функция выбора пользователя и возврат его ID")
+fun adsConstructor(validator: InputValidator, adsManager: AdsManager) {
+    val idVehicle = //TODO("Функция выбора нужного авто и возврат его ID")
+    val idOwner = //TODO("Функция выбора пользователя и возврат его ID")
     val publicationDate = Date()
     println("Введите цену:")
     val price = readln().toInt()
@@ -121,9 +123,61 @@ fun adsConstructor(validator: InputValidator, adsManager: AdsManager): Boolean {
         idOwner
     )
     adsManager.addAd(ad)
-    return true
+    return
 }
 
-fun search(usersChoice: Int) {
+fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager, vehicle: Vehicle) {
+
+    println(
+                "1. Поиск по всем ТС\n" +
+                "2. Поиск по авто\n" +
+                "3. Поиск по мото\n" +
+                "4. Поиск по коммерческому транспорту\n" +
+                "5. Назад"
+    )
+    var enteredSymbol = 0
+    do enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
+    while (enteredSymbol == 0)
+
+         if (enteredSymbol == 1) {
+        val brand =
+        val model =
+    }
+    if (enteredSymbol == 2) {
+        val brand =
+        val model =
+        val userRequestVehicleSpecificInfo =
+    }
+    if (enteredSymbol == 3) {
+        val brand =
+        val model =
+        val userRequestVehicleSpecificInfo =
+    }
+    if (enteredSymbol == 4) {
+        val brand =
+        val model =
+        val userRequestVehicleSpecificInfo =
+    }
+    if (enteredSymbol == 5) {
+return
+    }
+
+    val year =
+    val color =
+    val mileage =
+
+        vehicleManager.searchVehicle(brand, model, year, color, mileage, userRequestVehicleSpecificInfo)
+
+    for (i in vehicleListOut) {
+        vehicle.getVehicleInfo()
+    }
+
+}
+
+fun researchAds(adsManager: TestAdsManager) {
+//
+//        val foundAd = adsManager.searchAds()
+//    vehicle = foundAd.idVehicle
+//        .getVehicleInfo()
 
 }

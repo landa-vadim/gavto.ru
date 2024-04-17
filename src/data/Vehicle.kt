@@ -11,6 +11,7 @@ abstract class Vehicle(
     val mileage: Int,
 ) {
     abstract fun getVehicleInfo()
+    abstract fun getVehicleSpecificInfo(): String
 }
 
 class Auto(
@@ -24,6 +25,10 @@ class Auto(
 
     override fun getVehicleInfo() {
         println("Марка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип кузова: $typeAuto")
+    }
+
+    override fun getVehicleSpecificInfo(): String {
+        return "$typeAuto"
     }
 
 }
@@ -41,6 +46,10 @@ class Moto(
         println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип мотоцикла: $typeMoto")
     }
 
+    override fun getVehicleSpecificInfo(): String {
+        return "$typeMoto"
+    }
+
 }
 
 class Commercial(
@@ -53,6 +62,10 @@ class Commercial(
 ) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
     override fun getVehicleInfo() {
         println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nГрузоподъемность: $loadCapacity")
+    }
+
+    override fun getVehicleSpecificInfo(): String {
+        return "$loadCapacity"
     }
 
 }

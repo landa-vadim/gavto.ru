@@ -26,7 +26,7 @@ class TestAdsManager : AdsManager {
         inActiveAdsList.add(ad)
     }
 
-    override fun searchAds() {
+    override fun searchAds(): Ads {
 
     }
 
