@@ -13,12 +13,13 @@ fun main() {
     val vehicleManager: VehicleManager = TestVehicleManager()
     val validator = InputValidator()
 
-    mainMenu(vehicleManager, ownerManager, adsManager, validator)
+    do mainMenu(vehicleManager, ownerManager, adsManager, validator)
+        while (true)
 
-    val allVehicles = vehicleManager.getAllVehicle()
-    allVehicles.forEach { vehicle ->
-        vehicle.getVehicleInfo()
-    }
+//    val allVehicles = vehicleManager.getAllVehicle()
+//    allVehicles.forEach { vehicle ->
+//        vehicle.getVehicleInfo()
+//    }
 }
 
 fun mainMenu(
@@ -26,7 +27,7 @@ fun mainMenu(
     ownerManager: OwnerManager,
     adsManager: AdsManager,
     validator: InputValidator
-): Boolean {
+) {
 
     var enteredSymbol = 0
     do {
@@ -40,12 +41,12 @@ fun mainMenu(
     } while (enteredSymbol == 0)
 
     when (enteredSymbol) {
-        1 -> return vehicleMenu(vehicleManager, validator)
-        2 -> return ownerConstructor(ownerManager, validator)
-//        3 -> return adsConstructor()
-//        4 -> return adsManager.removeAd(adsConstructor())
-//        5 -> return adsManager.searchAds(adsConstructor())
-        else -> return false
+        1 -> vehicleMenu(vehicleManager, validator)
+        2 -> ownerConstructor(ownerManager, validator)
+        3 -> adsConstructor(validator, adsManager)
+//        4 -> adsManager.removeAd(adsConstructor())
+//        5 -> adsManager.searchAds(adsConstructor())
+        else -> return
     }
 }
 
@@ -106,9 +107,9 @@ fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator): Boo
 }
 
 
-fun adsConstructor(vehicle: Vehicle, owner: Owner, adsManager: AdsManager): Boolean {
-    val idVehicle = vehicle.idVehicle
-    val idOwner = owner.idOwner
+fun adsConstructor(validator: InputValidator, adsManager: AdsManager): Boolean {
+    val idVehicle = TODO("Функция выбора нужного авто и возврат его ID")
+    val idOwner = TODO("Функция выбора пользователя и возврат его ID")
     val publicationDate = Date()
     println("Введите цену:")
     val price = readln().toInt()
