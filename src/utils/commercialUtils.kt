@@ -3,6 +3,27 @@ package utils
 import data.*
 import validators.InputValidator
 fun commercialConstructor(validator: InputValidator): Commercial? {
+
+    val brandChoice = brandChoose(validator) ?: return null
+    val modelChoice = modelChoose(brandChoice, validator) ?: return null
+    val enteredYear = yearChoose(validator)
+    val colorChoice = colorChoose(validator) ?: return null
+    val enteredMileage = mileageChoose(validator)
+    val enteredLoadCapacity = loadCapacityChoose(validator) ?: return null
+
+    val commercial = Commercial(
+        brand = brandChoice,
+        model = modelChoice,
+        year = enteredYear,
+        color = colorChoice,
+        mileage = enteredMileage,
+        loadCapacity = enteredLoadCapacity
+    )
+
+    return commercial
+}
+
+private fun brandChoose(validator: InputValidator): Brand? {
     var enteredBrand = 0
     do {
         println(
@@ -25,7 +46,10 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
             5 -> Brand.VOLKSWAGEN
             else -> return null
         }
+    return brandChoice
+}
 
+private fun modelChoose(brandChoice: Brand?, validator: InputValidator): CommercialModel? {
     var enteredModel = 0
     do {
         when (brandChoice) {
@@ -67,14 +91,19 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
             Brand.VOLKSWAGEN -> VolksWagenCommercialModel(VolksWagenCommercialModels.getById(enteredModel - 1))
             else -> return null
         }
+    return modelChoice
+}
 
-
+private fun yearChoose(validator: InputValidator): Int {
     var enteredYear = 0
     do {
         println("Введите год выпуска:")
         enteredYear = validator.isYearValid(readln())
     } while (enteredYear == 0)
+    return enteredYear
+}
 
+private fun colorChoose(validator: InputValidator): Color? {
     var enteredColor = 0
     do {
         println(
@@ -96,29 +125,23 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
             5 -> Color.WHITE
             else -> return null
         }
+    return colorChoice
+}
 
-
+private fun mileageChoose(validator: InputValidator): Int {
     var enteredMileage = 0
     do {
         println("Введите пробег:")
-        enteredMileage = validator.isStringValidInRange(readln(), 0..5000000)
+        enteredMileage = validator.isStringValidInRange(readln(), 1..5000000)
     } while (enteredMileage == 0)
+    return enteredMileage
+}
 
-
+private fun loadCapacityChoose(validator: InputValidator): Double? {
     var enteredLoadCapacity: Double? = 0.0
     do {
         println("Введите грузоподъемность:")
         enteredLoadCapacity = validator.isStringValidInDouble(readln())
     } while (enteredLoadCapacity == null)
-
-    val commercial = Commercial(
-        brand = brandChoice,
-        model = modelChoice,
-        year = enteredYear,
-        color = colorChoice,
-        mileage = enteredMileage,
-        loadCapacity = enteredLoadCapacity
-    )
-
-    return commercial
+    return enteredLoadCapacity
 }

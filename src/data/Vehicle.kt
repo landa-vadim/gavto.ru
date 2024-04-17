@@ -131,7 +131,7 @@ enum class MazdaAutoModels {
     CX9;
     companion object {
         fun getById(ordinal: Int): MazdaAutoModels? {
-            return values().firstOrNull() { it.ordinal == ordinal }
+            return  values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }

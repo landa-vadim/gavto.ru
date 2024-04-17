@@ -4,6 +4,27 @@ import data.*
 import validators.InputValidator
 
 fun motoConstructor(validator: InputValidator): Moto? {
+
+    val brandChoice = brandChoose(validator) ?: return null
+    val modelChoice = modelChoose(brandChoice, validator) ?: return null
+    val enteredYear = yearChoose(validator)
+    val colorChoice = colorChoose(validator) ?: return null
+    val enteredMileage = mileageChoose(validator)
+    val typeMotoChoice = typeMotoChoose(validator) ?: return null
+
+    val moto = Moto(
+        brand = brandChoice,
+        model = modelChoice,
+        year = enteredYear,
+        color = colorChoice,
+        mileage = enteredMileage,
+        typeMoto = typeMotoChoice
+    )
+
+    return moto
+}
+
+private fun brandChoose(validator: InputValidator): Brand? {
     println(
         "Выберете марку:\n" +
                 "1. BMW\n" +
@@ -25,7 +46,10 @@ fun motoConstructor(validator: InputValidator): Moto? {
             5 -> Brand.HONDA
             else -> return null
         }
+    return brandChoice
+}
 
+private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoModel? {
     when (brandChoice) {
         Brand.BMW -> println(
             "Выберете модель:\n+" +
@@ -86,12 +110,18 @@ fun motoConstructor(validator: InputValidator): Moto? {
             Brand.HONDA -> HondaMotoModel(HondaMotoModels.getById(enteredModel - 1))
             else -> return null
         }
+    return modelChoice
+}
 
+private fun yearChoose(validator: InputValidator): Int {
     println("Введите год выпуска:")
     var enteredYear = 0
     do enteredYear = validator.isYearValid(readln())
     while (enteredYear == 0)
+    return enteredYear
+}
 
+private fun colorChoose(validator: InputValidator): Color? {
     println(
         "Выберете цвет:\n" +
                 "1. Красный\n" +
@@ -112,12 +142,18 @@ fun motoConstructor(validator: InputValidator): Moto? {
             5 -> Color.WHITE
             else -> return null
         }
+    return colorChoice
+}
 
+private fun mileageChoose(validator: InputValidator): Int {
     println("Введите пробег:")
     var enteredMileage = 0
     do enteredMileage = validator.isStringValidInRange(readln(), 0..5000000)
     while (enteredMileage == 0)
+    return enteredMileage
+}
 
+private fun typeMotoChoose(validator: InputValidator): TypeMoto? {
     println(
         "Выберете тип мотоцикла:\n" +
                 "1. Кроссовый\n" +
@@ -134,15 +170,5 @@ fun motoConstructor(validator: InputValidator): Moto? {
             3 -> TypeMoto.GRANTURISMO
             else -> return null
         }
-
-    val moto = Moto(
-        brand = brandChoice,
-        model = modelChoice,
-        year = enteredYear,
-        color = colorChoice,
-        mileage = enteredMileage,
-        typeMoto = typeMotoChoice
-    )
-
-    return moto
+    return typeMotoChoice
 }
