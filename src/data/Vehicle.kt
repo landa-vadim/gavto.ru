@@ -105,7 +105,7 @@ enum class AudiAutoModels {
     Q5;
     companion object {
         fun getById(ordinal: Int): AudiAutoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -118,7 +118,7 @@ enum class BmwAutoModels {
     X6;
     companion object {
         fun getById(ordinal: Int): BmwAutoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -131,7 +131,7 @@ enum class MazdaAutoModels {
     CX9;
     companion object {
         fun getById(ordinal: Int): MazdaAutoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -144,7 +144,7 @@ enum class KiaAutoModels {
     SORENTO;
     companion object {
         fun getById(ordinal: Int): KiaAutoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -157,7 +157,7 @@ enum class SkodaAutoModels {
     KODIAQ;
     companion object {
         fun getById(ordinal: Int): SkodaAutoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -170,7 +170,7 @@ enum class BmwMotoModels {
     C;
     companion object {
         fun getById(ordinal: Int): BmwMotoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -183,7 +183,7 @@ enum class YamahaMotoModels {
     YZF;
     companion object {
         fun getById(ordinal: Int): YamahaMotoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -196,7 +196,7 @@ enum class KawasakiMotoModels {
     Z;
     companion object {
         fun getById(ordinal: Int): KawasakiMotoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -209,7 +209,7 @@ enum class UralMotoModels {
     WOLF;
     companion object {
         fun getById(ordinal: Int): UralMotoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -220,9 +220,11 @@ enum class HondaMotoModels {
     CBR,
     CRF,
     GL;
+
     companion object {
+
         fun getById(ordinal: Int): HondaMotoModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -231,7 +233,7 @@ enum class CitroenCommercialModels {
     BERLINGO;
     companion object {
         fun getById(ordinal: Int): CitroenCommercialModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -240,7 +242,7 @@ enum class LadaCommercialModels {
     LARGUS;
     companion object {
         fun getById(ordinal: Int): LadaCommercialModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -249,7 +251,7 @@ enum class PeugeotCommercialModels {
     PARTNER;
     companion object {
         fun getById(ordinal: Int): PeugeotCommercialModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -258,7 +260,7 @@ enum class RenaultCommercialModels {
     DOKKER;
     companion object {
         fun getById(ordinal: Int): RenaultCommercialModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
@@ -267,7 +269,7 @@ enum class VolksWagenCommercialModels {
     CADDY;
     companion object {
         fun getById(ordinal: Int): VolksWagenCommercialModels? {
-            return entries.firstOrNull() { it.ordinal == ordinal }
+            return values().firstOrNull() { it.ordinal == ordinal }
         }
     }
 }
