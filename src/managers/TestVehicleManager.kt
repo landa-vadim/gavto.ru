@@ -36,6 +36,7 @@ class TestVehicleManager : VehicleManager {
     ): List<Vehicle> {
 
         val listVehicleOutput = mutableListOf<Vehicle>()
+        val userRequestLoadCapacity = userRequestVehicleSpecificInfo?.toDoubleOrNull()
 
         for (vehicle in vehicleList) {
             if (userRequestBrand == null || vehicle.brand == userRequestBrand) {
@@ -43,7 +44,8 @@ class TestVehicleManager : VehicleManager {
                     if (userRequestYear == null || vehicle.year >= userRequestYear) {
                         if (userRequestColor == null || vehicle.color == userRequestColor) {
                             if (userRequestMileage == null || vehicle.mileage <= userRequestMileage) {
-                                if (userRequestVehicleSpecificInfo == null || vehicle.getVehicleSpecificInfo() == userRequestVehicleSpecificInfo) {
+                                val vehicleLoadCapacity = vehicle.getVehicleSpecificInfo().toDoubleOrNull()
+                                if (userRequestVehicleSpecificInfo == null || vehicle.getVehicleSpecificInfo() == userRequestVehicleSpecificInfo || (userRequestLoadCapacity != null && vehicleLoadCapacity != null && userRequestLoadCapacity <= vehicleLoadCapacity)) {
                                     listVehicleOutput.add(vehicle)
                                 }
                             }

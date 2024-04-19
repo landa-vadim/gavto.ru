@@ -322,7 +322,7 @@ fun userRequestSpecificInfo (chooseOption: Int, validator: InputValidator): Stri
         }
     }
     if (chooseOption == 4) {
-        println("Введите грузоподъемность или \"0.0\" для перехода к следующему параметру:")
+        println("Введите минимальную грузоподъемность или \"0.0\" для перехода к следующему параметру:")
         return "${validator.isStringValidInDouble(readln())}"
     } else return null
 }
