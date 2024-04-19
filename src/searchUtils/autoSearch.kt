@@ -27,7 +27,7 @@ fun userRequestAutoBrand(validator: InputValidator): Brand? {
     }
 }
 
-fun userRequestAutoModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
+fun userRequestAutoModel(brandChoice: Brand?, validator: InputValidator): AutoModel? {
     var enteredModel = 0
     do {
         when (brandChoice) {
@@ -93,25 +93,5 @@ fun userRequestAutoModel(brandChoice: Brand, validator: InputValidator): AutoMod
         Brand.KIA -> KiaAutoModel(KiaAutoModels.getById(enteredModel - 1))
         Brand.SKODA -> SkodaAutoModel(SkodaAutoModels.getById(enteredModel - 1))
         else -> null
-    }
-}
-
-fun userRequestAutoType(validator: InputValidator): TypeAuto? {
-    var enteredTypeAuto = 0
-    do {
-        println(
-            "Выберете тип кузова:\n" +
-                    "1. Седан\n" +
-                    "2. Хэтчбэк\n" +
-                    "3. Универсал\n" +
-                    "4. Следующий параметр"
-        )
-        enteredTypeAuto = validator.isStringValidInRange(readln(), 1..4)
-    } while (enteredTypeAuto == 0)
-    return when (enteredTypeAuto) {
-        1 -> TypeAuto.SEDAN
-        2 -> TypeAuto.HATCHBACK
-        3 -> TypeAuto.UNIVERSAL
-        else -> return null
     }
 }

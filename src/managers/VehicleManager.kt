@@ -17,9 +17,9 @@ interface VehicleManager {
     fun searchVehicle(
         userRequestBrand: Brand?,
         userRequestModel: VehicleModel?,
-        userRequestYear: Int,
+        userRequestYear: Int?,
         userRequestColor: Color?,
-        userRequestMileage: Int,
+        userRequestMileage: Int?,
         userRequestVehicleSpecificInfo: String?,
         vehicleList: List<Vehicle>
     ): List<Vehicle>      //searchCriteria: VehicleSearchCriteria

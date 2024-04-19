@@ -244,7 +244,7 @@ fun userRequestVehicleYear(validator: InputValidator): Int? {
     var enteredYear: Int? = 0
     do {
         println("Введите самый ранний год выпуска или цифру\"0\" для перехода к следующему параметру:")
-        enteredYear = validator.isYearValidForSearch(readln())
+        enteredYear = validator.isYearValid(readln())
     } while (enteredYear == 0)
     return enteredYear
 }
@@ -277,7 +277,52 @@ fun userRequestVehicleMileage(validator: InputValidator): Int? {
     var enteredMileage: Int? = 0
     do {
         println("Введите максимальный пробег или цифру \"0\" для перехода к следующему параметру:")
-        enteredMileage = validator.isStringValidInRangeForSearch(readln(), 1..5000000)
+        enteredMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
     } while (enteredMileage == 0)
     return enteredMileage
+}
+
+fun userRequestSpecificInfo (chooseOption: Int, validator: InputValidator): String? {
+    if (chooseOption == 2) {
+        var enteredTypeAuto = 0
+        do {
+            println(
+                "Выберете тип кузова:\n" +
+                        "1. Седан\n" +
+                        "2. Хэтчбэк\n" +
+                        "3. Универсал\n" +
+                        "4. Следующий параметр"
+            )
+            enteredTypeAuto = validator.isStringValidInRange(readln(), 1..4)
+        } while (enteredTypeAuto == 0)
+        return when (enteredTypeAuto) {
+            1 -> "${TypeAuto.SEDAN}"
+            2 -> "${TypeAuto.HATCHBACK}"
+            3 -> "${TypeAuto.UNIVERSAL}"
+            else -> return null
+        }
+    }
+    if (chooseOption == 3) {
+        var enteredTypeMoto = 0
+        do {
+            println(
+                "Выберете тип мотоцикла:\n" +
+                        "1. Кроссовый\n" +
+                        "2. Спортивный\n" +
+                        "3. Грантуризмо\n" +
+                        "4. Следующий параметр"
+            )
+            enteredTypeMoto = validator.isStringValidInRange(readln(), 1..4)
+        } while (enteredTypeMoto == 0)
+        return when (enteredTypeMoto) {
+            1 -> "${TypeMoto.CROSS}"
+            2 -> "${TypeMoto.SPORT}"
+            3 -> "${TypeMoto.GRANTURISMO}"
+            else -> return null
+        }
+    }
+    if (chooseOption == 4) {
+        println("Введите грузоподъемность или \"0.0\" для перехода к следующему параметру:")
+        return "${validator.isStringValidInDouble(readln())}"
+    } else return null
 }

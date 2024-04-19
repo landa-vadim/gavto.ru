@@ -6,9 +6,9 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
 
     val brandChoice = brandChoose(validator) ?: return null
     val modelChoice = modelChoose(brandChoice, validator) ?: return null
-    val enteredYear = yearChoose(validator)
+    val enteredYear = yearChoose(validator)  ?: return null
     val colorChoice = colorChoose(validator) ?: return null
-    val enteredMileage = mileageChoose(validator)
+    val enteredMileage = mileageChoose(validator)  ?: return null
     val enteredLoadCapacity = loadCapacityChoose(validator) ?: return null
 
     val commercial = Commercial(
@@ -94,8 +94,8 @@ private fun modelChoose(brandChoice: Brand?, validator: InputValidator): Commerc
     return modelChoice
 }
 
-private fun yearChoose(validator: InputValidator): Int {
-    var enteredYear = 0
+private fun yearChoose(validator: InputValidator): Int? {
+    var enteredYear: Int? = 0
     do {
         println("Введите год выпуска:")
         enteredYear = validator.isYearValid(readln())
@@ -116,7 +116,7 @@ private fun colorChoose(validator: InputValidator): Color? {
         )
         enteredColor = validator.isStringValidInRange(readln(), 1..5)
     } while (enteredColor == 0)
-    val colorChoice =
+    val colorChoice: Color =
         when (enteredColor) {
             1 -> Color.RED
             2 -> Color.GREEN
@@ -128,8 +128,8 @@ private fun colorChoose(validator: InputValidator): Color? {
     return colorChoice
 }
 
-private fun mileageChoose(validator: InputValidator): Int {
-    var enteredMileage = 0
+private fun mileageChoose(validator: InputValidator): Int? {
+    var enteredMileage: Int? = 0
     do {
         println("Введите пробег:")
         enteredMileage = validator.isStringValidInRange(readln(), 1..5000000)
@@ -137,7 +137,7 @@ private fun mileageChoose(validator: InputValidator): Int {
     return enteredMileage
 }
 
-private fun loadCapacityChoose(validator: InputValidator): Double {
+private fun loadCapacityChoose(validator: InputValidator): Double? {
     var enteredLoadCapacity: Double? = 0.0
     do {
         println("Введите грузоподъемность:")

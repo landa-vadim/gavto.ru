@@ -1,7 +1,6 @@
 package managers
 
 import data.*
-import validators.InputValidator
 import java.util.*
 
 class TestVehicleManager : VehicleManager {
@@ -29,23 +28,23 @@ class TestVehicleManager : VehicleManager {
     override fun searchVehicle(
         userRequestBrand: Brand?,
         userRequestModel: VehicleModel?,
-        userRequestYear: Int,
+        userRequestYear: Int?,
         userRequestColor: Color?,
-        userRequestMileage: Int,
+        userRequestMileage: Int?,
         userRequestVehicleSpecificInfo: String?,
         vehicleList: List<Vehicle>
     ): List<Vehicle> {
 
-        val listVehicleOut = mutableListOf<Vehicle>()
+        val listVehicleOutput = mutableListOf<Vehicle>()
 
         for (vehicle in vehicleList) {
             if (userRequestBrand == null || vehicle.brand == userRequestBrand) {
                 if (userRequestModel == null || vehicle.model == userRequestModel) {
-                    if (userRequestYear == 0 || vehicle.year >= userRequestYear) {
+                    if (userRequestYear == null || vehicle.year >= userRequestYear) {
                         if (userRequestColor == null || vehicle.color == userRequestColor) {
-                            if (userRequestMileage == 0 || vehicle.mileage <= userRequestMileage) {
+                            if (userRequestMileage == null || vehicle.mileage <= userRequestMileage) {
                                 if (userRequestVehicleSpecificInfo == null || vehicle.getVehicleSpecificInfo() == userRequestVehicleSpecificInfo) {
-                                    listVehicleOut.add(vehicle)
+                                    listVehicleOutput.add(vehicle)
                                 }
                             }
                         }
@@ -53,7 +52,7 @@ class TestVehicleManager : VehicleManager {
                 }
             }
         }
-        return listVehicleOut
+        return listVehicleOutput
     }
 
 }

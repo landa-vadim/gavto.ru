@@ -26,7 +26,7 @@ fun userRequestMotoBrand(validator: InputValidator): Brand? {
     }
 }
 
-fun userRequestMotoModel(brandChoice: Brand, validator: InputValidator): MotoModel? {
+fun userRequestMotoModel(brandChoice: Brand?, validator: InputValidator): MotoModel? {
     var enteredModel = 0
     do {
         when (brandChoice) {
@@ -91,27 +91,6 @@ fun userRequestMotoModel(brandChoice: Brand, validator: InputValidator): MotoMod
         Brand.KAWASAKI -> KawasakiMotoModel(KawasakiMotoModels.getById(enteredModel - 1))
         Brand.URAL -> UralMotoModel(UralMotoModels.getById(enteredModel - 1))
         Brand.HONDA -> HondaMotoModel(HondaMotoModels.getById(enteredModel - 1))
-        else -> return null
-    }
-}
-
-fun userRequestMotoType(validator: InputValidator): TypeMoto? {
-    var enteredTypeMoto = 0
-    do {
-        println(
-            "Выберете тип мотоцикла:\n" +
-                    "1. Кроссовый\n" +
-                    "2. Спортивный\n" +
-                    "3. Грантуризмо\n" +
-                    "4. Следующий параметр"
-        )
-
-        enteredTypeMoto = validator.isStringValidInRange(readln(), 1..4)
-    } while (enteredTypeMoto == 0)
-    return when (enteredTypeMoto) {
-        1 -> TypeMoto.CROSS
-        2 -> TypeMoto.SPORT
-        3 -> TypeMoto.GRANTURISMO
         else -> return null
     }
 }

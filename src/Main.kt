@@ -1,7 +1,6 @@
 import data.*
 import managers.*
-import searchUtils.userRequestVehicleBrand
-import searchUtils.userRequestVehicleModel
+import searchUtils.*
 import utils.autoConstructor
 import utils.commercialConstructor
 import utils.motoConstructor
@@ -128,7 +127,7 @@ fun adsConstructor(validator: InputValidator, adsManager: AdsManager) {
     return
 }
 
-fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager, vehicle: Vehicle) {
+fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManager, vehicle: Vehicle) {
 
     println(
         "1. Поиск по всем ТС\n" +
@@ -141,39 +140,42 @@ fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager, v
     do enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
     while (enteredSymbol == 0)
 
-    if (enteredSymbol == 1) {
-        val brand = userRequestVehicleBrand(validator)
-        val model = userRequestVehicleModel(brand?, validator)
-    }
-    if (enteredSymbol == 2) {
-        val brand =
-        val model =
-        val userRequestVehicleSpecificInfo =
-    }
-    if (enteredSymbol == 3) {
-        val brand =
-        val model =
-        val userRequestVehicleSpecificInfo =
-    }
-    if (enteredSymbol == 4) {
-        val brand =
-        val model =
-        val userRequestVehicleSpecificInfo =
-    }
-    if (enteredSymbol == 5) {
-        return
-    }
+    val brand =
+        when (enteredSymbol) {
+            1 -> userRequestVehicleBrand(validator)
+            2 -> userRequestAutoBrand(validator)
+            3 -> userRequestMotoBrand(validator)
+            4 -> userRequestCommercialBrand(validator)
+            else -> return
+        }
+    val model =
+        when (enteredSymbol) {
+            1 -> userRequestVehicleModel(brand, validator)
+            2 -> userRequestAutoModel(brand, validator)
+            3 -> userRequestMotoModel(brand, validator)
+            4 -> userRequestCommercialModel(brand, validator)
+            else -> return
+        }
 
-    val year =
-    val color =
-    val mileage =
+    val year = userRequestVehicleYear(validator)
+    val color = userRequestVehicleColor(validator)
+    val mileage = userRequestVehicleMileage(validator)
+    val userRequestVehicleSpecificInfo = userRequestSpecificInfo(enteredSymbol, validator)
 
-        vehicleManager.searchVehicle(brand, model, year, color, mileage, userRequestVehicleSpecificInfo)
+    val vehicleListFounded =
+        vehicleManager.searchVehicle(
+            brand,
+            model,
+            year,
+            color,
+            mileage,
+            userRequestVehicleSpecificInfo,
+            vehicleManager.vehicleList
+        )
 
-    for (i in vehicleListOut) {
+    for (i in vehicleListFounded) {
         vehicle.getVehicleInfo()
     }
-
 }
 
 fun researchAds(adsManager: TestAdsManager) {

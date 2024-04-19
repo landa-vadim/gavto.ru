@@ -17,7 +17,7 @@ class InputValidator {
         }
     }
 
-    fun isStringValidInRangeForSearch(string: String, range: IntRange): Int? {
+    fun isStringValidInRangeNullable(string: String, range: IntRange): Int? {
         val output = string.toIntOrNull()
         if (output != null && output in range) return output
         return if (output == 0) null
@@ -26,21 +26,21 @@ class InputValidator {
 
     fun isStringValidInDouble(string: String): Double? {
         val output = string.toDoubleOrNull()
-        return output
+        return if(output != 0.0) output else null
     }
 
-    fun isYearValid(string: String): Int {
-        val output = string.toIntOrNull()
-        val calendar: Calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        return if (output != null && output in 1900..year) output
-        else {
-            println("Введите год в формате \"ГГГГ\"")
-            0
-        }
-    }
+//    fun isYearValid(string: String): Int {
+//        val output = string.toIntOrNull()
+//        val calendar: Calendar = Calendar.getInstance()
+//        val year = calendar.get(Calendar.YEAR)
+//        return if (output != null && output in 1900..year) output
+//        else {
+//            println("Введите год в формате \"ГГГГ\"")
+//            0
+//        }
+//    }
 
-    fun isYearValidForSearch(string: String): Int? {
+    fun isYearValid(string: String): Int? {
         val output = string.toIntOrNull()
         val calendar: Calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)

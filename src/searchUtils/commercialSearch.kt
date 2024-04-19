@@ -27,7 +27,7 @@ fun userRequestCommercialBrand(validator: InputValidator): Brand? {
         }
 }
 
-fun userRequestModel(brandChoice: Brand?, validator: InputValidator): CommercialModel? {
+fun userRequestCommercialModel(brandChoice: Brand?, validator: InputValidator): CommercialModel? {
     var enteredModel = 0
     do {
         when (brandChoice) {
@@ -74,9 +74,4 @@ fun userRequestModel(brandChoice: Brand?, validator: InputValidator): Commercial
         Brand.VOLKSWAGEN -> VolksWagenCommercialModel(VolksWagenCommercialModels.getById(enteredModel - 1))
         else -> return null
     }
-}
-
-fun userRequestLoadCapacity(validator: InputValidator): Double? {
-    println("Введите грузоподъемность или введите любую букву для перехода к следующему параметру:")
-    return validator.isStringValidInDouble(readln())
 }

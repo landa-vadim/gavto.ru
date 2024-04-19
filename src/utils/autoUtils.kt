@@ -7,9 +7,9 @@ fun autoConstructor(validator: InputValidator): Auto? {
 
     val brand = chooseCarBrand(validator) ?: return null
     val model = chooseCarModel(brand, validator) ?: return null
-    val year = chooseYear(validator)
+    val year = chooseYear(validator) ?: return null
     val color = chooseColor(validator) ?: return null
-    val mileage = chooseMileage(validator)
+    val mileage = chooseMileage(validator) ?: return null
     val carType = chooseCarType(validator) ?: return null
 
     return Auto(
@@ -109,8 +109,8 @@ fun chooseCarModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
     }
 }
 
-fun chooseYear(validator: InputValidator): Int {
-    var enteredYear = 0
+fun chooseYear(validator: InputValidator): Int? {
+    var enteredYear: Int? = 0
     do {
         println("Введите год выпуска:")
         enteredYear = validator.isYearValid(readln())
@@ -141,11 +141,11 @@ fun chooseColor(validator: InputValidator): Color? {
     }
 }
 
-fun chooseMileage(validator: InputValidator): Int {
-    var enteredMileage = 0
+fun chooseMileage(validator: InputValidator): Int? {
+    var enteredMileage: Int? = 0
     do {
         println("Введите пробег:")
-        enteredMileage = validator.isStringValidInRange(readln(), 1..5000000)
+        enteredMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
     } while (enteredMileage == 0)
     return enteredMileage
 }
