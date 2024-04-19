@@ -19,11 +19,9 @@ class InputValidator {
 
     fun isStringValidInRangeForSearch(string: String, range: IntRange): Int? {
         val output = string.toIntOrNull()
-        return if (output != null && (output in range || output == 0)) output
-        else {
-            println("Введите цифру от ${range.first} до ${range.last} или цифру \"0\" для перехода к следующему параметру:")
-            null
-        }
+        if (output != null && output in range) return output
+        return if (output == 0) null
+        else 0
     }
 
     fun isStringValidInDouble(string: String): Double? {
@@ -46,11 +44,9 @@ class InputValidator {
         val output = string.toIntOrNull()
         val calendar: Calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
-        return if (output != null && (output in 1900..year || output == 0)) output
-        else {
-            println("Введите год в формате \"ГГГГ\" или цифру \"0\" для перехода к следующему параметру")
-            return null
-        }
+        if (output != null && (output in 1900..year)) return output
+        return if (output == 0) null
+        else 0
     }
 
     fun isValidEmail(email: String): Boolean {

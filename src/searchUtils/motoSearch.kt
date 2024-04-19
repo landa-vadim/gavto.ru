@@ -84,7 +84,8 @@ fun userRequestMotoModel(brandChoice: Brand, validator: InputValidator): MotoMod
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..6)
     } while (enteredModel == 0)
-    return when (brandChoice) {
+    return if (enteredModel == 6) null
+    else when (brandChoice) {
         Brand.BMW -> BmwMotoModel(BmwMotoModels.getById(enteredModel - 1))
         Brand.YAMAHA -> YamahaMotoModel(YamahaMotoModels.getById(enteredModel - 1))
         Brand.KAWASAKI -> KawasakiMotoModel(KawasakiMotoModels.getById(enteredModel - 1))

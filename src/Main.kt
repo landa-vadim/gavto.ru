@@ -1,5 +1,7 @@
 import data.*
 import managers.*
+import searchUtils.userRequestVehicleBrand
+import searchUtils.userRequestVehicleModel
 import utils.autoConstructor
 import utils.commercialConstructor
 import utils.motoConstructor
@@ -129,7 +131,7 @@ fun adsConstructor(validator: InputValidator, adsManager: AdsManager) {
 fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager, vehicle: Vehicle) {
 
     println(
-                "1. Поиск по всем ТС\n" +
+        "1. Поиск по всем ТС\n" +
                 "2. Поиск по авто\n" +
                 "3. Поиск по мото\n" +
                 "4. Поиск по коммерческому транспорту\n" +
@@ -139,9 +141,9 @@ fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager, v
     do enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
     while (enteredSymbol == 0)
 
-         if (enteredSymbol == 1) {
-        val brand =
-        val model =
+    if (enteredSymbol == 1) {
+        val brand = userRequestVehicleBrand(validator)
+        val model = userRequestVehicleModel(brand?, validator)
     }
     if (enteredSymbol == 2) {
         val brand =
@@ -159,7 +161,7 @@ fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager, v
         val userRequestVehicleSpecificInfo =
     }
     if (enteredSymbol == 5) {
-return
+        return
     }
 
     val year =

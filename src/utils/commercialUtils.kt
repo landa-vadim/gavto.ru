@@ -137,7 +137,7 @@ private fun mileageChoose(validator: InputValidator): Int {
     return enteredMileage
 }
 
-private fun loadCapacityChoose(validator: InputValidator): Double? {
+private fun loadCapacityChoose(validator: InputValidator): Double {
     var enteredLoadCapacity: Double? = 0.0
     do {
         println("Введите грузоподъемность:")

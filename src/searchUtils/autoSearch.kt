@@ -85,7 +85,8 @@ fun userRequestAutoModel(brandChoice: Brand, validator: InputValidator): AutoMod
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..6)
     } while (enteredModel == 0)
-    return when (brandChoice) {
+    return if (enteredModel == 6) null
+    else when (brandChoice) {
         Brand.AUDI -> AudiAutoModel(AudiAutoModels.getById(enteredModel - 1))
         Brand.BMW -> BmwAutoModel(BmwAutoModels.getById(enteredModel - 1))
         Brand.MAZDA -> MazdaAutoModel(MazdaAutoModels.getById(enteredModel - 1))
