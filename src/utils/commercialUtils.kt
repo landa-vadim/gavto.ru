@@ -1,6 +1,6 @@
 package utils
 
-import data.*
+import data.vehicle.*
 import validators.InputValidator
 fun commercialConstructor(validator: InputValidator): Commercial? {
 

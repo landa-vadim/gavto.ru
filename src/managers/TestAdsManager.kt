@@ -1,7 +1,6 @@
 package managers
 
 import data.Ads
-import data.Vehicle
 
 class TestAdsManager : AdsManager {
 
@@ -16,7 +15,7 @@ class TestAdsManager : AdsManager {
 
     override fun getAllAds() {
         for (i in activeAdsList) {
-            vehicleManager.getVehicleByID(i.idVehicle).getVehicleInfo()
+            vehicleManager.getVehicleByID(i.idVehicle)?.getVehicleInfo()
             i.getAdInfo()
         }
     }
@@ -26,7 +25,7 @@ class TestAdsManager : AdsManager {
         inActiveAdsList.add(ad)
     }
 
-    override fun searchAds(): Ads {
+    override fun searchAds() {
 
     }
 

@@ -1,6 +1,6 @@
 package searchUtils
 
-import data.*
+import data.vehicle.*
 import validators.InputValidator
 
 fun userRequestMotoBrand(validator: InputValidator): Brand? {

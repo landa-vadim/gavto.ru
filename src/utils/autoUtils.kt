@@ -1,6 +1,6 @@
 package utils
 
-import data.*
+import data.vehicle.*
 import validators.InputValidator
 
 fun autoConstructor(validator: InputValidator): Auto? {
