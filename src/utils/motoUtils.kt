@@ -1,13 +1,13 @@
 package utils
 
-import data.*
+import data.vehicle.*
 import validators.InputValidator
 
 fun motoConstructor(validator: InputValidator): Moto? {
 
     val brandChoice = brandChoose(validator) ?: return null
     val modelChoice = modelChoose(brandChoice, validator) ?: return null
-    val enteredYear = yearChoose(validator)
+    val enteredYear = yearChoose(validator) ?: return null
     val colorChoice = colorChoose(validator) ?: return null
     val enteredMileage = mileageChoose(validator)
     val typeMotoChoice = typeMotoChoose(validator) ?: return null
@@ -113,9 +113,9 @@ private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoMode
     return modelChoice
 }
 
-private fun yearChoose(validator: InputValidator): Int {
+private fun yearChoose(validator: InputValidator): Int? {
     println("Введите год выпуска:")
-    var enteredYear = 0
+    var enteredYear: Int? = 0
     do enteredYear = validator.isYearValid(readln())
     while (enteredYear == 0)
     return enteredYear

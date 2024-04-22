@@ -1,6 +1,9 @@
 package managers
 
-import data.*
+import data.vehicle.Brand
+import data.vehicle.Color
+import data.vehicle.Vehicle
+import data.vehicle.VehicleModel
 import java.util.*
 
 class TestVehicleManager : VehicleManager {

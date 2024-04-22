@@ -1,6 +1,6 @@
 package searchUtils
 
-import data.*
+import data.vehicle.*
 import validators.InputValidator
 
 fun userRequestVehicleBrand(validator: InputValidator): Brand? {
@@ -223,7 +223,8 @@ fun userRequestVehicleModel(brandChoice: Brand?, validator: InputValidator): Veh
     return if (enteredModel == 6) null
     else when (brandChoice) {
         Brand.AUDI -> AudiAutoModel(AudiAutoModels.getById(enteredModel - 1))
-        Brand.BMW -> if (enteredModel in 1..5) BmwAutoModel(BmwAutoModels.getById(enteredModel - 1)) else BmwMotoModel(BmwMotoModels.getById(enteredModel - 6))
+        Brand.BMW -> if (enteredModel in 1..5) BmwAutoModel(BmwAutoModels.getById(enteredModel - 1)) else BmwMotoModel(
+            BmwMotoModels.getById(enteredModel - 6))
         Brand.MAZDA -> MazdaAutoModel(MazdaAutoModels.getById(enteredModel - 1))
         Brand.KIA -> KiaAutoModel(KiaAutoModels.getById(enteredModel - 1))
         Brand.SKODA -> SkodaAutoModel(SkodaAutoModels.getById(enteredModel - 1))
