@@ -8,7 +8,7 @@ import java.util.*
 
 class TestVehicleManager : VehicleManager {
 
-    val vehicleList = mutableListOf<Vehicle>()
+    private val vehicleList = mutableListOf<Vehicle>()
 
     override fun addVehicle(vehicle: Vehicle) {
         vehicleList.add(vehicle)
@@ -34,28 +34,22 @@ class TestVehicleManager : VehicleManager {
         userRequestYear: Int?,
         userRequestColor: Color?,
         userRequestMileage: Int?,
-        userRequestVehicleSpecificInfo: String?,
-        vehicleList: List<Vehicle>
+        userRequestVehicleSpecificInfo: String?
     ): List<Vehicle> {
 
-        val listVehicleOutput = mutableListOf<Vehicle>()
         val userRequestLoadCapacity = userRequestVehicleSpecificInfo?.toDoubleOrNull()
 
-        for (vehicle in vehicleList) {
-            if (userRequestBrand == null || vehicle.brand == userRequestBrand) {
-                if (userRequestModel == null || vehicle.model == userRequestModel) {
-                    if (userRequestYear == null || vehicle.year >= userRequestYear) {
-                        if (userRequestColor == null || vehicle.color == userRequestColor) {
-                            if (userRequestMileage == null || vehicle.mileage <= userRequestMileage) {
-                                val vehicleLoadCapacity = vehicle.getVehicleSpecificInfo().toDoubleOrNull()
-                                if (userRequestVehicleSpecificInfo == null || vehicle.getVehicleSpecificInfo() == userRequestVehicleSpecificInfo || (userRequestLoadCapacity != null && vehicleLoadCapacity != null && userRequestLoadCapacity <= vehicleLoadCapacity)) {
-                                    listVehicleOutput.add(vehicle)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        val listVehicleOutput = vehicleList.filter { vehicle ->
+            val brand = (userRequestBrand == null || vehicle.brand == userRequestBrand)
+            val model = (userRequestModel == null || vehicle.model == userRequestModel)
+            val year = (userRequestYear == null || vehicle.year >= userRequestYear)
+            val color = (userRequestColor == null || vehicle.color == userRequestColor)
+            val mileage = (userRequestMileage == null || vehicle.mileage <= userRequestMileage)
+            val isItLoadCapacity =
+                if (vehicle.getVehicleSpecificInfo().toDoubleOrNull() != null) vehicle.getVehicleSpecificInfo().toDoubleOrNull() else 0.0
+            val vehicleSpecificInfo =
+                if (userRequestLoadCapacity != null) (isItLoadCapacity!! >= userRequestLoadCapacity) else (vehicle.getVehicleSpecificInfo() == userRequestVehicleSpecificInfo)
+            brand && model && year && color && mileage && vehicleSpecificInfo
         }
         return listVehicleOutput
     }

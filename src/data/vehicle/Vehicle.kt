@@ -72,15 +72,13 @@ class Commercial(
 enum class TypeAuto {
     SEDAN,
     HATCHBACK,
-    UNIVERSAL,
-    UNKNOWN
+    UNIVERSAL
 }
 
 enum class TypeMoto {
     CROSS,
     SPORT,
-    GRANTURISMO,
-    UNKNOWN
+    GRANTURISMO
 }
 
 enum class Color {
@@ -88,8 +86,7 @@ enum class Color {
     GREEN,
     BLUE,
     BLACK,
-    WHITE,
-    UNKNOWN
+    WHITE
 }
 
 

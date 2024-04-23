@@ -162,9 +162,9 @@ fun chooseCarType(validator: InputValidator): TypeAuto? {
         enteredTypeAuto = validator.isStringValidInRange(readln(), 1..3)
     } while (enteredTypeAuto == 0)
     return when (enteredTypeAuto) {
-            1 -> TypeAuto.SEDAN
-            2 -> TypeAuto.HATCHBACK
-            3 -> TypeAuto.UNIVERSAL
-            else -> return null
-        }
+        1 -> TypeAuto.SEDAN
+        2 -> TypeAuto.HATCHBACK
+        3 -> TypeAuto.UNIVERSAL
+        else -> return null
+    }
 }

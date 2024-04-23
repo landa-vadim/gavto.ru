@@ -7,7 +7,7 @@ class Ads(
     val idAd: UUID = UUID.randomUUID(),
     val price: Int,
     val publicationDate: Date,
-    val idVehicle: UUID,
+    val idVehicle: UUID, // Vehicle
     val idOwner: UUID,
 ) {
 

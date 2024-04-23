@@ -21,7 +21,6 @@ interface VehicleManager {
         userRequestColor: Color?,
         userRequestMileage: Int?,
         userRequestVehicleSpecificInfo: String?,
-        vehicleList: List<Vehicle>
     ): List<Vehicle>      //searchCriteria: VehicleSearchCriteria
 
 

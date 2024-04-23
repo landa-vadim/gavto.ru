@@ -11,7 +11,9 @@ class InputValidator {
 
     fun isStringValidInRange(string: String, range: IntRange): Int {
         val output = string.toIntOrNull()
-        return if (output != null && output in range) output else {
+        return if (output != null && output in range) {
+            output
+        } else {
             println("Введите цифру от ${range.first} до ${range.last}:")
             0
         }
@@ -19,14 +21,17 @@ class InputValidator {
 
     fun isStringValidInRangeNullable(string: String, range: IntRange): Int? {
         val output = string.toIntOrNull()
-        if (output != null && output in range) return output
-        return if (output == 0) null
-        else 0
+        if (output != null && output in range) {
+            return output
+        }
+        return if (output == 0) {
+            null
+        } else 0
     }
 
     fun isStringValidInDouble(string: String): Double? {
         val output = string.toDoubleOrNull()
-        return if(output != 0.0) output else null
+        return if (output != 0.0) output else null
     }
 
 //    fun isYearValid(string: String): Int {

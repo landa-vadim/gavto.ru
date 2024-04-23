@@ -171,7 +171,6 @@ fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManage
             color,
             mileage,
             userRequestVehicleSpecificInfo,
-            vehicleManager.vehicleList
         )
 
     for (i in vehicleListFounded) {
