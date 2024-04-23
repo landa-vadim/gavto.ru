@@ -274,12 +274,21 @@ fun userRequestVehicleColor(validator: InputValidator): Color? {
     }
 }
 
-fun userRequestVehicleMileage(validator: InputValidator): Int? {
-    var enteredMileage: Int? = 0
+fun userRequestVehicleMileage(validator: InputValidator): IntRange {
+    var enteredMileage = 0..5000000
+    var enteredMinMileage: Int?
+    var enteredMaxMileage: Int?
+    do {
+        println("Введите минимальный пробег или цифру \"0\" для перехода к следующему параметру:")
+        enteredMinMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
+    } while (enteredMinMileage == 0)
     do {
         println("Введите максимальный пробег или цифру \"0\" для перехода к следующему параметру:")
-        enteredMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
-    } while (enteredMileage == 0)
+        enteredMaxMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
+    } while (enteredMaxMileage == 0)
+    val enteredMinMileageNPE = enteredMaxMileage ?: 0
+    val enteredMaxMileageNPE = enteredMaxMileage ?: 5000000
+    enteredMileage = enteredMinMileageNPE..enteredMaxMileageNPE
     return enteredMileage
 }
 
@@ -327,3 +336,4 @@ fun userRequestSpecificInfo (chooseOption: Int, validator: InputValidator): Stri
         return "${validator.isStringValidInDouble(readln())}"
     } else return null
 }
+

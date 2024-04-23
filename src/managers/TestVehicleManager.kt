@@ -4,11 +4,14 @@ import data.vehicle.Brand
 import data.vehicle.Color
 import data.vehicle.Vehicle
 import data.vehicle.VehicleModel
+import validators.InputValidator
 import java.util.*
 
 class TestVehicleManager : VehicleManager {
 
+    val validator = InputValidator()
     private val vehicleList = mutableListOf<Vehicle>()
+    private val adsVehicleList = mutableListOf<Vehicle>()
 
     override fun addVehicle(vehicle: Vehicle) {
         vehicleList.add(vehicle)
@@ -33,7 +36,7 @@ class TestVehicleManager : VehicleManager {
         userRequestModel: VehicleModel?,
         userRequestYear: Int?,
         userRequestColor: Color?,
-        userRequestMileage: Int?,
+        userRequestMileage: IntRange,
         userRequestVehicleSpecificInfo: String?
     ): List<Vehicle> {
 
@@ -44,14 +47,27 @@ class TestVehicleManager : VehicleManager {
             val model = (userRequestModel == null || vehicle.model == userRequestModel)
             val year = (userRequestYear == null || vehicle.year >= userRequestYear)
             val color = (userRequestColor == null || vehicle.color == userRequestColor)
-            val mileage = (userRequestMileage == null || vehicle.mileage <= userRequestMileage)
+            val mileage = (vehicle.mileage in userRequestMileage)
             val isItLoadCapacity =
-                if (vehicle.getVehicleSpecificInfo().toDoubleOrNull() != null) vehicle.getVehicleSpecificInfo().toDoubleOrNull() else 0.0
+                if (vehicle.getVehicleSpecificInfo().toDoubleOrNull() != null) vehicle.getVehicleSpecificInfo()
+                    .toDoubleOrNull() else 0.0
             val vehicleSpecificInfo =
                 if (userRequestLoadCapacity != null) (isItLoadCapacity!! >= userRequestLoadCapacity) else (vehicle.getVehicleSpecificInfo() == userRequestVehicleSpecificInfo)
             brand && model && year && color && mileage && vehicleSpecificInfo
         }
         return listVehicleOutput
+    }
+
+    override fun getVehicleFromList(): Vehicle {
+        var number = 1
+        var choice = 0
+        vehicleList.forEach { vehicle ->
+            println("${number++}.")
+            vehicle.getVehicleInfo()
+        }
+        println("Введите номер ТС, который вы хотите добавить в объявление:")
+        choice = validator.isStringValidInRange(readln(), 1..vehicleList.count())
+        return vehicleList[choice - 1]
     }
 
 }

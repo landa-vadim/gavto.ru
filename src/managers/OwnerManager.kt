@@ -6,5 +6,6 @@ interface OwnerManager {
 
     fun addOwner(owner: Owner)
 
+    fun getOwnerFromList(): Owner
 
 }

@@ -15,8 +15,8 @@ class TestAdsManager : AdsManager {
 
     override fun getAllAds() {
         for (i in activeAdsList) {
-            vehicleManager.getVehicleByID(i.idVehicle)?.getVehicleInfo()
             i.getAdInfo()
+            i.vehicle.getVehicleInfo()
         }
     }
 

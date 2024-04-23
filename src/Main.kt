@@ -111,22 +111,22 @@ fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
 }
 
 
-//fun adsConstructor(validator: InputValidator, adsManager: AdsManager) {
-//    val idVehicle = //TODO("Функция выбора нужного авто и возврат его ID")
-//    val idOwner = //TODO("Функция выбора пользователя и возврат его ID")
-//    val publicationDate = Date()
-//    println("Введите цену:")
-//    val price = readln().toInt()
-//    val ad = Ads(
-//        UUID.randomUUID(),
-//        price,
-//        publicationDate,
-//        idVehicle,
-//        idOwner
-//    )
-//    adsManager.addAd(ad)
-//    return
-//}
+fun adsConstructor(validator: InputValidator, adsManager: AdsManager) {
+    val publicationDate = Date()
+    println("Введите цену:")
+    val price = readln().toInt()
+    val vehicle = getVehicleFromList()
+    val owner =
+    val ad = Ads(
+        UUID.randomUUID(),
+        price,
+        publicationDate,
+        vehicle,
+        owner
+    )
+    adsManager.addAd(ad)
+    return
+}
 
 fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManager, vehicle: Vehicle) {
 
