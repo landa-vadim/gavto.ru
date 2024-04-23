@@ -286,9 +286,9 @@ fun userRequestVehicleMileage(validator: InputValidator): IntRange {
         println("Введите максимальный пробег или цифру \"0\" для перехода к следующему параметру:")
         enteredMaxMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
     } while (enteredMaxMileage == 0)
-    val enteredMinMileageNPE = enteredMaxMileage ?: 0
-    val enteredMaxMileageNPE = enteredMaxMileage ?: 5000000
-    enteredMileage = enteredMinMileageNPE..enteredMaxMileageNPE
+    enteredMinMileage = enteredMaxMileage ?: 0
+    enteredMaxMileage = enteredMaxMileage ?: 5000000
+    enteredMileage = enteredMinMileage..enteredMaxMileage
     return enteredMileage
 }
 

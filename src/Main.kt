@@ -2,9 +2,7 @@ import data.*
 import data.vehicle.Vehicle
 import managers.*
 import searchUtils.*
-import utils.autoConstructor
-import utils.commercialConstructor
-import utils.motoConstructor
+import utils.*
 import validators.InputValidator
 import java.util.*
 
@@ -91,16 +89,12 @@ fun vehicleMenu(vehicleManager: VehicleManager, validator: InputValidator) {
 }
 
 fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
-    println("Введите имя:")
-    val name = readln()
-    println("Введите номер телефона:")
-    val telephoneNumber = readln().toLong()
-    println("Введите email:")
-    var email = readln()
-    while (!validator.isValidEmail(email)) {
-        println("Введите действительный email")
-        email = readln()
-    }
+
+    val name = getOwnerName()
+    val telephoneNumber = getTelephoneNumber()
+    val email = getOwnerEmail()
+
+
     val owner = Owner(
         UUID.randomUUID(),
         name,
@@ -110,13 +104,12 @@ fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
     ownerManager.addOwner(owner)
 }
 
-
-fun adsConstructor(validator: InputValidator, adsManager: AdsManager) {
+fun adsConstructor(vehicleManager: VehicleManager, ownerManager: OwnerManager, adsManager: AdsManager) {
     val publicationDate = Date()
     println("Введите цену:")
     val price = readln().toInt()
-    val vehicle = getVehicleFromList()
-    val owner =
+    val vehicle = vehicleManager.getVehicleFromList()
+    val owner = ownerManager.getOwnerFromList()
     val ad = Ads(
         UUID.randomUUID(),
         price,

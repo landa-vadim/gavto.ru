@@ -34,16 +34,6 @@ class InputValidator {
         return if (output != 0.0) output else null
     }
 
-//    fun isYearValid(string: String): Int {
-//        val output = string.toIntOrNull()
-//        val calendar: Calendar = Calendar.getInstance()
-//        val year = calendar.get(Calendar.YEAR)
-//        return if (output != null && output in 1900..year) output
-//        else {
-//            println("Введите год в формате \"ГГГГ\"")
-//            0
-//        }
-//    }
 
     fun isYearValid(string: String): Int? {
         val output = string.toIntOrNull()
@@ -54,14 +44,23 @@ class InputValidator {
         else 0
     }
 
-    fun isValidEmail(email: String): Boolean {
+    fun isValidEmail(email: String): String? {
 
         val pattern = Pattern.compile(
             "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,6}\\\$"
         )
         val matcher = pattern.matcher(email)
-        return matcher.matches()
+        return if (matcher.matches()) email else null
     }
 
+    fun isTelephoneValid(string: String): Long? {
+        val output = string.toLongOrNull()
+        return output
+    }
+
+    fun isValidName(string: String): String? {
+        val isStringValid = string.all { it in "[a-zA-Zа-яёА-ЯЁ -]" }
+        return if (isStringValid) string else null
+    }
 
 }
