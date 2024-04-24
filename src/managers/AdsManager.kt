@@ -1,6 +1,7 @@
 package managers
 
 import data.Ads
+import java.util.*
 
 interface AdsManager {
 
@@ -11,6 +12,10 @@ interface AdsManager {
     fun removeAd(ad: Ads)
 
     fun searchAds()
+
+    fun priceData(ad: Ads)
+
+    fun changeAdPrice(ad: Ads)
 
 
 }

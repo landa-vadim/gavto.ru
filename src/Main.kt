@@ -35,19 +35,21 @@ fun mainMenu(
             "1. Добавить новое ТС\n" +
                     "2. Добавить нового владельца\n" +
                     "3. Добавить объявление\n" +
-                    "4. Снять объявление\n" +
-                    "5. Поиск по объявлениям"
+                    "4. Изменить цену в объявлении\n" +
+                    "5. Снять объявление\n" +
+                    "6. Поиск по объявлениям"
         )
 
-        enteredSymbol = validator.isStringValidInRange(readln(), 1..5)
+        enteredSymbol = validator.isStringValidInRange(readln(), 1..6)
     } while (enteredSymbol == 0)
 
     when (enteredSymbol) {
         1 -> vehicleMenu(vehicleManager, validator)
         2 -> ownerConstructor(ownerManager, validator)
-//        3 -> adsConstructor(validator, adsManager)
-//        4 -> adsManager.removeAd(adsConstructor())
-//        5 -> researchAds(adsManager)
+        3 -> adsConstructor(vehicleManager, ownerManager, adsManager)
+//        4 -> adsPriceChange()
+//        5 -> adsManager.removeAd(adsConstructor())
+//        6 -> researchAds(adsManager)
         else -> return
     }
 }
@@ -94,7 +96,6 @@ fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
     val telephoneNumber = getTelephoneNumber()
     val email = getOwnerEmail()
 
-
     val owner = Owner(
         UUID.randomUUID(),
         name,
@@ -105,20 +106,21 @@ fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
 }
 
 fun adsConstructor(vehicleManager: VehicleManager, ownerManager: OwnerManager, adsManager: AdsManager) {
-    val publicationDate = Date()
-    println("Введите цену:")
-    val price = readln().toInt()
+
     val vehicle = vehicleManager.getVehicleFromList()
     val owner = ownerManager.getOwnerFromList()
+    val setPrice = PriceRecord(getAdDate(), getAdPrice())
+    val priceHistory = mutableListOf<PriceRecord>()
+
+    priceHistory.add(setPrice)
+
     val ad = Ads(
         UUID.randomUUID(),
-        price,
-        publicationDate,
         vehicle,
-        owner
+        owner,
+        priceHistory
     )
     adsManager.addAd(ad)
-    return
 }
 
 fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManager, vehicle: Vehicle) {

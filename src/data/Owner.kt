@@ -13,7 +13,7 @@ class Owner (
 
 
     fun getOwnerInfo () {
-        println("ID: $idOwner\nИмя: $name\nНомер телефона: $telephoneNumber\nemail: $email")
+        println("Имя: $name\nНомер телефона: $telephoneNumber\nemail: $email")
     }
 
 }

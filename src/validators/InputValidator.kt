@@ -14,7 +14,7 @@ class InputValidator {
         return if (output != null && output in range) {
             output
         } else {
-            println("Введите цифру от ${range.first} до ${range.last}:")
+            println("Введите число от ${range.first} до ${range.last}:")
             0
         }
     }
@@ -26,7 +26,10 @@ class InputValidator {
         }
         return if (output == 0) {
             null
-        } else 0
+        } else {
+            println("Введите число от ${range.first} до ${range.last}:")
+            0
+        }
     }
 
     fun isStringValidInDouble(string: String): Double? {

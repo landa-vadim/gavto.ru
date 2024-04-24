@@ -1,6 +1,8 @@
 package managers
 
 import data.Ads
+import utils.validator
+import java.util.*
 
 class TestAdsManager : AdsManager {
 
@@ -11,6 +13,7 @@ class TestAdsManager : AdsManager {
 
     override fun addAd(ad: Ads) {
         activeAdsList.add(ad)
+        priceData(ad)
     }
 
     override fun getAllAds() {
@@ -28,5 +31,21 @@ class TestAdsManager : AdsManager {
     override fun searchAds() {
 
     }
+
+    override fun priceData(ad: Ads) {
+
+
+    }
+
+    override fun changeAdPrice(ad: Ads) {
+
+        do {
+            println("Введите новую цену:")
+            ad.price = validator.isStringValidInRange(readln(), 1..99999999)
+        } while (ad.price == 0)
+
+    }
+
+
 
 }
