@@ -24,6 +24,7 @@ class Ads(
             }
             priceHistory[lastIndex].getLastPrice()
         } else priceHistory[0].getLastPrice()
+        println("----------------------------------------------------------------")
     }
 
 

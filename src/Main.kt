@@ -5,6 +5,7 @@ import searchUtils.*
 import utils.*
 import validators.InputValidator
 import java.util.*
+import javax.xml.validation.ValidatorHandler
 
 fun main() {
 
@@ -16,10 +17,7 @@ fun main() {
     do mainMenu(vehicleManager, ownerManager, adsManager, validator)
     while (true)
 
-//    val allVehicles = vehicleManager.getAllVehicle()
-//    allVehicles.forEach { vehicle ->
-//        vehicle.getVehicleInfo()
-//    }
+
 }
 
 fun mainMenu(
@@ -47,9 +45,9 @@ fun mainMenu(
         1 -> vehicleMenu(vehicleManager, validator)
         2 -> ownerConstructor(ownerManager, validator)
         3 -> adsConstructor(vehicleManager, ownerManager, adsManager)
-//        4 -> adsPriceChange()
-//        5 -> adsManager.removeAd(adsConstructor())
-//        6 -> researchAds(adsManager)
+        4 -> adPriceChange()
+        5 -> removingAd()
+        6 -> getFoundAds()
         else -> return
     }
 }
@@ -123,7 +121,20 @@ fun adsConstructor(vehicleManager: VehicleManager, ownerManager: OwnerManager, a
     adsManager.addAd(ad)
 }
 
-fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManager, vehicle: Vehicle) {
+fun adPriceChange() {
+
+    println("Выберете объявление из списка, для которого хотите поменять цену:")
+    val ad = adsManager.chooseAds()
+    val setNewPrice = PriceRecord(getAdDate(), getAdPrice())
+    ad.priceHistory.add(setNewPrice)
+}
+
+fun removingAd() {
+
+    adsManager.removeAd(adsManager.chooseAds())
+}
+
+fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManager): List<Vehicle>? {
 
     println(
         "1. Поиск по всем ТС\n" +
@@ -142,7 +153,7 @@ fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManage
             2 -> userRequestAutoBrand(validator)
             3 -> userRequestMotoBrand(validator)
             4 -> userRequestCommercialBrand(validator)
-            else -> return
+            else -> return null
         }
     val model =
         when (enteredSymbol) {
@@ -150,7 +161,7 @@ fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManage
             2 -> userRequestAutoModel(brand, validator)
             3 -> userRequestMotoModel(brand, validator)
             4 -> userRequestCommercialModel(brand, validator)
-            else -> return
+            else -> return null
         }
 
     val year = userRequestVehicleYear(validator)
@@ -168,15 +179,17 @@ fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManage
             userRequestVehicleSpecificInfo,
         )
 
-    for (i in vehicleListFounded) {
-        vehicle.getVehicleInfo()
-    }
+    return vehicleListFounded
+
 }
 
-fun researchAds(adsManager: TestAdsManager) {
-//
-//        val foundAd = adsManager.searchAds()
-//    vehicle = foundAd.idVehicle
-//        .getVehicleInfo()
+fun getFoundAds() {
 
+    val adsFoundedList = adsManager.searchAds()
+    if (adsFoundedList == null) {
+        println("Объявлений с указанными параметрами не найдено!")
+        return
+    } else adsFoundedList.forEach { ad ->
+        ad.getAdInfo()
+    }
 }

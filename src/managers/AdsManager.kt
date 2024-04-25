@@ -11,11 +11,9 @@ interface AdsManager {
 
     fun removeAd(ad: Ads)
 
-    fun searchAds()
+    fun chooseAds(): Ads
 
-    fun priceData(ad: Ads)
-
-    fun changeAdPrice(ad: Ads)
+    fun searchAds(): List<Ads>?
 
 
 }

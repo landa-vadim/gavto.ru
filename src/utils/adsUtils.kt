@@ -23,13 +23,3 @@ fun getAdPrice(): Int {
     return price
 }
 
-fun getAllAdPrices(ad: Ads) {
-
-    val id = ad.idAd
-    val idList = adsManager
-    val priceList = adsManager
-    val indexList = mutableListOf<Int>()
-
-
-
-}
