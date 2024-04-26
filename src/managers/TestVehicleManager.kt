@@ -11,7 +11,7 @@ class TestVehicleManager : VehicleManager {
 
     val validator = InputValidator()
     private val vehicleList = mutableListOf<Vehicle>()
-    private val adsVehicleList = mutableListOf<Vehicle>()
+    private val vehicleIntoAdsList = mutableListOf<Vehicle>()
 
     override fun addVehicle(vehicle: Vehicle) {
         vehicleList.add(vehicle)
@@ -68,6 +68,16 @@ class TestVehicleManager : VehicleManager {
         println("Введите номер ТС, который вы хотите добавить в объявление:")
         choice = validator.isStringValidInRange(readln(), 1..vehicleList.count())
         return vehicleList[choice - 1]
+    }
+
+    fun vehicleMoveIntoAdsList(vehicle: Vehicle) {
+        vehicleList.remove(vehicle)
+        vehicleIntoAdsList.add(vehicle)
+    }
+
+    fun vehicleMoveToList (vehicle: Vehicle) {
+        vehicleIntoAdsList.remove(vehicle)
+        vehicleList.add(vehicle)
     }
 
 }

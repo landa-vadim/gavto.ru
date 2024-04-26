@@ -13,6 +13,11 @@ class PriceRecord (
         println("Актуальная цена: $price рублей")
     }
 
+    fun getLastPriceForRemovedAd() {
+
+        println("Последняя цена: $price рублей")
+    }
+
     fun getPriceHistory() {
 
         println("Цена на дату: $date - $price рублей")

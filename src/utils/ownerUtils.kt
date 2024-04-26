@@ -29,9 +29,8 @@ fun getTelephoneNumber(): Long {
 fun getOwnerEmail(): String {
 
     var email: String? = ""
-    println("Введите email:")
     do {
-        println("Введите действительный email")
+        println("Введите email:")
         email = validator.isValidEmail(readln())
     } while (email == null)
     return email

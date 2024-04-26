@@ -1,6 +1,7 @@
 package managers
 
 import data.Ads
+import data.RemovedAds
 import java.util.*
 
 interface AdsManager {
@@ -11,9 +12,14 @@ interface AdsManager {
 
     fun removeAd(ad: Ads)
 
+    fun recoverAd(removedAd: RemovedAds)
+
     fun chooseAds(): Ads
 
-    fun searchAds(): List<Ads>?
+    fun getAllRemovedAds()
 
+    fun chooseRemovedAds(): RemovedAds
+
+    fun searchAds(): List<Ads>?
 
 }

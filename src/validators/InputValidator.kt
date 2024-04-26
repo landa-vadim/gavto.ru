@@ -49,11 +49,9 @@ class InputValidator {
 
     fun isValidEmail(email: String): String? {
 
-        val pattern = Pattern.compile(
-            "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,6}\\\$"
-        )
-        val matcher = pattern.matcher(email)
-        return if (matcher.matches()) email else null
+        val pattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+[.][A-Za-z]{2,3}$"
+        val isEmailValid = Regex(pattern).matches(email)
+        return if (isEmailValid) email else null
     }
 
     fun isTelephoneValid(string: String): Long? {
@@ -62,7 +60,9 @@ class InputValidator {
     }
 
     fun isValidName(string: String): String? {
-        val isStringValid = string.all { it in "[a-zA-Zа-яёА-ЯЁ -]" }
+
+        val pattern = "^[a-zA-Zа-яА-Я-\\s]*$"
+        val isStringValid = Regex(pattern).matches(string)
         return if (isStringValid) string else null
     }
 

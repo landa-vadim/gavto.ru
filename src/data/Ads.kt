@@ -27,5 +27,21 @@ class Ads(
         println("----------------------------------------------------------------")
     }
 
+    fun getAdInfoForRemovedAd() {
+
+        owner.getOwnerInfo()
+        vehicle.getVehicleInfo()
+        val count = priceHistory.count()
+        val lastIndex = count - 1
+        if (count > 1) {
+            println("История изменение цены:")
+            priceHistory.forEach { price ->
+                price.getPriceHistory()
+            }
+            priceHistory[lastIndex].getLastPriceForRemovedAd()
+        } else priceHistory[0].getLastPriceForRemovedAd()
+        println("----------------------------------------------------------------")
+    }
+
 
 }

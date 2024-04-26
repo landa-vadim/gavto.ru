@@ -14,6 +14,11 @@ fun main() {
     val vehicleManager: VehicleManager = TestVehicleManager()
     val validator = InputValidator()
 
+    var email: String? = ""
+    do {
+        email = validator.isValidEmail(readln())
+    } while (email == null)
+
     do mainMenu(vehicleManager, ownerManager, adsManager, validator)
     while (true)
 
@@ -35,10 +40,11 @@ fun mainMenu(
                     "3. Добавить объявление\n" +
                     "4. Изменить цену в объявлении\n" +
                     "5. Снять объявление\n" +
-                    "6. Поиск по объявлениям"
+                    "6. Восстановить снятое объявление\n" +
+                    "7. Поиск по объявлениям"
         )
 
-        enteredSymbol = validator.isStringValidInRange(readln(), 1..6)
+        enteredSymbol = validator.isStringValidInRange(readln(), 1..7)
     } while (enteredSymbol == 0)
 
     when (enteredSymbol) {
@@ -47,7 +53,8 @@ fun mainMenu(
         3 -> adsConstructor(vehicleManager, ownerManager, adsManager)
         4 -> adPriceChange()
         5 -> removingAd()
-        6 -> getFoundAds()
+        6 -> recoverAd()
+        7 -> getFoundAds()
         else -> return
     }
 }
@@ -132,6 +139,11 @@ fun adPriceChange() {
 fun removingAd() {
 
     adsManager.removeAd(adsManager.chooseAds())
+}
+
+fun recoverAd() {
+
+    adsManager.recoverAd(adsManager.chooseRemovedAds())
 }
 
 fun researchVehicle(validator: InputValidator, vehicleManager: TestVehicleManager): List<Vehicle>? {
