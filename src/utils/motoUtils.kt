@@ -4,7 +4,6 @@ import data.vehicle.*
 import validators.InputValidator
 
 fun motoConstructor(validator: InputValidator): Moto? {
-
     val brandChoice = brandChoose(validator) ?: return null
     val modelChoice = modelChoose(brandChoice, validator) ?: return null
     val enteredYear = yearChoose(validator) ?: return null

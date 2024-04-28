@@ -4,16 +4,13 @@ import data.Owner
 import validators.InputValidator
 
 class TestOwnerManager : OwnerManager {
-
     val validator = InputValidator()
-    val ownerList = mutableListOf<Owner>()
+    private val ownerList = mutableListOf<Owner>()
     val adsOwnerList = mutableListOf<Owner>()
 
     override fun addOwner(owner: Owner) {
-
         ownerList.add(owner)
     }
-
     override fun getOwnerFromList(): Owner {
         var number = 1
         var choice = 0
@@ -25,7 +22,4 @@ class TestOwnerManager : OwnerManager {
         choice = validator.isStringValidInRange(readln(), 1..ownerList.count())
         return ownerList[choice - 1]
     }
-
-
-
 }

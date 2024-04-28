@@ -4,9 +4,7 @@ import data.Owner
 import validators.InputValidator
 
 val validator = InputValidator()
-
 fun getOwnerName(): String {
-
     var name: String? = ""
     do {
         println("Введите имя:")
@@ -16,7 +14,6 @@ fun getOwnerName(): String {
 }
 
 fun getTelephoneNumber(): Long {
-
     var telephoneNumber: Long? = 0
     println("Введите номер телефона:")
     do {

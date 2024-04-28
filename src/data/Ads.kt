@@ -10,9 +10,7 @@ class Ads(
     val owner: Owner,
     val priceHistory: MutableList<PriceRecord>
 ) {
-
     fun getAdInfo() {
-
         owner.getOwnerInfo()
         vehicle.getVehicleInfo()
         val count = priceHistory.count()
@@ -28,7 +26,6 @@ class Ads(
     }
 
     fun getAdInfoForRemovedAd() {
-
         owner.getOwnerInfo()
         vehicle.getVehicleInfo()
         val count = priceHistory.count()
@@ -42,6 +39,4 @@ class Ads(
         } else priceHistory[0].getLastPriceForRemovedAd()
         println("----------------------------------------------------------------")
     }
-
-
 }

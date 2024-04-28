@@ -7,13 +7,9 @@ import data.vehicle.VehicleModel
 import java.util.UUID
 
 interface VehicleManager {
-
     fun addVehicle(vehicle: Vehicle)
-
     fun getAllVehicle(): List<Vehicle>
-
     fun getVehicleByID(idVehicle: UUID): Vehicle?
-
     fun searchVehicle(
         userRequestBrand: Brand?,
         userRequestModel: VehicleModel?,
@@ -22,7 +18,6 @@ interface VehicleManager {
         userRequestMileage: IntRange,
         userRequestVehicleSpecificInfo: String?,
     ): List<Vehicle>      //searchCriteria: VehicleSearchCriteria
-
     fun getVehicleFromList(): Vehicle
 
 }
