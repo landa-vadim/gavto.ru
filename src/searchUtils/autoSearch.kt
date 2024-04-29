@@ -26,7 +26,6 @@ fun userRequestAutoBrand(validator: InputValidator): Brand? {
         else -> return null
     }
 }
-
 fun userRequestAutoModel(brandChoice: Brand?, validator: InputValidator): AutoModel? {
     var enteredModel = 0
     do {
@@ -40,7 +39,6 @@ fun userRequestAutoModel(brandChoice: Brand?, validator: InputValidator): AutoMo
                         "5. Q5\n" +
                         "6. Следующий параметр"
             )
-
             Brand.BMW -> println(
                 "Выберете модель:\n" +
                         "1. M3\n" +
@@ -50,7 +48,6 @@ fun userRequestAutoModel(brandChoice: Brand?, validator: InputValidator): AutoMo
                         "5. X6\n" +
                         "6. Следующий параметр"
             )
-
             Brand.MAZDA -> println(
                 "Выберете модель:\n" +
                         "1. M3\n" +
@@ -60,7 +57,6 @@ fun userRequestAutoModel(brandChoice: Brand?, validator: InputValidator): AutoMo
                         "5. CX-9\n" +
                         "6. Следующий параметр"
             )
-
             Brand.KIA -> println(
                 "Выберете модель:\n" +
                         "1. Rio\n" +
@@ -70,7 +66,6 @@ fun userRequestAutoModel(brandChoice: Brand?, validator: InputValidator): AutoMo
                         "5. Sorento\n" +
                         "6. Следующий параметр"
             )
-
             Brand.SKODA -> println(
                 "Выберете модель:\n" +
                         "1. Rapid\n" +
@@ -80,7 +75,6 @@ fun userRequestAutoModel(brandChoice: Brand?, validator: InputValidator): AutoMo
                         "5. Kodiaq\n" +
                         "6. Следующий параметр"
             )
-
             else -> return null
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..6)

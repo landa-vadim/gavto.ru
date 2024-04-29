@@ -5,6 +5,7 @@ data class BmwAutoModel(val model: BmwAutoModels?) : AutoModel()
 data class MazdaAutoModel(val model: MazdaAutoModels?) : AutoModel()
 data class KiaAutoModel(val model: KiaAutoModels?) : AutoModel()
 data class SkodaAutoModel(val model: SkodaAutoModels?) : AutoModel()
+
 enum class AudiAutoModels {
     A3,
     A4,
@@ -17,7 +18,6 @@ enum class AudiAutoModels {
         }
     }
 }
-
 enum class BmwAutoModels {
     M3,
     M5,
@@ -30,7 +30,6 @@ enum class BmwAutoModels {
         }
     }
 }
-
 enum class MazdaAutoModels {
     M3,
     M6,
@@ -43,7 +42,6 @@ enum class MazdaAutoModels {
         }
     }
 }
-
 enum class KiaAutoModels {
     RIO,
     CERATO,
@@ -56,7 +54,6 @@ enum class KiaAutoModels {
         }
     }
 }
-
 enum class SkodaAutoModels {
     RAPID,
     OCTAVIA,

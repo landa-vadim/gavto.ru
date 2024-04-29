@@ -10,14 +10,14 @@ import java.util.*
 class TestVehicleManager : VehicleManager {
     val validator = InputValidator()
     private val vehicleList = mutableListOf<Vehicle>()
-    private val vehicleIntoAdsList = mutableListOf<Vehicle>()
-
     override fun addVehicle(vehicle: Vehicle) {
         vehicleList.add(vehicle)
     }
+
     override fun getAllVehicle(): List<Vehicle> {
         return vehicleList
     }
+
     override fun getVehicleByID(idVehicle: UUID): Vehicle? {
         for (vehicle in vehicleList) {
             if (vehicle.idVehicle == idVehicle) {
@@ -26,6 +26,7 @@ class TestVehicleManager : VehicleManager {
         }
         return null
     }
+
     override fun searchVehicle(
         userRequestBrand: Brand?,
         userRequestModel: VehicleModel?,
@@ -50,23 +51,16 @@ class TestVehicleManager : VehicleManager {
         }
         return listVehicleOutput
     }
-    override fun getVehicleFromList(): Vehicle {
+
+    override fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>): Vehicle {
         var number = 1
         var choice = 0
-        vehicleList.forEach { vehicle ->
+        vehicleWithoutAdsList.forEach { vehicle ->
             println("${number++}.")
             vehicle.getVehicleInfo()
         }
         println("Введите номер ТС, который вы хотите добавить в объявление:")
-        choice = validator.isStringValidInRange(readln(), 1..vehicleList.count())
-        return vehicleList[choice - 1]
-    }
-    fun vehicleMoveIntoAdsList(vehicle: Vehicle) {
-        vehicleList.remove(vehicle)
-        vehicleIntoAdsList.add(vehicle)
-    }
-    fun vehicleMoveToList (vehicle: Vehicle) {
-        vehicleIntoAdsList.remove(vehicle)
-        vehicleList.add(vehicle)
+        choice = validator.isStringValidInRange(readln(), 1..vehicleWithoutAdsList.count())
+        return vehicleWithoutAdsList[choice - 1]
     }
 }

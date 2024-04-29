@@ -57,7 +57,6 @@ fun chooseCarModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
                         "4. Q3\n" +
                         "5. Q5"
             )
-
             Brand.BMW -> println(
                 "Выберете модель:\n" +
                         "1. M3\n" +
@@ -66,7 +65,6 @@ fun chooseCarModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
                         "4. X5\n" +
                         "5. X6"
             )
-
             Brand.MAZDA -> println(
                 "Выберете модель:\n" +
                         "1. M3\n" +
@@ -75,7 +73,6 @@ fun chooseCarModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
                         "4. CX-5\n" +
                         "5. CX-9"
             )
-
             Brand.KIA -> println(
                 "Выберете модель:\n" +
                         "1. Rio\n" +
@@ -84,7 +81,6 @@ fun chooseCarModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
                         "4. Sportage\n" +
                         "5. Sorento"
             )
-
             Brand.SKODA -> println(
                 "Выберете модель:\n" +
                         "1. Rapid\n" +
@@ -93,7 +89,6 @@ fun chooseCarModel(brandChoice: Brand, validator: InputValidator): AutoModel? {
                         "4. Karoq\n" +
                         "5. Kodiaq"
             )
-
             else -> return null
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..5)

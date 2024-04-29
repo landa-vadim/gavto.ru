@@ -1,7 +1,6 @@
 package data
 
 import data.vehicle.Vehicle
-import managers.AdsManager
 import java.util.*
 
 class Ads(
@@ -24,7 +23,6 @@ class Ads(
         } else priceHistory[0].getLastPrice()
         println("----------------------------------------------------------------")
     }
-
     fun getAdInfoForRemovedAd() {
         owner.getOwnerInfo()
         vehicle.getVehicleInfo()

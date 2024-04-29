@@ -1,4 +1,5 @@
 package data
+
 class RemovedAds(
     val ad: Ads,
     val reason: String

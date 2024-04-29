@@ -1,6 +1,5 @@
 package data
 
-import managers.OwnerManager
 import java.util.*
 
 class Owner (

@@ -3,8 +3,7 @@ package utils
 import data.Owner
 import validators.InputValidator
 
-val validator = InputValidator()
-fun getOwnerName(): String {
+fun getOwnerName(validator: InputValidator): String {
     var name: String? = ""
     do {
         println("Введите имя:")
@@ -13,7 +12,7 @@ fun getOwnerName(): String {
     return name
 }
 
-fun getTelephoneNumber(): Long {
+fun getTelephoneNumber(validator: InputValidator): Long {
     var telephoneNumber: Long? = 0
     println("Введите номер телефона:")
     do {
@@ -23,7 +22,7 @@ fun getTelephoneNumber(): Long {
     return telephoneNumber
 }
 
-fun getOwnerEmail(): String {
+fun getOwnerEmail(validator: InputValidator): String {
 
     var email: String? = ""
     do {

@@ -26,7 +26,6 @@ fun userRequestCommercialBrand(validator: InputValidator): Brand? {
             else -> return null
         }
 }
-
 fun userRequestCommercialModel(brandChoice: Brand?, validator: InputValidator): CommercialModel? {
     var enteredModel = 0
     do {
@@ -36,31 +35,26 @@ fun userRequestCommercialModel(brandChoice: Brand?, validator: InputValidator): 
                         "1. Berlingo\n" +
                         "2. Следующий параметр"
             )
-
             Brand.LADA -> println(
                 "Выберете модель:\n" +
                         "1. Largus\n" +
                         "2. Следующий параметр"
             )
-
             Brand.PEUGEOT -> println(
                 "Выберете модель:\n" +
                         "1. Partner\n" +
                         "2. Следующий параметр"
             )
-
             Brand.RENAULT -> println(
                 "Выберете модель:\n" +
                         "1. Dokker\n" +
                         "2. Следующий параметр"
             )
-
             Brand.VOLKSWAGEN -> println(
                 "Выберете модель:\n" +
                         "1. Caddy\n" +
                         "2. Следующий параметр"
             )
-
             else -> return null
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..2)

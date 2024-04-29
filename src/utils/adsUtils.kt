@@ -1,15 +1,14 @@
 package utils
 
-import data.Ads
-import managers.AdsManager
-import managers.TestAdsManager
+import validators.InputValidator
 import java.util.*
-val adsManager: AdsManager = TestAdsManager()
+
 fun getAdDate(): Date {
     val date = Date()
     return date
 }
-fun getAdPrice(): Int {
+
+fun getAdPrice(validator: InputValidator): Int {
     var price = 0
     do {
         println("Введите цену:")
@@ -17,4 +16,3 @@ fun getAdPrice(): Int {
     } while (price == 0)
     return price
 }
-

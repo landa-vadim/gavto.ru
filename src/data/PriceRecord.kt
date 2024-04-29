@@ -1,6 +1,7 @@
 package data
 
 import java.util.*
+
 class PriceRecord (
     val date: Date,
     val price: Int

@@ -58,7 +58,6 @@ private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoMode
                     "4. R\n" +
                     "5. C"
         )
-
         Brand.YAMAHA -> println(
             "Выберете модель:\n" +
                     "1. MT\n" +
@@ -67,7 +66,6 @@ private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoMode
                     "4. XV\n" +
                     "5. YZF"
         )
-
         Brand.KAWASAKI -> println(
             "Выберете модель:\n" +
                     "1. EN\n" +
@@ -76,7 +74,6 @@ private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoMode
                     "4. NINJA,\n" +
                     "5. Z"
         )
-
         Brand.URAL -> println(
             "Выберете модель:\n" +
                     "1. M\n" +
@@ -85,7 +82,6 @@ private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoMode
                     "4. Voyazh\n" +
                     "5. Wolf"
         )
-
         Brand.HONDA -> println(
             "Выберете модель:\n" +
                     "1. CB\n" +
@@ -94,7 +90,6 @@ private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoMode
                     "4. CRF\n" +
                     "5. GL"
         )
-
         else -> return null
     }
     var enteredModel = 0

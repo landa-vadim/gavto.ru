@@ -55,27 +55,22 @@ private fun modelChoose(brandChoice: Brand?, validator: InputValidator): Commerc
                 "Выберете модель:\n+" +
                         "1. Berlingo"
             )
-
             Brand.LADA -> println(
                 "Выберете модель:\n" +
                         "1. Largus"
             )
-
             Brand.PEUGEOT -> println(
                 "Выберете модель:\n" +
                         "1. Partner"
             )
-
             Brand.RENAULT -> println(
                 "Выберете модель:\n" +
                         "1. Dokker"
             )
-
             Brand.VOLKSWAGEN -> println(
                 "Выберете модель:\n" +
                         "1. Caddy"
             )
-
             else -> return null
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..1)

@@ -13,7 +13,6 @@ abstract class Vehicle(
     abstract fun getVehicleInfo()
     abstract fun getVehicleSpecificInfo(): String
 }
-
 class Auto(
     brand: Brand,
     model: AutoModel,
@@ -22,17 +21,13 @@ class Auto(
     mileage: Int,
     val typeAuto: TypeAuto,
 ) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
-
     override fun getVehicleInfo() {
         println("Марка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип кузова: $typeAuto")
     }
-
     override fun getVehicleSpecificInfo(): String {
         return "$typeAuto"
     }
-
 }
-
 class Moto(
     brand: Brand,
     model: MotoModel,
@@ -41,17 +36,13 @@ class Moto(
     mileage: Int,
     val typeMoto: TypeMoto,
 ) : Vehicle(idVehicle = UUID.randomUUID(), brand, model, year, color, mileage) {
-
     override fun getVehicleInfo() {
         println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nТип мотоцикла: $typeMoto")
     }
-
     override fun getVehicleSpecificInfo(): String {
         return "$typeMoto"
     }
-
 }
-
 class Commercial(
     brand: Brand,
     model: CommercialModel,
@@ -63,24 +54,20 @@ class Commercial(
     override fun getVehicleInfo() {
         println("ID: $idVehicle\nМарка: $brand\nМодель: $model\nГод выпуска: $year\nЦвет: $color\nПробег: $mileage\nГрузоподъемность: $loadCapacity")
     }
-
     override fun getVehicleSpecificInfo(): String {
         return "$loadCapacity"
     }
-
 }
 enum class TypeAuto {
     SEDAN,
     HATCHBACK,
     UNIVERSAL
 }
-
 enum class TypeMoto {
     CROSS,
     SPORT,
     GRANTURISMO
 }
-
 enum class Color {
     RED,
     GREEN,
@@ -88,5 +75,3 @@ enum class Color {
     BLACK,
     WHITE
 }
-
-

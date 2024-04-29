@@ -77,7 +77,6 @@ fun userRequestVehicleModel(brandChoice: Brand?, validator: InputValidator): Veh
                             "10. C\n" +
                             "11. Следующий параметр"
                 )
-
                 enteredModel = validator.isStringValidInRange(readln(), 1..11)
             }
 
@@ -224,7 +223,9 @@ fun userRequestVehicleModel(brandChoice: Brand?, validator: InputValidator): Veh
     else when (brandChoice) {
         Brand.AUDI -> AudiAutoModel(AudiAutoModels.getById(enteredModel - 1))
         Brand.BMW -> if (enteredModel in 1..5) BmwAutoModel(BmwAutoModels.getById(enteredModel - 1)) else BmwMotoModel(
-            BmwMotoModels.getById(enteredModel - 6))
+            BmwMotoModels.getById(enteredModel - 6)
+        )
+
         Brand.MAZDA -> MazdaAutoModel(MazdaAutoModels.getById(enteredModel - 1))
         Brand.KIA -> KiaAutoModel(KiaAutoModels.getById(enteredModel - 1))
         Brand.SKODA -> SkodaAutoModel(SkodaAutoModels.getById(enteredModel - 1))
@@ -282,17 +283,17 @@ fun userRequestVehicleMileage(validator: InputValidator): IntRange {
         println("Введите минимальный пробег или цифру \"0\" для перехода к следующему параметру:")
         enteredMinMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
     } while (enteredMinMileage == 0)
+    enteredMinMileage = enteredMinMileage ?: 1
     do {
         println("Введите максимальный пробег или цифру \"0\" для перехода к следующему параметру:")
-        enteredMaxMileage = validator.isStringValidInRangeNullable(readln(), 1..5000000)
+        enteredMaxMileage = validator.isStringValidInRangeNullable(readln(), enteredMinMileage..5000000)
     } while (enteredMaxMileage == 0)
-    enteredMinMileage = enteredMaxMileage ?: 0
     enteredMaxMileage = enteredMaxMileage ?: 5000000
     enteredMileage = enteredMinMileage..enteredMaxMileage
     return enteredMileage
 }
 
-fun userRequestSpecificInfo (chooseOption: Int, validator: InputValidator): String? {
+fun userRequestSpecificInfo(chooseOption: Int, validator: InputValidator): String? {
     if (chooseOption == 2) {
         var enteredTypeAuto = 0
         do {

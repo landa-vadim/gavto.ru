@@ -14,7 +14,6 @@ enum class CitroenCommercialModels {
         }
     }
 }
-
 enum class LadaCommercialModels {
     LARGUS;
     companion object {
@@ -23,7 +22,6 @@ enum class LadaCommercialModels {
         }
     }
 }
-
 enum class PeugeotCommercialModels {
     PARTNER;
     companion object {
@@ -32,7 +30,6 @@ enum class PeugeotCommercialModels {
         }
     }
 }
-
 enum class RenaultCommercialModels {
     DOKKER;
     companion object {
@@ -41,7 +38,6 @@ enum class RenaultCommercialModels {
         }
     }
 }
-
 enum class VolksWagenCommercialModels {
     CADDY;
     companion object {

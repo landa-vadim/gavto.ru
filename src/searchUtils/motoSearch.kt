@@ -25,7 +25,6 @@ fun userRequestMotoBrand(validator: InputValidator): Brand? {
         else -> return null
     }
 }
-
 fun userRequestMotoModel(brandChoice: Brand?, validator: InputValidator): MotoModel? {
     var enteredModel = 0
     do {
@@ -39,7 +38,6 @@ fun userRequestMotoModel(brandChoice: Brand?, validator: InputValidator): MotoMo
                         "5. C\n" +
                         "6. Следующий параметр"
             )
-
             Brand.YAMAHA -> println(
                 "Выберете модель:\n" +
                         "1. MT\n" +
@@ -49,7 +47,6 @@ fun userRequestMotoModel(brandChoice: Brand?, validator: InputValidator): MotoMo
                         "5. YZF\n" +
                         "6. Следующий параметр"
             )
-
             Brand.KAWASAKI -> println(
                 "Выберете модель:\n" +
                         "1. EN\n" +
@@ -59,7 +56,6 @@ fun userRequestMotoModel(brandChoice: Brand?, validator: InputValidator): MotoMo
                         "5. Z\n" +
                         "6. Следующий параметр"
             )
-
             Brand.URAL -> println(
                 "Выберете модель:\n" +
                         "1. M\n" +
@@ -69,7 +65,6 @@ fun userRequestMotoModel(brandChoice: Brand?, validator: InputValidator): MotoMo
                         "5. Wolf\n" +
                         "6. Следующий параметр"
             )
-
             Brand.HONDA -> println(
                 "Выберете модель:\n" +
                         "1. CB\n" +
@@ -79,7 +74,6 @@ fun userRequestMotoModel(brandChoice: Brand?, validator: InputValidator): MotoMo
                         "5. GL\n" +
                         "6. Следующий параметр"
             )
-
             else -> return null
         }
         enteredModel = validator.isStringValidInRange(readln(), 1..6)

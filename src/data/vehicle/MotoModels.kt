@@ -6,6 +6,7 @@ data class YamahaMotoModel(val model: YamahaMotoModels?) : MotoModel()
 data class KawasakiMotoModel(val model: KawasakiMotoModels?) : MotoModel()
 data class UralMotoModel(val model: UralMotoModels?) : MotoModel()
 data class HondaMotoModel(val model: HondaMotoModels?) : MotoModel()
+
 enum class BmwMotoModels {
     M,
     K,
@@ -18,7 +19,6 @@ enum class BmwMotoModels {
         }
     }
 }
-
 enum class YamahaMotoModels {
     MT,
     XSR,
@@ -31,7 +31,6 @@ enum class YamahaMotoModels {
         }
     }
 }
-
 enum class KawasakiMotoModels {
     EN,
     ER,
@@ -44,7 +43,6 @@ enum class KawasakiMotoModels {
         }
     }
 }
-
 enum class UralMotoModels {
     M,
     SOLO,
@@ -57,16 +55,13 @@ enum class UralMotoModels {
         }
     }
 }
-
 enum class HondaMotoModels {
     CB,
     CBF,
     CBR,
     CRF,
     GL;
-
     companion object {
-
         fun getById(ordinal: Int): HondaMotoModels? {
             return entries.firstOrNull() { it.ordinal == ordinal }
         }

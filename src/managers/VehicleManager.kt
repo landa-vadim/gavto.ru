@@ -17,7 +17,6 @@ interface VehicleManager {
         userRequestColor: Color?,
         userRequestMileage: IntRange,
         userRequestVehicleSpecificInfo: String?,
-    ): List<Vehicle>      //searchCriteria: VehicleSearchCriteria
-    fun getVehicleFromList(): Vehicle
-
+    ): List<Vehicle>
+    fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>): Vehicle
 }
