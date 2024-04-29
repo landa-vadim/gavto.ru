@@ -3,7 +3,6 @@ package utils
 import data.vehicle.*
 import validators.InputValidator
 fun commercialConstructor(validator: InputValidator): Commercial? {
-
     val brandChoice = brandChoose(validator) ?: return null
     val modelChoice = modelChoose(brandChoice, validator) ?: return null
     val enteredYear = yearChoose(validator)  ?: return null
@@ -19,7 +18,6 @@ fun commercialConstructor(validator: InputValidator): Commercial? {
         mileage = enteredMileage,
         loadCapacity = enteredLoadCapacity
     )
-
     return commercial
 }
 

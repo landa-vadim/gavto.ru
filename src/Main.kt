@@ -8,21 +8,19 @@ import java.util.*
 import javax.xml.validation.ValidatorHandler
 
 fun main() {
-
     val ownerManager: OwnerManager = TestOwnerManager()
     val adsManager: AdsManager = TestAdsManager()
     val vehicleManager: VehicleManager = TestVehicleManager()
     val validator = InputValidator()
-
     var email: String? = ""
     do {
         email = validator.isValidEmail(readln())
     } while (email == null)
 
-    do mainMenu(vehicleManager, ownerManager, adsManager, validator)
+    do {
+        mainMenu(vehicleManager, ownerManager, adsManager, validator)
+    }
     while (true)
-
-
 }
 
 fun mainMenu(

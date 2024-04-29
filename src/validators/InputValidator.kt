@@ -5,10 +5,7 @@ import java.util.*
 import java.util.regex.Pattern
 
 class InputValidator {
-
     val calendar: Calendar = Calendar.getInstance()
-
-
     fun isStringValidInRange(string: String, range: IntRange): Int {
         val output = string.toIntOrNull()
         return if (output != null && output in range) {
@@ -37,7 +34,6 @@ class InputValidator {
         return if (output != 0.0) output else null
     }
 
-
     fun isYearValid(string: String): Int? {
         val output = string.toIntOrNull()
         val calendar: Calendar = Calendar.getInstance()
@@ -48,7 +44,6 @@ class InputValidator {
     }
 
     fun isValidEmail(email: String): String? {
-
         val pattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+[.][A-Za-z]{2,3}$"
         val isEmailValid = Regex(pattern).matches(email)
         return if (isEmailValid) email else null
@@ -60,7 +55,6 @@ class InputValidator {
     }
 
     fun isValidName(string: String): String? {
-
         val pattern = "^[a-zA-Zа-яА-Я-\\s]*$"
         val isStringValid = Regex(pattern).matches(string)
         return if (isStringValid) string else null
