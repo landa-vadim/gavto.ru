@@ -3,12 +3,9 @@ package managers
 import data.Ads
 import data.RemovedAds
 import data.vehicle.Vehicle
-import utils.validator
-import researchVehicle
 import validators.InputValidator
 
 class TestAdsManager : AdsManager {
-    private val vehicleManager: TestVehicleManager = TestVehicleManager()
     private val activeAdsList = mutableListOf<Ads>()
     private val inActiveAdsList = mutableListOf<RemovedAds>()
 
@@ -16,11 +13,12 @@ class TestAdsManager : AdsManager {
         activeAdsList.add(ad)
     }
 
-    override fun getAllAds() {
+    override fun getAllAds(): List<Ads> {
         activeAdsList.forEach { ad ->
             println("${activeAdsList.indexOf(ad) + 1}.")
             ad.getAdInfo()
         }
+        return activeAdsList
     }
 
     override fun removeAd(ad: Ads) {

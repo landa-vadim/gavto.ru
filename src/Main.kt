@@ -11,9 +11,8 @@ fun main() {
     val adsManager: AdsManager = TestAdsManager()
     val vehicleManager: VehicleManager = TestVehicleManager()
     val validator = InputValidator()
-    val vehicleIntoAdsList = mutableListOf<Vehicle>()
     do {
-        mainMenu(vehicleManager, ownerManager, adsManager, validator, vehicleIntoAdsList)
+        mainMenu(vehicleManager, ownerManager, adsManager, validator)
     } while (true)
 }
 
@@ -22,7 +21,6 @@ fun mainMenu(
     ownerManager: OwnerManager,
     adsManager: AdsManager,
     validator: InputValidator,
-    vehicleIntoAdsList: MutableList<Vehicle>
 ) {
     var enteredSymbol = 0
     do {
@@ -40,7 +38,7 @@ fun mainMenu(
     when (enteredSymbol) {
         1 -> vehicleMenu(vehicleManager, validator)
         2 -> ownerConstructor(ownerManager, validator)
-        3 -> adsConstructor(vehicleManager, ownerManager, adsManager, vehicleIntoAdsList, validator)
+        3 -> adsConstructor(vehicleManager, ownerManager, adsManager, validator)
         4 -> adPriceChange(adsManager, validator)
         5 -> removingAd(adsManager, validator)
         6 -> recoverAd(adsManager, validator)
@@ -60,38 +58,21 @@ fun vehicleMenu(vehicleManager: VehicleManager, validator: InputValidator) {
     do {
         choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
     } while (choiceVehicleType == 0)
-    if (choiceVehicleType == 1) {
-        val autoWasAdded = autoConstructor(validator)
-        if (autoWasAdded == null) return
-        else {
-            vehicleManager.addVehicle(autoWasAdded)
-        }
+    val vehicle = when (choiceVehicleType) {
+        1 -> autoConstructor(validator)
+        2 -> motoConstructor(validator)
+        3 -> commercialConstructor(validator)
+        else -> null
     }
-    if (choiceVehicleType == 2) {
-        val motoWasAdded = motoConstructor(validator)
-        if (motoWasAdded == null) return
-        else {
-            vehicleManager.addVehicle(motoWasAdded)
-        }
-    }
-    if (choiceVehicleType == 3) {
-        val commercialWasAdded = commercialConstructor(validator)
-        if (commercialWasAdded == null) return
-        else {
-            vehicleManager.addVehicle(commercialWasAdded)
-        }
-    }
+    vehicle?.let { vehicleManager.addVehicle(it) }
 }
 
 fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
-    val name = getOwnerName(validator)
-    val telephoneNumber = getTelephoneNumber(validator)
-    val email = getOwnerEmail(validator)
     val owner = Owner(
-        UUID.randomUUID(),
-        name,
-        telephoneNumber,
-        email
+        idOwner = UUID.randomUUID(),
+        name = getOwnerName(validator),
+        telephoneNumber = getTelephoneNumber(validator),
+        email = getOwnerEmail(validator)
     )
     ownerManager.addOwner(owner)
 }
@@ -100,12 +81,12 @@ fun adsConstructor(
     vehicleManager: VehicleManager,
     ownerManager: OwnerManager,
     adsManager: AdsManager,
-    vehicleIntoAdsList: MutableList<Vehicle>,
     validator: InputValidator
 ) {
     val vehicleList = vehicleManager.getAllVehicle()
+    val vehicleIntoAdsList = adsManager.getAllAds()
     val vehicleWithoutAdsList = vehicleList.filter { vehicle ->
-        !vehicleIntoAdsList.contains(vehicle)
+        !vehicleIntoAdsList.map { vehicle }.contains(vehicle)
     }
     val vehicle = vehicleManager.getVehicleFromList(vehicleWithoutAdsList)
     val owner = ownerManager.getOwnerFromList(validator)
@@ -118,7 +99,6 @@ fun adsConstructor(
         owner,
         priceHistory
     )
-    vehicleIntoAdsList.add(ad.vehicle)
     adsManager.addAd(ad)
 }
 
