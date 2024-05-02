@@ -7,18 +7,17 @@ class TestOwnerManager : OwnerManager {
 
     private val ownerList = mutableListOf<Owner>()
     val adsOwnerList = mutableListOf<Owner>()
+
     override fun addOwner(owner: Owner) {
         ownerList.add(owner)
     }
     override fun getOwnerFromList(validator: InputValidator): Owner {
-        var number = 1
-        var choice = 0
-        ownerList.forEach { owner ->
-            println("${number++}.")
+        ownerList.forEachIndexed { index, owner ->
+            println("${index + 1}.")
             owner.getOwnerInfo()
         }
         println("Найдите свои данные владельца в списке и введите соответствующий номер:")
-        choice = validator.isStringValidInRange(readln(), 1..ownerList.count())
+        val choice = validator.isStringValidInRange(readln(), 1..ownerList.count())
         return ownerList[choice - 1]
     }
 }
