@@ -46,12 +46,12 @@ class TestAdsManager : AdsManager {
         return ad
     }
 
-    override fun getAllRemovedAds() {
-        var count = 1
-        println("$count++.")
-        inActiveAdsList.forEach { removedAd ->
+    override fun getAllRemovedAds(): List<RemovedAds> {
+        inActiveAdsList.forEachIndexed { index, removedAd ->
+            println("${index + 1}.")
             removedAd.getReasonToRemoveAd()
         }
+        return inActiveAdsList
     }
 
     override fun chooseRemovedAds(validator: InputValidator): RemovedAds {

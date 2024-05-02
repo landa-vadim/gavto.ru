@@ -11,7 +11,7 @@ interface AdsManager {
     fun removeAd(ad: Ads)
     fun recoverAd(removedAd: RemovedAds)
     fun chooseAds(validator: InputValidator): Ads
-    fun getAllRemovedAds()
+    fun getAllRemovedAds(): List<RemovedAds>
     fun chooseRemovedAds(validator: InputValidator): RemovedAds
     fun searchAds(foundVehicleList: List<Vehicle>?): List<Ads>?
 }

@@ -37,8 +37,8 @@ fun mainMenu(
     } while (enteredSymbol == 0)
     when (enteredSymbol) {
         1 -> vehicleMenu(vehicleManager, validator)
-        2 -> ownerConstructor(ownerManager, validator)
-        3 -> adsConstructor(vehicleManager, ownerManager, adsManager, validator)
+        2 -> ownerCreator(ownerManager, validator)
+        3 -> adsCreator(vehicleManager, ownerManager, adsManager, validator)
         4 -> adPriceChange(adsManager, validator)
         5 -> removingAd(adsManager, validator)
         6 -> recoverAd(adsManager, validator)
@@ -67,7 +67,7 @@ fun vehicleMenu(vehicleManager: VehicleManager, validator: InputValidator) {
     vehicle?.let { vehicleManager.addVehicle(it) }
 }
 
-fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
+fun ownerCreator(ownerManager: OwnerManager, validator: InputValidator) {
     val owner = Owner(
         idOwner = UUID.randomUUID(),
         name = getOwnerName(validator),
@@ -77,16 +77,17 @@ fun ownerConstructor(ownerManager: OwnerManager, validator: InputValidator) {
     ownerManager.addOwner(owner)
 }
 
-fun adsConstructor(
+fun adsCreator(
     vehicleManager: VehicleManager,
     ownerManager: OwnerManager,
     adsManager: AdsManager,
     validator: InputValidator
 ) {
     val vehicleList = vehicleManager.getAllVehicle()
-    val vehicleIntoAdsList = adsManager.getAllAds()
+    val allAdsList = adsManager.getAllAds()
+    if (vehicleList.isEmpty() || ownerManager.getAllOwners().isEmpty() || allAdsList.isEmpty()) return
     val vehicleWithoutAdsList = vehicleList.filter { vehicle ->
-        !vehicleIntoAdsList.map { vehicle }.contains(vehicle)
+        !allAdsList.map { vehicle }.contains(vehicle)
     }
     val vehicle = vehicleManager.getVehicleFromList(vehicleWithoutAdsList)
     val owner = ownerManager.getOwnerFromList(validator)
@@ -103,6 +104,7 @@ fun adsConstructor(
 }
 
 fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
+    if (adsManager.getAllAds().isEmpty()) return
     println("Выберете объявление из списка, для которого хотите поменять цену:")
     val ad = adsManager.chooseAds(validator)
     val setNewPrice = PriceRecord(getAdDate(), getAdPrice(validator))
@@ -110,14 +112,17 @@ fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
 }
 
 fun removingAd(adsManager: AdsManager, validator: InputValidator) {
+    if (adsManager.getAllAds().isEmpty()) return
     adsManager.removeAd(adsManager.chooseAds(validator))
 }
 
 fun recoverAd(adsManager: AdsManager, validator: InputValidator) {
+    if (adsManager.getAllRemovedAds().isEmpty()) return
     adsManager.recoverAd(adsManager.chooseRemovedAds(validator))
 }
 
 fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager): List<Vehicle>? {
+    if (vehicleManager.getAllVehicle().isEmpty()) return null
     println(
         "1. Поиск по всем ТС\n" +
                 "2. Поиск по авто\n" +
@@ -161,6 +166,7 @@ fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager): 
 }
 
 fun getFoundAds(vehicleManager: VehicleManager, adsManager: AdsManager, validator: InputValidator) {
+    if (vehicleManager.getAllVehicle().isEmpty() || adsManager.getAllAds().isEmpty()) return
     val foundVehicleList = researchVehicle(validator, vehicleManager)
     val adsFoundedList = adsManager.searchAds(foundVehicleList)
     if (adsFoundedList == null) {

@@ -6,11 +6,15 @@ import validators.InputValidator
 class TestOwnerManager : OwnerManager {
 
     private val ownerList = mutableListOf<Owner>()
-    val adsOwnerList = mutableListOf<Owner>()
 
     override fun addOwner(owner: Owner) {
         ownerList.add(owner)
     }
+
+    override fun getAllOwners(): List<Owner> {
+        return ownerList
+    }
+
     override fun getOwnerFromList(validator: InputValidator): Owner {
         ownerList.forEachIndexed { index, owner ->
             println("${index + 1}.")
