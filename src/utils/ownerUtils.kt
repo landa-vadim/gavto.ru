@@ -1,6 +1,5 @@
 package utils
 
-import data.Owner
 import validators.InputValidator
 
 fun getOwnerName(validator: InputValidator): String {

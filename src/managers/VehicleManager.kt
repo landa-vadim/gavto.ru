@@ -18,5 +18,5 @@ interface VehicleManager {
         userRequestMileage: IntRange,
         userRequestVehicleSpecificInfo: String?,
     ): List<Vehicle>
-    fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>): Vehicle
+    fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>): Vehicle?
 }

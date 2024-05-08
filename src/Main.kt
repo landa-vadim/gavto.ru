@@ -7,9 +7,9 @@ import validators.InputValidator
 import java.util.*
 
 fun main() {
-    val ownerManager: OwnerManager = TestOwnerManager()
-    val adsManager: AdsManager = TestAdsManager()
-    val vehicleManager: VehicleManager = TestVehicleManager()
+    val ownerManager: OwnerManager = JsonOwnerManager()
+    val adsManager: AdsManager = JsonAdsManager()
+    val vehicleManager: VehicleManager = JsonVehicleManager()
     val validator = InputValidator()
     do {
         mainMenu(vehicleManager, ownerManager, adsManager, validator)
@@ -59,9 +59,9 @@ fun vehicleMenu(vehicleManager: VehicleManager, validator: InputValidator) {
         choiceVehicleType = validator.isStringValidInRange(readln(), 1..4)
     } while (choiceVehicleType == 0)
     val vehicle = when (choiceVehicleType) {
-        1 -> autoConstructor(validator)
-        2 -> motoConstructor(validator)
-        3 -> commercialConstructor(validator)
+        1 -> autoCreator(validator)
+        2 -> motoCreator(validator)
+        3 -> commercialCreator(validator)
         else -> null
     }
     vehicle?.let { vehicleManager.addVehicle(it) }
@@ -85,12 +85,12 @@ fun adsCreator(
 ) {
     val vehicleList = vehicleManager.getAllVehicle()
     val allAdsList = adsManager.getAllAds()
-    if (vehicleList.isEmpty() || ownerManager.getAllOwners().isEmpty() || allAdsList.isEmpty()) return
+    if (vehicleList.isEmpty() || ownerManager.getAllOwners().isEmpty()) return
     val vehicleWithoutAdsList = vehicleList.filter { vehicle ->
-        !allAdsList.map { vehicle }.contains(vehicle)
+        !allAdsList.map { it.vehicle } .contains(vehicle)
     }
-    val vehicle = vehicleManager.getVehicleFromList(vehicleWithoutAdsList)
-    val owner = ownerManager.getOwnerFromList(validator)
+    val vehicle = vehicleManager.getVehicleFromList(vehicleWithoutAdsList) ?: return
+    val owner = ownerManager.getOwnerFromList(validator) ?: return
     val setPrice = PriceRecord(getAdDate(), getAdPrice(validator))
     val priceHistory = mutableListOf<PriceRecord>()
     priceHistory.add(setPrice)
@@ -105,6 +105,7 @@ fun adsCreator(
 
 fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
     if (adsManager.getAllAds().isEmpty()) return
+    adsManager.printAllAds()
     println("Выберете объявление из списка, для которого хотите поменять цену:")
     val ad = adsManager.chooseAds(validator)
     val setNewPrice = PriceRecord(getAdDate(), getAdPrice(validator))
@@ -113,6 +114,7 @@ fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
 
 fun removingAd(adsManager: AdsManager, validator: InputValidator) {
     if (adsManager.getAllAds().isEmpty()) return
+    adsManager.printAllAds()
     adsManager.removeAd(adsManager.chooseAds(validator))
 }
 
@@ -152,7 +154,7 @@ fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager): 
     val year = userRequestVehicleYear(validator)
     val color = userRequestVehicleColor(validator)
     val mileage = userRequestVehicleMileage(validator)
-    val userRequestVehicleSpecificInfo = userRequestSpecificInfo(enteredSymbol, validator)
+    val userRequestVehicleSpecificInfo = userRequestSpecificInfo(enteredSymbol, validator, model)
     val vehicleListFounded =
         vehicleManager.searchVehicle(
             brand,

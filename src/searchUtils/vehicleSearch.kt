@@ -24,7 +24,7 @@ fun userRequestVehicleBrand(validator: InputValidator): Brand? {
                     "14. Volksvagen\n" +
                     "15. Следующий параметр"
         )
-        enteredBrand = validator.isStringValidInRange(readln(), 1..6)
+        enteredBrand = validator.isStringValidInRange(readln(), 1..15)
     } while (enteredBrand == 0)
     return when (enteredBrand) {
         1 -> Brand.AUDI
@@ -293,8 +293,8 @@ fun userRequestVehicleMileage(validator: InputValidator): IntRange {
     return enteredMileage
 }
 
-fun userRequestSpecificInfo(chooseOption: Int, validator: InputValidator): String? {
-    if (chooseOption == 2) {
+fun userRequestSpecificInfo(chooseOption: Int, validator: InputValidator, model: VehicleModel?): String? {
+        if (chooseOption == 2 || (chooseOption == 1 && model is AutoModel)) {
         var enteredTypeAuto = 0
         do {
             println(
@@ -313,7 +313,7 @@ fun userRequestSpecificInfo(chooseOption: Int, validator: InputValidator): Strin
             else -> return null
         }
     }
-    if (chooseOption == 3) {
+    if (chooseOption == 3 || (chooseOption == 1 && model is MotoModel)) {
         var enteredTypeMoto = 0
         do {
             println(
@@ -332,7 +332,7 @@ fun userRequestSpecificInfo(chooseOption: Int, validator: InputValidator): Strin
             else -> return null
         }
     }
-    if (chooseOption == 4) {
+    if (chooseOption == 4 || (chooseOption == 1 && model is CommercialModel)) {
         println("Введите минимальную грузоподъемность или \"0.0\" для перехода к следующему параметру:")
         return "${validator.isStringValidInDouble(readln())}"
     } else return null

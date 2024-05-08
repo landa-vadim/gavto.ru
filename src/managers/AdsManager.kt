@@ -8,6 +8,7 @@ import validators.InputValidator
 interface AdsManager {
     fun addAd(ad: Ads)
     fun getAllAds(): List<Ads>
+    fun printAllAds()
     fun removeAd(ad: Ads)
     fun recoverAd(removedAd: RemovedAds)
     fun chooseAds(validator: InputValidator): Ads

@@ -3,7 +3,7 @@ package utils
 import data.vehicle.*
 import validators.InputValidator
 
-fun autoConstructor(validator: InputValidator): Auto? {
+fun autoCreator(validator: InputValidator): Auto? {
     val brand = chooseCarBrand(validator) ?: return null
     val model = chooseCarModel(brand, validator) ?: return null
     val year = chooseYear(validator) ?: return null

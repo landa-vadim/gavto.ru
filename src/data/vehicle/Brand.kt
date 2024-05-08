@@ -1,5 +1,8 @@
 package data.vehicle
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class Brand {
     AUDI,
     BMW,

@@ -3,7 +3,7 @@ package utils
 import data.vehicle.*
 import validators.InputValidator
 
-fun motoConstructor(validator: InputValidator): Moto? {
+fun motoCreator(validator: InputValidator): Moto? {
     val brandChoice = brandChoose(validator) ?: return null
     val modelChoice = modelChoose(brandChoice, validator) ?: return null
     val enteredYear = yearChoose(validator) ?: return null
@@ -51,7 +51,7 @@ private fun brandChoose(validator: InputValidator): Brand? {
 private fun modelChoose(brandChoice: Brand, validator: InputValidator): MotoModel? {
     when (brandChoice) {
         Brand.BMW -> println(
-            "Выберете модель:\n+" +
+            "Выберете модель:\n" +
                     "1. M\n" +
                     "2. K\n" +
                     "3. G\n" +
