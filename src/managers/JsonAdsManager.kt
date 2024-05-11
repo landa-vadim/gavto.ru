@@ -46,21 +46,19 @@ class JsonAdsManager : AdsManager {
     }
 
     override fun printAllAds() {
-        activeAdsList.forEach { ad ->
-            println("${activeAdsList.indexOf(ad) + 1}.")
+        activeAdsList.forEachIndexed { index, ad ->
+            println("${index + 1}.")
             ad.getAdInfo()
         }
     }
 
-    override fun removeAd(ad: Ads) {
-        println("Введите причину снятия объявления:")
-        val reason = readln()
+    override fun removeAd(ad: Ads, reason: String) {
         val removedAd = RemovedAds(ad, reason)
         activeAdsList.remove(ad)
         saveActiveAds(activeAdsList)
         inActiveAdsList.add(removedAd)
         saveInActiveAds(inActiveAdsList)
-        println("Объявление снято с публикации!")
+
     }
 
     override fun recoverAd(removedAd: RemovedAds) {
@@ -68,33 +66,25 @@ class JsonAdsManager : AdsManager {
         saveInActiveAds(inActiveAdsList)
         activeAdsList.add(removedAd.ad)
         saveActiveAds(activeAdsList)
-        println("Объявление опубликовано вновь!")
     }
 
-    override fun chooseAds(validator: InputValidator): Ads {
-        println("Список всех объявлений:")
-        getAllAds()
-        val count = activeAdsList.count()
-        println("Выберете номер объявления:")
-        val adNumber = validator.isStringValidInRange(readln(), 1..count) - 1
+    override fun chooseAds(adNumber: Int): Ads {
         val ad = activeAdsList[adNumber]
         return ad
     }
 
     override fun getAllRemovedAds(): List<RemovedAds> {
+        return inActiveAdsList
+    }
+
+    override fun printAllRemovedAds() {
         inActiveAdsList.forEachIndexed { index, removedAd ->
             println("${index + 1}.")
             removedAd.getReasonToRemoveAd()
         }
-        return inActiveAdsList
     }
 
-    override fun chooseRemovedAds(validator: InputValidator): RemovedAds {
-        println("Список всех снятых объявлений:")
-        getAllRemovedAds()
-        val count = inActiveAdsList.count()
-        println("Выберете номер объявления:")
-        val adNumber = validator.isStringValidInRange(readln(), 1..count) - 1
+    override fun chooseRemovedAds(adNumber: Int): RemovedAds {
         val removedAd = inActiveAdsList[adNumber]
         return removedAd
     }

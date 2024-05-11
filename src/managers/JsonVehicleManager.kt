@@ -69,14 +69,4 @@ class JsonVehicleManager : VehicleManager {
         return listVehicleOutput
     }
 
-    override fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>): Vehicle? {
-        vehicleWithoutAdsList.forEachIndexed { index, vehicle ->
-            println("${index + 1}.")
-            vehicle.getVehicleInfo()
-        }
-        println("Введите номер ТС, который вы хотите добавить в объявление или \"0\" для возврата в главное меню:")
-        val choice = validator.isStringValidInRange(readln(), 1..vehicleWithoutAdsList.count())
-        return if (choice == 0) null else vehicleWithoutAdsList[choice - 1]
-    }
-
 }

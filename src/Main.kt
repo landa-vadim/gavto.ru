@@ -84,13 +84,14 @@ fun adsCreator(
     validator: InputValidator
 ) {
     val vehicleList = vehicleManager.getAllVehicle()
+    val ownerList = ownerManager.getAllOwners()
     val allAdsList = adsManager.getAllAds()
     if (vehicleList.isEmpty() || ownerManager.getAllOwners().isEmpty()) return
     val vehicleWithoutAdsList = vehicleList.filter { vehicle ->
-        !allAdsList.map { it.vehicle } .contains(vehicle)
+        !allAdsList.map { it.vehicle }.contains(vehicle)
     }
-    val vehicle = vehicleManager.getVehicleFromList(vehicleWithoutAdsList) ?: return
-    val owner = ownerManager.getOwnerFromList(validator) ?: return
+    val vehicle = getVehicleFromList(vehicleWithoutAdsList, validator) ?: return
+    val owner = getOwnerFromList(ownerList, validator) ?: return
     val setPrice = PriceRecord(getAdDate(), getAdPrice(validator))
     val priceHistory = mutableListOf<PriceRecord>()
     priceHistory.add(setPrice)
@@ -107,7 +108,7 @@ fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
     if (adsManager.getAllAds().isEmpty()) return
     adsManager.printAllAds()
     println("Выберете объявление из списка, для которого хотите поменять цену:")
-    val ad = adsManager.chooseAds(validator)
+    val ad = chooseAdsUI(adsManager, validator)
     val setNewPrice = PriceRecord(getAdDate(), getAdPrice(validator))
     ad.priceHistory.add(setNewPrice)
 }
@@ -115,12 +116,15 @@ fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
 fun removingAd(adsManager: AdsManager, validator: InputValidator) {
     if (adsManager.getAllAds().isEmpty()) return
     adsManager.printAllAds()
-    adsManager.removeAd(adsManager.chooseAds(validator))
+    val ad = chooseAdsUI(adsManager, validator)
+    removeAdUI(ad, adsManager)
 }
 
 fun recoverAd(adsManager: AdsManager, validator: InputValidator) {
     if (adsManager.getAllRemovedAds().isEmpty()) return
-    adsManager.recoverAd(adsManager.chooseRemovedAds(validator))
+    val removedAd = chooseRemovedAdsUI(adsManager, validator)
+    adsManager.recoverAd(removedAd)
+    println("Объявление опубликовано вновь!")
 }
 
 fun researchVehicle(validator: InputValidator, vehicleManager: VehicleManager): List<Vehicle>? {
@@ -177,4 +181,53 @@ fun getFoundAds(vehicleManager: VehicleManager, adsManager: AdsManager, validato
     } else adsFoundedList.forEach { ad ->
         ad.getAdInfo()
     }
+}
+
+fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>, validator: InputValidator): Vehicle? {
+    vehicleWithoutAdsList.forEachIndexed { index, vehicle ->
+        println("${index + 1}.")
+        vehicle.getVehicleInfo()
+    }
+    println("Введите номер ТС, который вы хотите добавить в объявление или \"0\" для возврата в главное меню:")
+    val choice = validator.isStringValidInRange(readln(), 1..vehicleWithoutAdsList.count())
+    return if (choice == 0) null else vehicleWithoutAdsList[choice - 1]
+}
+
+fun getOwnerFromList(ownerList: List<Owner>, validator: InputValidator): Owner? {
+    ownerList.forEachIndexed { index, owner ->
+        println("${index + 1}.")
+        owner.getOwnerInfo()
+    }
+    println("Найдите свои данные в списке и введите соответствующий номер или \"0\" для возврата в главное меню:")
+    val choice = validator.isStringValidInRange(readln(), 1..ownerList.count())
+    return if (choice == 0) null else ownerList[choice - 1]
+}
+
+fun removeAdUI(ad: Ads, adsManager: AdsManager) {
+    println("Введите причину снятия объявления:")
+    val reason = readln()
+    adsManager.removeAd(ad, reason)
+    println("Объявление снято с публикации!")
+}
+
+fun chooseAdsUI(adsManager: AdsManager, validator: InputValidator): Ads {
+    println("Список всех объявлений:")
+    adsManager.getAllAds()
+    println("Выберете номер объявления:")
+    val activeAdsList = adsManager.getAllAds()
+    val count = activeAdsList.count()
+    val adNumber = validator.isStringValidInRange(readln(), 1..count) - 1
+    val ad = adsManager.chooseAds(adNumber)
+    return ad
+}
+
+fun chooseRemovedAdsUI(adsManager: AdsManager, validator: InputValidator): RemovedAds {
+    println("Список всех снятых объявлений:")
+    adsManager.printAllRemovedAds()
+    println("Выберете номер объявления:")
+    val inActiveAdsList = adsManager.getAllRemovedAds()
+    val count = inActiveAdsList.count()
+    val adNumber = validator.isStringValidInRange(readln(), 1..count) - 1
+    val removedAd = adsManager.chooseRemovedAds(adNumber)
+    return removedAd
 }

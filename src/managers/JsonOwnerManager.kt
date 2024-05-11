@@ -30,14 +30,4 @@ class JsonOwnerManager : OwnerManager {
         return ownerList
     }
 
-    override fun getOwnerFromList(validator: InputValidator): Owner? {
-        ownerList.forEachIndexed { index, owner ->
-            println("${index + 1}.")
-            owner.getOwnerInfo()
-        }
-        println("Найдите свои данные владельца в списке и введите соответствующий номер или \"0\" для возврата в главное меню:")
-        val choice = validator.isStringValidInRange(readln(), 1..ownerList.count())
-        return if(choice == 0) null else ownerList[choice - 1]
-    }
-
 }

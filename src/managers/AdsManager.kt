@@ -9,10 +9,11 @@ interface AdsManager {
     fun addAd(ad: Ads)
     fun getAllAds(): List<Ads>
     fun printAllAds()
-    fun removeAd(ad: Ads)
+    fun removeAd(ad: Ads, reason: String)
     fun recoverAd(removedAd: RemovedAds)
-    fun chooseAds(validator: InputValidator): Ads
+    fun chooseAds(adNumber: Int): Ads
     fun getAllRemovedAds(): List<RemovedAds>
-    fun chooseRemovedAds(validator: InputValidator): RemovedAds
+    fun printAllRemovedAds()
+    fun chooseRemovedAds(adNumber: Int): RemovedAds
     fun searchAds(foundVehicleList: List<Vehicle>?): List<Ads>?
 }
