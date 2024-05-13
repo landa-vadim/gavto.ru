@@ -1,7 +1,6 @@
 package managers
 
 import data.Owner
-import validators.InputValidator
 
 class TestOwnerManager : OwnerManager {
 
@@ -13,15 +12,5 @@ class TestOwnerManager : OwnerManager {
 
     override fun getAllOwners(): List<Owner> {
         return ownerList
-    }
-
-    override fun getOwnerFromList(validator: InputValidator): Owner {
-        ownerList.forEachIndexed { index, owner ->
-            println("${index + 1}.")
-            owner.getOwnerInfo()
-        }
-        println("Найдите свои данные владельца в списке и введите соответствующий номер:")
-        val choice = validator.isStringValidInRange(readln(), 1..ownerList.count())
-        return ownerList[choice - 1]
     }
 }

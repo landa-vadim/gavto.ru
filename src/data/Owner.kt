@@ -12,7 +12,7 @@ class Owner (
     val telephoneNumber: Long,
     val email: String,
 ) {
-    fun getOwnerInfo () {
-        println("Имя: $name\nНомер телефона: $telephoneNumber\nemail: $email")
-    }
+//    fun printOwnerInfo () {
+//        println("Имя: $name\nНомер телефона: $telephoneNumber\nemail: $email")
+//    }
 }

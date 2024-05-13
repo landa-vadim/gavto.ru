@@ -13,32 +13,32 @@ class Ads(
     val owner: Owner,
     val priceHistory: MutableList<PriceRecord>
 ) {
-    fun getAdInfo() {
-        owner.getOwnerInfo()
-        vehicle.getVehicleInfo()
-        val count = priceHistory.count()
-        val lastIndex = count - 1
-        if (count > 1) {
-            println("История изменение цены:")
-            priceHistory.forEach { price ->
-                price.getPriceHistory()
-            }
-            priceHistory[lastIndex].getLastPrice()
-        } else priceHistory[0].getLastPrice()
-        println("----------------------------------------------------------------")
-    }
-    fun getAdInfoForRemovedAd() {
-        owner.getOwnerInfo()
-        vehicle.getVehicleInfo()
-        val count = priceHistory.count()
-        val lastIndex = count - 1
-        if (count > 1) {
-            println("История изменение цены:")
-            priceHistory.forEach { price ->
-                price.getPriceHistory()
-            }
-            priceHistory[lastIndex].getLastPriceForRemovedAd()
-        } else priceHistory[0].getLastPriceForRemovedAd()
-        println("----------------------------------------------------------------")
-    }
+//    fun printAdInfo() {
+//        owner.printOwnerInfo()
+//        vehicle.getVehicleInfo()
+//        val count = priceHistory.count()
+//        val lastIndex = count - 1
+//        if (count > 1) {
+//            println("История изменение цены:")
+//            priceHistory.forEach { price ->
+//                price.printPriceHistory()
+//            }
+//            priceHistory[lastIndex].printLastPrice()
+//        } else priceHistory[0].printLastPrice()
+//        println("----------------------------------------------------------------")
+//    }
+//    fun printRemovedAdInfo() {
+//        owner.printOwnerInfo()
+//        vehicle.getVehicleInfo()
+//        val count = priceHistory.count()
+//        val lastIndex = count - 1
+//        if (count > 1) {
+//            println("История изменение цены:")
+//            priceHistory.forEach { price ->
+//                price.printPriceHistory()
+//            }
+//            priceHistory[lastIndex].printLastPriceForRemovedAd()
+//        } else priceHistory[0].printLastPriceForRemovedAd()
+//        println("----------------------------------------------------------------")
+//    }
 }

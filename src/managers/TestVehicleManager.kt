@@ -51,16 +51,4 @@ class TestVehicleManager : VehicleManager {
         }
         return listVehicleOutput
     }
-
-    override fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>): Vehicle {
-        var number = 1
-        var choice = 0
-        vehicleWithoutAdsList.forEach { vehicle ->
-            println("${number++}.")
-            vehicle.getVehicleInfo()
-        }
-        println("Введите номер ТС, который вы хотите добавить в объявление:")
-        choice = validator.isStringValidInRange(readln(), 1..vehicleWithoutAdsList.count())
-        return vehicleWithoutAdsList[choice - 1]
-    }
 }

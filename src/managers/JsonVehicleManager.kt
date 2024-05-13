@@ -15,7 +15,7 @@ class JsonVehicleManager : VehicleManager {
     val validator = InputValidator()
     private val vehicleList = loadVehicle()
 
-    private fun saveOwner(list: MutableList<Vehicle>) {
+    private fun saveVehicle(list: MutableList<Vehicle>) {
         val data = Json.encodeToString(list)
         file.writeText(data)
     }
@@ -28,7 +28,7 @@ class JsonVehicleManager : VehicleManager {
 
     override fun addVehicle(vehicle: Vehicle) {
         vehicleList.add(vehicle)
-        saveOwner(vehicleList)
+        saveVehicle(vehicleList)
     }
 
     override fun getAllVehicle(): List<Vehicle> {

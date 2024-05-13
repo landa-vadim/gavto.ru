@@ -106,7 +106,7 @@ fun adsCreator(
 
 fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
     if (adsManager.getAllAds().isEmpty()) return
-    adsManager.printAllAds()
+    printAllAds(adsManager.getAllAds())
     println("Выберете объявление из списка, для которого хотите поменять цену:")
     val ad = chooseAdsUI(adsManager, validator)
     val setNewPrice = PriceRecord(getAdDate(), getAdPrice(validator))
@@ -115,7 +115,7 @@ fun adPriceChange(adsManager: AdsManager, validator: InputValidator) {
 
 fun removingAd(adsManager: AdsManager, validator: InputValidator) {
     if (adsManager.getAllAds().isEmpty()) return
-    adsManager.printAllAds()
+    printAllAds(adsManager.getAllAds())
     val ad = chooseAdsUI(adsManager, validator)
     removeAdUI(ad, adsManager)
 }
@@ -179,7 +179,7 @@ fun getFoundAds(vehicleManager: VehicleManager, adsManager: AdsManager, validato
         println("Объявлений с указанными параметрами не найдено!")
         return
     } else adsFoundedList.forEach { ad ->
-        ad.getAdInfo()
+        ad.printAdInfo()
     }
 }
 
@@ -196,7 +196,7 @@ fun getVehicleFromList(vehicleWithoutAdsList: List<Vehicle>, validator: InputVal
 fun getOwnerFromList(ownerList: List<Owner>, validator: InputValidator): Owner? {
     ownerList.forEachIndexed { index, owner ->
         println("${index + 1}.")
-        owner.getOwnerInfo()
+        owner.printOwnerInfo()
     }
     println("Найдите свои данные в списке и введите соответствующий номер или \"0\" для возврата в главное меню:")
     val choice = validator.isStringValidInRange(readln(), 1..ownerList.count())
@@ -217,17 +217,29 @@ fun chooseAdsUI(adsManager: AdsManager, validator: InputValidator): Ads {
     val activeAdsList = adsManager.getAllAds()
     val count = activeAdsList.count()
     val adNumber = validator.isStringValidInRange(readln(), 1..count) - 1
-    val ad = adsManager.chooseAds(adNumber)
+    val ad = chooseAds(adNumber, adsManager)
+    return ad
+}
+
+fun chooseAds(adNumber: Int, adsManager: AdsManager): Ads {
+    val activeAdsList = adsManager.getAllAds()
+    val ad = activeAdsList[adNumber]
     return ad
 }
 
 fun chooseRemovedAdsUI(adsManager: AdsManager, validator: InputValidator): RemovedAds {
     println("Список всех снятых объявлений:")
-    adsManager.printAllRemovedAds()
+    printAllRemovedAds(adsManager.getAllRemovedAds())
     println("Выберете номер объявления:")
     val inActiveAdsList = adsManager.getAllRemovedAds()
     val count = inActiveAdsList.count()
     val adNumber = validator.isStringValidInRange(readln(), 1..count) - 1
-    val removedAd = adsManager.chooseRemovedAds(adNumber)
+    val removedAd = chooseRemovedAds(adNumber, adsManager)
+    return removedAd
+}
+
+fun chooseRemovedAds(adNumber: Int, adsManager: AdsManager): RemovedAds {
+    val inActiveAdsList = adsManager.getAllRemovedAds()
+    val removedAd = inActiveAdsList[adNumber]
     return removedAd
 }

@@ -6,7 +6,6 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,15 +27,15 @@ class PriceRecord(
     val date: Date,
     val price: Int
 ) {
-    fun getLastPrice() {
-        println("Актуальная цена: $price рублей")
-    }
-
-    fun getLastPriceForRemovedAd() {
-        println("Последняя цена: $price рублей")
-    }
-
-    fun getPriceHistory() {
-        println("Цена на дату: $date - $price рублей")
-    }
+//    fun printLastPrice() {
+//        println("Актуальная цена: $price рублей")
+//    }
+//
+//    fun printLastPriceForRemovedAd() {
+//        println("Последняя цена: $price рублей")
+//    }
+//
+//    fun printPriceHistory() {
+//        println("Цена на дату: $date - $price рублей")
+//    }
 }

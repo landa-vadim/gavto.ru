@@ -3,7 +3,6 @@ package managers
 import data.Ads
 import data.RemovedAds
 import data.vehicle.Vehicle
-import validators.InputValidator
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -45,12 +44,12 @@ class JsonAdsManager : AdsManager {
         return activeAdsList
     }
 
-    override fun printAllAds() {
-        activeAdsList.forEachIndexed { index, ad ->
-            println("${index + 1}.")
-            ad.getAdInfo()
-        }
-    }
+//    override fun printAllAds() {
+//        activeAdsList.forEachIndexed { index, ad ->
+//            println("${index + 1}.")
+//            ad.printAdInfo()
+//        }
+//    }
 
     override fun removeAd(ad: Ads, reason: String) {
         val removedAd = RemovedAds(ad, reason)
@@ -68,26 +67,26 @@ class JsonAdsManager : AdsManager {
         saveActiveAds(activeAdsList)
     }
 
-    override fun chooseAds(adNumber: Int): Ads {
-        val ad = activeAdsList[adNumber]
-        return ad
-    }
+//    override fun chooseAds(adNumber: Int): Ads {
+//        val ad = activeAdsList[adNumber]
+//        return ad
+//    }
 
     override fun getAllRemovedAds(): List<RemovedAds> {
         return inActiveAdsList
     }
 
-    override fun printAllRemovedAds() {
-        inActiveAdsList.forEachIndexed { index, removedAd ->
-            println("${index + 1}.")
-            removedAd.getReasonToRemoveAd()
-        }
-    }
+//    override fun printAllRemovedAds() {
+//        inActiveAdsList.forEachIndexed { index, removedAd ->
+//            println("${index + 1}.")
+//            removedAd.printReasonToRemoveAd()
+//        }
+//    }
 
-    override fun chooseRemovedAds(adNumber: Int): RemovedAds {
-        val removedAd = inActiveAdsList[adNumber]
-        return removedAd
-    }
+//    override fun chooseRemovedAds(adNumber: Int): RemovedAds {
+//        val removedAd = inActiveAdsList[adNumber]
+//        return removedAd
+//    }
 
     override fun searchAds(foundVehicleList: List<Vehicle>?): List<Ads>? {
         if (foundVehicleList == null) return null
