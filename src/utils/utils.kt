@@ -12,6 +12,13 @@ fun printAllAds(activeAdsList: List<Ads>) {
     }
 }
 
+fun printAllRemovedAds(inActiveAdsList: List<RemovedAds>) {
+    inActiveAdsList.forEachIndexed { index, removedAd ->
+        println("${index + 1}.")
+        removedAd.printReasonToRemoveAd()
+    }
+}
+
 fun Ads.printAdInfo() {
     val count = priceHistory.count()
     val lastIndex = count - 1
@@ -51,13 +58,6 @@ fun RemovedAds.printReasonToRemoveAd() {
     println("Снято по причине:\n$reason")
 }
 
-fun printAllRemovedAds(inActiveAdsList: List<RemovedAds>) {
-    inActiveAdsList.forEachIndexed { index, removedAd ->
-        println("${index + 1}.")
-        removedAd.printReasonToRemoveAd()
-    }
-}
-
 fun PriceRecord.printLastPrice() {
     println("Актуальная цена: $price рублей")
 }
@@ -73,4 +73,3 @@ fun PriceRecord.printPriceHistory() {
 fun Owner.printOwnerInfo() {
     println("Имя: $name\nНомер телефона: $telephoneNumber\nemail: $email")
 }
-
