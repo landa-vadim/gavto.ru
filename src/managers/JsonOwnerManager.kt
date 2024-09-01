@@ -3,7 +3,6 @@ package managers
 import data.Owner
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import validators.InputValidator
 import java.io.File
 
 class JsonOwnerManager : OwnerManager {

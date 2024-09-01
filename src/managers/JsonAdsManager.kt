@@ -44,13 +44,6 @@ class JsonAdsManager : AdsManager {
         return activeAdsList
     }
 
-//    override fun printAllAds() {
-//        activeAdsList.forEachIndexed { index, ad ->
-//            println("${index + 1}.")
-//            ad.printAdInfo()
-//        }
-//    }
-
     override fun removeAd(ad: Ads, reason: String) {
         val removedAd = RemovedAds(ad, reason)
         activeAdsList.remove(ad)
@@ -67,26 +60,9 @@ class JsonAdsManager : AdsManager {
         saveActiveAds(activeAdsList)
     }
 
-//    override fun chooseAds(adNumber: Int): Ads {
-//        val ad = activeAdsList[adNumber]
-//        return ad
-//    }
-
     override fun getAllRemovedAds(): List<RemovedAds> {
         return inActiveAdsList
     }
-
-//    override fun printAllRemovedAds() {
-//        inActiveAdsList.forEachIndexed { index, removedAd ->
-//            println("${index + 1}.")
-//            removedAd.printReasonToRemoveAd()
-//        }
-//    }
-
-//    override fun chooseRemovedAds(adNumber: Int): RemovedAds {
-//        val removedAd = inActiveAdsList[adNumber]
-//        return removedAd
-//    }
 
     override fun searchAds(foundVehicleList: List<Vehicle>?): List<Ads>? {
         if (foundVehicleList == null) return null
