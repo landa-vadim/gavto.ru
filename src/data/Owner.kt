@@ -11,8 +11,4 @@ class Owner (
     val name: String,
     val telephoneNumber: Long,
     val email: String,
-) {
-//    fun printOwnerInfo () {
-//        println("Имя: $name\nНомер телефона: $telephoneNumber\nemail: $email")
-//    }
-}
+)

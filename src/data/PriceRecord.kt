@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object DateSerializer : KSerializer<Date> {
-    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+    private val dateFormat = SimpleDateFormat("dd-MM-yyyy")
     override val descriptor = PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
     override fun deserialize(decoder: Decoder): Date {
         return dateFormat.parse(decoder.decodeString())
@@ -26,16 +26,4 @@ class PriceRecord(
     @Serializable(with = DateSerializer::class)
     val date: Date,
     val price: Int
-) {
-//    fun printLastPrice() {
-//        println("Актуальная цена: $price рублей")
-//    }
-//
-//    fun printLastPriceForRemovedAd() {
-//        println("Последняя цена: $price рублей")
-//    }
-//
-//    fun printPriceHistory() {
-//        println("Цена на дату: $date - $price рублей")
-//    }
-}
+)

@@ -3,7 +3,7 @@ package data.vehicle
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class AutoModel() : VehicleModel()
+sealed class AutoModel : VehicleModel()
 
 @Serializable
 data class AudiAutoModel(val model: AudiAutoModels?) : AutoModel() {

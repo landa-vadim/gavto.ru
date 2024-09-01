@@ -3,7 +3,7 @@ package data.vehicle
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class CommercialModel() : VehicleModel()
+sealed class CommercialModel : VehicleModel()
 
 @Serializable
 data class CitroenCommercialModel(val model: CitroenCommercialModels?) : CommercialModel() {
